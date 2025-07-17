@@ -46,7 +46,7 @@
     <file src="bin\Release\net9.0\Jiro.Shared.xml" target="lib\net9.0\Jiro.Shared.xml" />
 
     <!-- Package metadata -->
-    <file src="..\..\README.md" target="README.md" />
+    <file src="..\..\README.nuget.md" target="README.md" />
     <file src="..\..\dev\assets\Jiro-Icon.png" target="icon.png" />
   </files>
 </package>
