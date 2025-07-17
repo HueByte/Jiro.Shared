@@ -1,6 +1,8 @@
 using Jiro.Shared.Websocket.Requests;
 using Jiro.Shared.Websocket.Responses;
 
+using Microsoft.AspNetCore.SignalR;
+
 namespace Jiro.Shared.Websocket;
 
 /// <summary>
@@ -8,6 +10,66 @@ namespace Jiro.Shared.Websocket;
 /// </summary>
 public interface IJiroServerHub
 {
+	#region Response Handlers
+
+	/// <summary>
+	/// Receives logs response from the instance
+	/// </summary>
+	[HubMethodName("LogsResponse")]
+	Task ReceiveLogsResponse(LogsResponse response);
+
+	/// <summary>
+	/// Receives session response from the instance
+	/// </summary>
+	[HubMethodName("SessionResponse")]
+	Task ReceiveSessionResponse(SessionResponse response);
+
+	/// <summary>
+	/// Receives sessions response from the instance
+	/// </summary>
+	[HubMethodName("SessionsResponse")]
+	Task ReceiveSessionsResponse(SessionsResponse response);
+
+	/// <summary>
+	/// Receives config response from the instance
+	/// </summary>
+	[HubMethodName("ConfigResponse")]
+	Task ReceiveGetConfigResponse(ConfigResponse response);
+
+	/// <summary>
+	/// Receives config update response from the instance
+	/// </summary>
+	[HubMethodName("ConfigUpdateResponse")]
+	Task ReceiveConfigUpdateResponse(ConfigUpdateResponse response);
+
+	/// <summary>
+	/// Receives themes response from the instance
+	/// </summary>
+	[HubMethodName("ThemesResponse")]
+	Task ReceiveThemesResponse(ThemesResponse response);
+
+	/// <summary>
+	/// Receives commands metadata response from the instance
+	/// </summary>
+	[HubMethodName("CommandsMetadataResponse")]
+	Task ReceiveCommandsMetadataResponse(CommandsMetadataResponse response);
+
+	/// <summary>
+	/// Receives keepalive response from the instance
+	/// </summary>
+	[HubMethodName("KeepaliveResponse")]
+	Task ReceiveKeepaliveResponse(KeepaliveResponse response);
+
+	/// <summary>
+	/// Receives error response from the instance
+	/// </summary>
+	[HubMethodName("ErrorResponse")]
+	Task ReceiveErrorResponse(ErrorResponse response);
+
+	#endregion
+
+	#region Command Methods
+
 	/// <summary>
 	/// Sends a command to the client instance
 	/// </summary>
@@ -22,6 +84,10 @@ public interface IJiroServerHub
 	/// <param name="cancellationToken">Cancellation token</param>
 	/// <returns>Task representing the operation</returns>
 	Task SendKeepaliveAckAsync(CancellationToken cancellationToken = default);
+
+	#endregion
+
+	#region Request Methods
 
 	/// <summary>
 	/// Requests logs from the client instance
@@ -78,4 +144,6 @@ public interface IJiroServerHub
 	/// <param name="cancellationToken">Cancellation token</param>
 	/// <returns>Task representing the operation</returns>
 	Task GetCommandsMetadataAsync(GetCommandsMetadataRequest request, CancellationToken cancellationToken = default);
+
+	#endregion
 }
