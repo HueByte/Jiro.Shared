@@ -14,6 +14,7 @@ Jiro.Shared uses Japanese-inspired code names that reflect the spirit and theme 
 
 | Version | Code Name | Japanese | Meaning | Theme |
 |---------|-----------|----------|---------|--------|
+| v1.1.1 | Byakko | 白虎 | White Tiger | Response Handlers & SignalR |
 | v1.1.0 | Kaizen | 改善 | Continuous Improvement | Enhancement & Extension |
 | v1.0.0 | Hajimari | 始まり | Beginning | Initial Release & Foundation |
 
