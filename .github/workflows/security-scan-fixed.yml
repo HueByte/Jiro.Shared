@@ -1,4 +1,4 @@
-name: Jiro.Libs CodeQL Security Analysis
+name: Jiro.Shared CodeQL Security Analysis
 
 on:
   schedule:
@@ -8,7 +8,7 @@ on:
 
 env:
   DOTNET_VERSION: "9.0.x"
-  SOLUTION_PATH: "./src/Main.sln"
+  SOLUTION_PATH: "./source/Main.sln"
 
 jobs:
   security-scan:

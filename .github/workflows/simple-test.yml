@@ -1,11 +1,11 @@
-name: Jiro.Libs Simple Push Test
+name: Jiro.Shared Simple Push Test
 
 on:
   push:
     branches:
       - main
     paths-ignore:
-      - "src/**" # Avoid overlap with main CI workflow
+      - "source/**" # Avoid overlap with main CI workflow
 
 jobs:
   test:

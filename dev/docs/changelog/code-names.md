@@ -1,10 +1,10 @@
-# Jiro.Libs Release Code Names
+# Jiro.Shared Release Code Names
 
-This document contains the code naming convention and reference for Jiro.Libs releases.
+This document contains the code naming convention and reference for Jiro.Shared releases.
 
 ## Code Naming Theme
 
-Jiro.Libs uses Japanese-inspired code names that reflect the spirit and theme of each major release. The names are chosen to be:
+Jiro.Shared uses Japanese-inspired code names that reflect the spirit and theme of each major release. The names are chosen to be:
 
 - **Meaningful**: Reflecting the key improvements or theme of the release
 - **Memorable**: Easy to remember and reference

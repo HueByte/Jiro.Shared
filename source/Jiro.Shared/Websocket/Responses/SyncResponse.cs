@@ -1,4 +1,4 @@
-namespace Jiro.Shared.Websocket.Requests;
+namespace Jiro.Shared.Websocket.Responses;
 
 /// <summary>
 /// Base class for synchronous WebSocket responses.

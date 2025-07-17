@@ -65,7 +65,7 @@ jobs:
         continue-on-error: true # Don't fail the build if structure generation fails
 
       - name: Restore dependencies for API documentation
-        run: dotnet restore src/Main.sln
+        run: dotnet restore source/Main.sln
         continue-on-error: true # API docs will still generate even if restore fails
 
       - name: Build .NET projects for XML documentation generation

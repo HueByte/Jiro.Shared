@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Markdownlint Runner for Jiro.Libs
+# Markdownlint Runner for Jiro.Shared
 # Runs markdownlint on all Markdown files in the repository
 
 set -e  # Exit on any error
@@ -51,7 +51,7 @@ check_command() {
 
 show_help() {
     cat << EOF
-Markdownlint Runner for Jiro.Libs
+Markdownlint Runner for Jiro.Shared
 
 USAGE:
     ./markdownlint.sh [OPTIONS] [PATH]
@@ -109,7 +109,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(dirname "$SCRIPT_DIR")"
 cd "$REPO_ROOT"
 
-print_info "🔍 Jiro.Libs Markdownlint Runner"
+print_info "🔍 Jiro.Shared Markdownlint Runner"
 print_info "=============================="
 echo
 

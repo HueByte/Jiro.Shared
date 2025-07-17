@@ -99,6 +99,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Related Projects
 
-- [Jiro.Commands](https://github.com/HueByte/Jiro.Libs) - Command and plugin framework
+- [Jiro.Shared](https://github.com/HueByte/Jiro.Shared) - Shared models and infrastructure
 - [JiroCloud](https://github.com/HueByte/JiroCloud) - Cloud service implementation
 - [Jiro](https://github.com/HueByte/Jiro) - Main application instance

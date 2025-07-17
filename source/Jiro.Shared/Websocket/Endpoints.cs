@@ -1,6 +1,8 @@
 namespace Jiro.Shared.Websocket;
 
-
+/// <summary>
+/// Contains constants for WebSocket endpoint names used in Jiro hub communication
+/// </summary>
 public static class Endpoints
 {
 	/// <summary>
@@ -17,6 +19,19 @@ public static class Endpoints
 		public const string UpdateConfig = "UpdateConfig";
 		public const string GetCustomThemes = "GetCustomThemes";
 		public const string GetCommandsMetadata = "GetCommandsMetadata";
+
+		public static string[] AllIncomingEvents => new[]
+		{
+			ReceiveCommand,
+			KeepaliveAck,
+			GetLogs,
+			GetSession,
+			GetSessions,
+			GetConfig,
+			UpdateConfig,
+			GetCustomThemes,
+			GetCommandsMetadata
+		};
 	}
 
 	/// <summary>
@@ -33,6 +48,19 @@ public static class Endpoints
 		public const string ConfigUpdateResponse = "ConfigUpdateResponse";
 		public const string ThemesResponse = "ThemesResponse";
 		public const string CommandsMetadataResponse = "CommandsMetadataResponse";
+
+		public static string[] AllOutgoingEvents => new[]
+		{
+			KeepaliveResponse,
+			LogsResponse,
+			ErrorResponse,
+			SessionResponse,
+			SessionsResponse,
+			ConfigResponse,
+			ConfigUpdateResponse,
+			ThemesResponse,
+			CommandsMetadataResponse
+		};
 	}
 
 
@@ -44,5 +72,12 @@ public static class Endpoints
 		public const string Closed = "Closed";
 		public const string Reconnecting = "Reconnecting";
 		public const string Reconnected = "Reconnected";
+
+		public static string[] AllLifecycleEvents => new[]
+		{
+			Closed,
+			Reconnecting,
+			Reconnected
+		};
 	}
 }

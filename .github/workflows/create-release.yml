@@ -1,4 +1,4 @@
-name: Jiro.Libs Release Management
+name: Jiro.Shared Release Management
 
 on:
   push:
@@ -7,18 +7,18 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version to release (e.g., 3.0.2)'
+        description: "Version to release (e.g., 3.0.2)"
         required: true
         type: string
       create_release:
-        description: 'Create GitHub Release'
+        description: "Create GitHub Release"
         required: false
         default: true
         type: boolean
 
 jobs:
   build-and-release:
-    name: Build and Release Jiro.Libs
+    name: Build and Release Jiro.Shared
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
     environment: main
@@ -48,25 +48,25 @@ jobs:
       - name: Update project version
         run: |
           # Update the version in the project file to match the tag
-          sed -i "s/<Version>.*<\/Version>/<Version>${{ steps.get_version.outputs.version }}<\/Version>/" src/Jiro.Commands/Jiro.Commands.csproj
+          sed -i "s/<Version>.*<\/Version>/<Version>${{ steps.get_version.outputs.version }}<\/Version>/" source/Jiro.Shared/Jiro.Shared.csproj
 
           # Verify the change
           echo "Updated version in project file:"
-          grep -n "Version" src/Jiro.Commands/Jiro.Commands.csproj
+          grep -n "Version" source/Jiro.Shared/Jiro.Shared.csproj
 
-      - name: Build and Pack Libraries
+      - name: Build and Pack Jiro.Shared
         run: |
           # Restore dependencies
-          dotnet restore src/Main.sln
+          dotnet restore source/Main.sln
 
           # Build the solution
-          dotnet build src/Main.sln --no-restore --configuration Release
+          dotnet build source/Main.sln --no-restore --configuration Release
 
           # Create packages directory
           mkdir -p packages
 
-          # Pack the Jiro.Commands library using nuspec file
-          cd src/Jiro.Commands
+          # Pack the Jiro.Shared library using nuspec file
+          cd source/Jiro.Shared
           dotnet pack \
             --no-build \
             --configuration Release \
@@ -78,7 +78,7 @@ jobs:
 
       - name: Run tests
         run: |
-          dotnet test src/Main.sln \
+          dotnet test source/Main.sln \
             --no-build \
             --configuration Release \
             --logger trx \
@@ -96,7 +96,7 @@ jobs:
             echo "EOF" >> $GITHUB_OUTPUT
           else
             echo "No release notes file found at: $release_notes_file"
-            echo "RELEASE_NOTES=Jiro.Libs v${{ steps.get_version.outputs.version }}" >> $GITHUB_OUTPUT
+            echo "RELEASE_NOTES=Jiro.Shared v${{ steps.get_version.outputs.version }}" >> $GITHUB_OUTPUT
           fi
 
       - name: Publish to NuGet.org
@@ -120,17 +120,17 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: "v${{ steps.get_version.outputs.version }}"
-          name: "Jiro.Commands v${{ steps.get_version.outputs.version }}"
+          name: "Jiro.Shared v${{ steps.get_version.outputs.version }}"
           body: |
             ${{ steps.release_notes.outputs.RELEASE_NOTES }}
 
             ## 📦 NuGet Package
             ```
-            dotnet add package Jiro.Commands --version ${{ steps.get_version.outputs.version }}
+            dotnet add package Jiro.Shared --version ${{ steps.get_version.outputs.version }}
             ```
 
             ## 📋 Package Information
-            - **Package ID**: Jiro.Commands
+            - **Package ID**: Jiro.Shared
             - **Version**: ${{ steps.get_version.outputs.version }}
             - **Target Framework**: .NET 9.0
             - **Published to**: NuGet.org

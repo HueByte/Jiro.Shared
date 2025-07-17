@@ -16,10 +16,10 @@ Jiro.Shared is a foundational library that provides common types, models, and ut
 
 ## Quick Start
 
-To get started with Jiro.Libs, install the NuGet package:
+To get started with Jiro.Shared, install the NuGet package:
 
 ```bash
-dotnet add package Jiro.Commands
+dotnet add package Jiro.Shared
 ```
 
 ## Documentation Sections
@@ -29,4 +29,4 @@ dotnet add package Jiro.Commands
 
 ## Support
 
-For issues and feature requests, please visit our [GitHub repository](https://github.com/HueByte/Jiro.Libs).
+For issues and feature requests, please visit our [GitHub repository](https://github.com/HueByte/Jiro.Shared).

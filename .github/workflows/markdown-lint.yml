@@ -1,4 +1,4 @@
-name: Jiro.Libs Markdown Linting
+name: Jiro.Shared Markdown Linting
 
 on:
   push:

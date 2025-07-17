@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# DocFX Runner for Jiro.Libs
+# DocFX Runner for Jiro.Shared
 # Builds documentation using DocFX
 
 set -e  # Exit on any error
@@ -53,7 +53,7 @@ check_command() {
 
 show_help() {
     cat << EOF
-DocFX Runner for Jiro.Libs
+DocFX Runner for Jiro.Shared
 
 USAGE:
     ./docfx-gen.sh [OPTIONS] [ACTION]
@@ -130,7 +130,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(dirname "$SCRIPT_DIR")"
 cd "$REPO_ROOT"
 
-print_info "📚 Jiro.Libs DocFX Runner"
+print_info "📚 Jiro.Shared DocFX Runner"
 print_info "======================="
 echo
 

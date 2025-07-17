@@ -97,9 +97,7 @@ function find_build_artifacts() {
     else
         # Common build output paths for .NET projects
         search_paths=(
-            "src/Jiro.Commands/bin/Release"
-            "src/Examples/ExampleApp/bin/Release"
-            "src/Examples/ExamplePlugin/bin/Release"
+            "source/Jiro.Shared/bin/Release"
             "bin/Release" "publish" "artifacts" "dist" "build"
         )
     fi
