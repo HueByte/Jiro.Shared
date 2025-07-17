@@ -28,13 +28,13 @@
         <img src="https://img.shields.io/github/languages/code-size/HueByte/Jiro.Shared?style=for-the-badge&color=purple" alt="Code Size"/>
     </a>
     <a href="https://www.nuget.org/packages/Jiro.Shared/">
-        <img src="https://img.shields.io/nuget/v/Jiro.Shared.svg" alt="NuGet"/>
+        <img src="https://img.shields.io/nuget/v/Jiro.Shared.svg?style=for-the-badge&color=blue" alt="NuGet"/>
     </a>
     <a href="https://www.nuget.org/packages/Jiro.Shared/">
-        <img src="https://img.shields.io/nuget/dt/Jiro.Shared.svg" alt="Downloads"/>
+        <img src="https://img.shields.io/nuget/dt/Jiro.Shared.svg?style=for-the-badge&color=blue" alt="Downloads"/>
     </a>
     <a href="LICENSE">
-        <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"/>
+        <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge&color=blue" alt="License"/>
     </a>
 </p>
 

@@ -5,5 +5,7 @@ items:
   href: code-names.md
 - name: Versions
   items:
+  - name: v1.0.1
+    href: v1.0.1.md
   - name: v1.0.0 "Hajimari"
     href: v1.0.0.md
