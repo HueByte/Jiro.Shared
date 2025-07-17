@@ -35,7 +35,6 @@
       <group targetFramework="net9.0">
         <dependency id="Grpc.AspNetCore" version="2.66.0" exclude="Build,Analyzers" />
         <dependency id="Google.Protobuf" version="3.28.2" exclude="Build,Analyzers" />
-        <dependency id="Grpc.Tools" version="2.66.0" exclude="Build,Analyzers" />
       </group>
     </dependencies>
   </metadata>

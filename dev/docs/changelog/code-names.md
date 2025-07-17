@@ -14,20 +14,16 @@ Jiro.Shared uses Japanese-inspired code names that reflect the spirit and theme 
 
 | Version | Code Name | Japanese | Meaning | Theme |
 |---------|-----------|----------|---------|--------|
-| v2.0.0 | Kaizen | 改善 | Continuous Improvement | Foundation & Initial Framework |
-| v3.0.0 | Shinpo | 進歩 | Progress & Advancement | Enhanced Tooling & Documentation |
-| v3.0.1 | Shinpo-Kai | 進歩改 | Enhanced Progress | Release Process Automation |
-| v3.0.2 | Kaizen-ka | 改善化 | Improvement Process | Incremental Improvements & Bug Fixes |
-| v3.0.3 | Seishin | 精神 | Spirit & Essence | Core Framework Strengthening |
+| v1.0.0 | Hajimari | 始まり | Beginning | Initial Release & Foundation |
 
 ## Future Code Name Ideas
 
 For future reference, here are potential code names for upcoming releases:
 
-### Minor Releases (v3.x.x)
+### Minor Releases (v1.x.x)
 
-- **Kaizen-ka** (改善化) - "Improvement Process" - for incremental improvements
-- **Seishin** (精神) - "Spirit/Essence" - for core feature enhancements
+- **Kaizen** (改善) - "Continuous Improvement" - for incremental improvements
+- **Shinpo** (進歩) - "Progress & Advancement" - for enhanced features
 
 ### Major Releases (v4.x.x+)
 

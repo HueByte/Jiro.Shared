@@ -8,11 +8,11 @@ Jiro.Shared is a foundational library that provides common types, models, and ut
 
 ## Features
 
-- **Command System**: Build applications around a command-based architecture
-- **Plugin Framework**: Create and load plugins dynamically
-- **Type Safety**: Strongly-typed command parameters and responses
-- **Dependency Injection**: Full support for .NET dependency injection
-- **Result Types**: Rich result types for different response formats
+- **WebSocket Communication**: Predefined endpoint definitions for consistent WebSocket communication
+- **gRPC Integration**: Protocol buffer definitions and strongly-typed gRPC services
+- **Request/Response Models**: Comprehensive models for chat sessions, commands, configuration, logging, and themes
+- **Type Safety**: Strongly-typed communication contracts with compile-time validation
+- **Documentation**: Full XML documentation for IntelliSense support
 
 ## Quick Start
 
@@ -25,7 +25,7 @@ dotnet add package Jiro.Shared
 ## Documentation Sections
 
 - [API Reference](~/api/) - Complete API documentation
-- [Examples](~/examples/) - Code examples and tutorials
+- [Changelog](changelog/) - Version history and release notes
 
 ## Support
 

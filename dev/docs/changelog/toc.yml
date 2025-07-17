@@ -5,15 +5,5 @@ items:
   href: code-names.md
 - name: Versions
   items:
-  - name: v3.0.4 "Kakushin"
-    href: v3.0.4.md
-  - name: v3.0.3 "Seishin"
-    href: v3.0.3.md
-  - name: v3.0.2 "Kaizen-ka"
-    href: v3.0.2.md
-  - name: v3.0.1 "Shinpo-Kai"
-    href: v3.0.1.md
-  - name: v3.0.0 "Shinpo"
-    href: v3.0.0.md
-  - name: v2.0.0 "Kaizen"
-    href: v2.0.0.md
+  - name: v1.0.0 "Hajimari"
+    href: v1.0.0.md
