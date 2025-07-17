@@ -1,8 +1,44 @@
-# Jiro.Shared
+<p align="center">
+    <img src="dev/assets/JiroBanner.png" style="border-radius: 15px;" alt="Jiro AI Assistant Banner"/>
+</p>
 
-[![NuGet](https://img.shields.io/nuget/v/Jiro.Shared.svg)](https://www.nuget.org/packages/Jiro.Shared/)
-[![Downloads](https://img.shields.io/nuget/dt/Jiro.Shared.svg)](https://www.nuget.org/packages/Jiro.Shared/)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+<p align="center">
+    <a href="https://github.com/HueByte/Jiro.Shared/actions/workflows/create-release.yml">
+        <img src="https://img.shields.io/github/actions/workflow/status/HueByte/Jiro.Shared/create-release.yml?branch=main&style=for-the-badge&label=build" alt="Build Status"/>
+    </a>
+    <a href="https://github.com/HueByte/Jiro.Shared/releases/latest">
+        <img src="https://img.shields.io/github/v/release/HueByte/Jiro.Shared?style=for-the-badge&color=blue" alt="Latest Release"/>
+    </a>
+    <a href="https://github.com/HueByte/Jiro.Shared/commits/main">
+        <img src="https://img.shields.io/github/last-commit/HueByte/Jiro.Shared?style=for-the-badge&color=orange" alt="Last Commit"/>
+    </a>
+    <a href="https://github.com/HueByte/Jiro.Shared/stargazers">
+        <img src="https://img.shields.io/github/stars/HueByte/Jiro.Shared?style=for-the-badge&color=yellow" alt="GitHub Stars"/>
+    </a>
+    <a href="https://github.com/HueByte/Jiro.Shared/issues">
+        <img src="https://img.shields.io/github/issues/HueByte/Jiro.Shared?style=for-the-badge&color=red" alt="GitHub Issues"/>
+    </a>
+    <a href="https://github.com/HueByte/Jiro.Shared/blob/main/LICENSE">
+        <img src="https://img.shields.io/github/license/HueByte/Jiro.Shared?style=for-the-badge&color=green" alt="License"/>
+    </a>
+    <a href="https://dotnet.microsoft.com/download">
+        <img src="https://img.shields.io/badge/.NET-9.0-purple?style=for-the-badge" alt=".NET 9.0"/>
+    </a>
+    <a href="https://github.com/HueByte/Jiro.Shared">
+        <img src="https://img.shields.io/github/languages/code-size/HueByte/Jiro.Shared?style=for-the-badge&color=purple" alt="Code Size"/>
+    </a>
+    <a href="https://www.nuget.org/packages/Jiro.Shared/">
+        <img src="https://img.shields.io/nuget/v/Jiro.Shared.svg" alt="NuGet"/>
+    </a>
+    <a href="https://www.nuget.org/packages/Jiro.Shared/">
+        <img src="https://img.shields.io/nuget/dt/Jiro.Shared.svg" alt="Downloads"/>
+    </a>
+    <a href="LICENSE">
+        <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"/>
+    </a>
+</p>
+
+# Jiro.Shared
 
 Shared types and models for the Jiro ecosystem applications.
 
