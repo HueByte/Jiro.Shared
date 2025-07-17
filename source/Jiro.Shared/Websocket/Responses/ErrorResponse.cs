@@ -5,13 +5,13 @@ namespace Jiro.Shared.Websocket.Responses;
 /// </summary>
 public class ErrorResponse : SyncResponse
 {
-    /// <summary>
-    /// Gets or sets the command name associated with the error.
-    /// </summary>
-    public string CommandName { get; set; } = string.Empty;
+	/// <summary>
+	/// Gets or sets the command name associated with the error.
+	/// </summary>
+	public string CommandName { get; set; } = string.Empty;
 
-    /// <summary>
-    /// Gets or sets the error message.
-    /// </summary>
-    public string ErrorMessage { get; set; } = string.Empty;
+	/// <summary>
+	/// Gets or sets the error message.
+	/// </summary>
+	public string ErrorMessage { get; set; } = string.Empty;
 }
