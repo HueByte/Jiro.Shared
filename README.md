@@ -71,7 +71,7 @@ dotnet add package Jiro.Shared
 ### Package Reference
 
 ```xml
-<PackageReference Include="Jiro.Shared" Version="1.0.0" />
+<PackageReference Include="Jiro.Shared" Version="1.1.0" />
 ```
 
 ## Usage
@@ -126,6 +126,14 @@ Contributions are welcome! Please see our [Contributing Guidelines](CONTRIBUTING
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Releases
+
+- **[v1.1.0 "Kaizen"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.1.0)** - Enhancement release with system monitoring and database utilities
+- **[v1.0.1](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.0.1)** - NuGet package display fixes
+- **[v1.0.0 "Hajimari"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.0.0)** - Initial release
+
+Each major release includes a Japanese-inspired code name that reflects its theme. See our [changelog](dev/docs/changelog/) for detailed release notes and [code names documentation](dev/docs/changelog/code-names.md) for the naming convention.
 
 ## Support
 

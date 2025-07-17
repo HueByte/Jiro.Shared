@@ -23,17 +23,23 @@ For future reference, here are potential code names for upcoming releases:
 
 ### Minor Releases (v1.x.x)
 
-- **Kaizen** (改善) - "Continuous Improvement" - for incremental improvements
-- **Shinpo** (進歩) - "Progress & Advancement" - for enhanced features
+- **Shinpo** (進歩) - "Progress & Advancement" - for enhanced features and capabilities
+- **Kizen** (基盤) - "Foundation" - for infrastructure improvements
+- **Yūki** (勇気) - "Courage" - for bold new features
+- **Chikara** (力) - "Power/Strength" - for performance improvements
 
-### Major Releases (v4.x.x+)
+### Major Releases (v2.x.x+)
 
-- **Hatsumeika** (発明家) - "Inventor" - for innovative features
+- **Shinseiki** (新世紀) - "New Era" - for paradigm shifts
 - **Kakushin** (革新) - "Innovation" - for breakthrough changes
 - **Takumi** (匠) - "Artisan/Craftsman" - for refined, polished releases
 - **Mirai** (未来) - "Future" - for forward-looking, modern releases
-- **Harmony** (調和) - "Harmony" - for integration and compatibility releases
-- **Zenith** (頂点) - "Peak/Summit" - for performance and optimization releases
+- **Chōwa** (調和) - "Harmony" - for integration and compatibility releases
+- **Chōten** (頂点) - "Peak/Summit" - for performance and optimization releases
+- **Hatsumeika** (発明家) - "Inventor" - for innovative features
+- **Kanzen** (完全) - "Perfection" - for feature-complete releases
+- **Rinkaku** (輪郭) - "Outline/Definition" - for API standardization
+- **Kesshō** (結晶) - "Crystal" - for clarity and precision improvements
 
 ## Guidelines
 

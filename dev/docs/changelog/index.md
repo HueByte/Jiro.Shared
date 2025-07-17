@@ -5,6 +5,7 @@ Welcome to the Jiro.Shared changelog. This section contains detailed information
 ## Available Versions
 
 <!-- Newest first -->
+- **[v1.1.0 "Kaizen"](v1.1.0.md)** - Enhancement release with system monitoring, memory cache utilities, and database extensions
 - **[v1.0.1](v1.0.1.md)** - Patch release fixing NuGet package display issues
 - **[v1.0.0 "Hajimari"](v1.0.0.md)** - Initial release with WebSocket endpoints, gRPC definitions, and shared models
 
