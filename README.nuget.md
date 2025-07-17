@@ -77,7 +77,7 @@ var sessionResponse = new SessionResponse
 ## Documentation
 
 For comprehensive documentation, examples, and API reference, visit:
-https://huebyte.github.io/Jiro.Shared/
+<https://huebyte.github.io/Jiro.Shared/>
 
 ## Contributing
 
@@ -89,12 +89,12 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Support
 
-- **Issues**: https://github.com/HueByte/Jiro.Shared/issues
-- **Discussions**: https://github.com/HueByte/Jiro.Shared/discussions
-- **Documentation**: https://huebyte.github.io/Jiro.Shared/
+- **Issues**: <https://github.com/HueByte/Jiro.Shared/issues>
+- **Discussions**: <https://github.com/HueByte/Jiro.Shared/discussions>
+- **Documentation**: <https://huebyte.github.io/Jiro.Shared/>
 
 ## Related Projects
 
-- **Jiro.Shared**: https://github.com/HueByte/Jiro.Shared - Shared models and infrastructure
-- **JiroCloud**: https://github.com/HueByte/JiroCloud - Cloud service implementation
-- **Jiro**: https://github.com/HueByte/Jiro - Main application instance
+- **Jiro.Shared**: <https://github.com/HueByte/Jiro.Shared> - Shared models and infrastructure
+- **JiroCloud**: <https://github.com/HueByte/JiroCloud> - Cloud service implementation
+- **Jiro**: <https://github.com/HueByte/Jiro> - Main application instance

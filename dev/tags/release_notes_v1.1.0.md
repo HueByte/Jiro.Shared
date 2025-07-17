@@ -1,55 +1,22 @@
-# Release Notes - v1.1.0 "Kaizen"
+## What's Changed
 
-🎯 **Enhancement Release** - July 17, 2025
+### 📋 Detailed Changelog
 
-## 🚀 Key Highlights
+For detailed information about changes, new features, and breaking changes, see the [**📖 Changelog**](https://huebyte.github.io/Jiro.Shared/docs/changelog/v1.1.0.html).
 
-- **System Information Models**: New `SystemInfo` and `ConfigurationSection` classes for comprehensive system monitoring
-- **Memory Cache Extensions**: Type-safe cache operations with `MemoryExtensions`
-- **Database Service Extensions**: Simplified Entity Framework Core registration for MySQL and SQLite
-- **Application Utilities**: Debug detection and runtime environment utilities
+### 🔄 Commits in this release:
 
-## ✨ New Features
+- **Adjusted documentation** ([`f211e78`](https://github.com/HueByte/Jiro.Shared/commit/f211e78)) by @HueByte on 2025-07-17
+- **Updated nuspec** ([`1ba8dd9`](https://github.com/HueByte/Jiro.Shared/commit/1ba8dd9)) by @HueByte on 2025-07-17
+- **Adjusted the types for websockets to support requiest id better** ([`dfa0df6`](https://github.com/HueByte/Jiro.Shared/commit/dfa0df6)) by @HueByte on 2025-07-17
+- **Added extensions, exceptions and utilities to the project** ([`4f39341`](https://github.com/HueByte/Jiro.Shared/commit/4f39341)) by @HueByte on 2025-07-17
+- **Release preparation** ([`2b19f02`](https://github.com/HueByte/Jiro.Shared/commit/2b19f02)) by @HueByte on 2025-07-17
 
-### System Monitoring
+### ℹ️ Release Information
 
-- Operating system and runtime detection
-- Memory and processor information capture
-- Machine identification capabilities
-- Flexible configuration management
+- **Version**: v1.1.0
+- **Branch**: main
+- **Generated on**: 2025-07-17 04:23:38 UTC
+- **Changelog**: [https://huebyte.github.io/Jiro.Shared/docs/changelog/v1.1.0.html](https://huebyte.github.io/Jiro.Shared/docs/changelog/v1.1.0.html)
 
-### Developer Experience
-
-- Type-safe memory cache operations
-- Streamlined database service registration
-- Compile-time type checking for all new APIs
-- Comprehensive XML documentation
-
-### Database Integration
-
-- MySQL DbContext auto-registration with server version detection
-- SQLite DbContext registration with simplified connection strings
-- Automatic migration assembly configuration
-
-## 🔧 Technical Improvements
-
-- Enhanced type safety across all new components
-- Full nullable reference type support
-- Performance-optimized cache access patterns
-- Zero breaking changes - full backward compatibility
-
-## 📦 Package Information
-
-- **Version**: 1.1.0
-- **Target**: .NET 9.0
-- **Dependencies**: Entity Framework Core, MySQL/SQLite providers, Memory Cache abstractions
-- **License**: MIT
-- **Repository**: [GitHub - Jiro.Shared](https://github.com/HueByte/Jiro.Shared)
-
-## 🔄 Migration
-
-No migration required - this is a minor release with additive features only.
-
----
-
-*Code Name "Kaizen" (改善) represents continuous improvement and enhancement of the Jiro.Shared library.*
+**Full Changelog**: <https://github.com/HueByte/Jiro.Shared/compare/v1.0.0...v1.1.0>
