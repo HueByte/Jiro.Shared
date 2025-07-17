@@ -1,14 +1,12 @@
+using Jiro.Shared.Websocket;
+
 namespace Jiro.Shared.Websocket.Requests;
 
 /// <summary>
 /// Base class for WebSocket command parameters
 /// </summary>
-public abstract class WebSocketParametersBase
+public abstract class WebSocketParametersBase : TrackedObject
 {
-	/// <summary>
-	/// Gets or sets the request ID for tracking purposes
-	/// </summary>
-	public string RequestId { get; set; } = string.Empty;
 }
 
 /// <summary>

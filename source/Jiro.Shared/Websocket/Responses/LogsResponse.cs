@@ -5,7 +5,7 @@ namespace Jiro.Shared.Websocket.Responses;
 /// <summary>
 /// Represents the response for logs.
 /// </summary>
-public class LogsResponse : SyncResponse
+public class LogsResponse : TrackedObject
 {
 	/// <summary>
 	/// Gets or sets the total number of logs.

@@ -3,7 +3,7 @@ namespace Jiro.Shared.Websocket.Responses;
 /// <summary>
 /// Represents the response for keepalive acknowledgment.
 /// </summary>
-public class KeepaliveResponse : SyncResponse
+public class KeepaliveResponse : TrackedObject
 {
 	/// <summary>
 	/// Gets or sets the timestamp of the acknowledgment.

@@ -5,7 +5,7 @@ namespace Jiro.Shared.Websocket.Responses;
 /// <summary>
 /// Represents the response for configuration.
 /// </summary>
-public class ConfigResponse : SyncResponse
+public class ConfigResponse : TrackedObject
 {
 	/// <summary>
 	/// Gets or sets the application name.

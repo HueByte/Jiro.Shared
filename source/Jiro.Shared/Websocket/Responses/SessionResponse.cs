@@ -3,7 +3,7 @@ namespace Jiro.Shared.Websocket.Responses;
 /// <summary>
 /// Represents the response for a single session with messages.
 /// </summary>
-public class SessionResponse : SyncResponse
+public class SessionResponse : TrackedObject
 {
 	/// <summary>
 	/// Gets or sets the instance ID.

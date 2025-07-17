@@ -3,7 +3,7 @@ namespace Jiro.Shared.Websocket.Responses;
 /// <summary>
 /// Represents the response for errors.
 /// </summary>
-public class ErrorResponse : SyncResponse
+public class ErrorResponse : TrackedObject
 {
 	/// <summary>
 	/// Gets or sets the command name associated with the error.

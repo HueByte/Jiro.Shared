@@ -5,7 +5,7 @@ namespace Jiro.Shared.Websocket.Responses;
 /// <summary>
 /// Represents the response for themes.
 /// </summary>
-public class ThemesResponse : SyncResponse
+public class ThemesResponse : TrackedObject
 {
 	/// <summary>
 	/// Gets or sets the list of available themes.

@@ -3,7 +3,7 @@ namespace Jiro.Shared.Websocket.Responses;
 /// <summary>
 /// Represents the response for configuration updates.
 /// </summary>
-public class ConfigUpdateResponse : SyncResponse
+public class ConfigUpdateResponse : TrackedObject
 {
 	/// <summary>
 	/// Gets or sets a value indicating whether the update was successful.
