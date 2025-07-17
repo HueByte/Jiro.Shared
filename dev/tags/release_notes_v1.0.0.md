@@ -1,55 +1,22 @@
-# Release Notes v1.0.0 "Hajimari"
+## What's Changed
 
-**Release Date**: July 17, 2025  
-**Package Version**: 1.0.0  
-**Code Name**: Hajimari (始まり - Beginning)
+### 📋 Detailed Changelog
 
-## Summary
+For detailed information about changes, new features, and breaking changes, see the [**📖 Changelog**](https://huebyte.github.io/Jiro.Shared/docs/changelog/v1.0.0.html).
 
-Initial release of Jiro.Shared - the foundational shared types and models library for the Jiro ecosystem. This package provides core communication contracts and data structures used across JiroCloud and Jiro instances.
+### 🔄 Commits in this release:
 
-## What's New
+- **Init** ([`6f9b748`](https://github.com/HueByte/Jiro.Shared/commit/6f9b748)) by @HueByte on 2025-07-17
+- **Adjustments from template to match Jiro.Shared** ([`6d870b6`](https://github.com/HueByte/Jiro.Shared/commit/6d870b6)) by @HueByte on 2025-07-17
+- **Template cleaning && Release preparation** ([`6fb3935`](https://github.com/HueByte/Jiro.Shared/commit/6fb3935)) by @HueByte on 2025-07-17
+- **dotnet format** ([`e1ec206`](https://github.com/HueByte/Jiro.Shared/commit/e1ec206)) by @HueByte on 2025-07-17
+- **README update** ([`5148d7e`](https://github.com/HueByte/Jiro.Shared/commit/5148d7e)) by @HueByte on 2025-07-17
 
-### WebSocket Communication
+### ℹ️ Release Information
 
-- Predefined endpoint constants for consistent communication
-- Support for incoming, outgoing, and lifecycle events
+- **Version**: v1.0.0
+- **Branch**: main
+- **Generated on**: 2025-07-17 03:32:34 UTC
+- **Changelog**: [https://huebyte.github.io/Jiro.Shared/docs/changelog/v1.0.0.html](https://huebyte.github.io/Jiro.Shared/docs/changelog/v1.0.0.html)
 
-### Request/Response Models
-
-- Chat session management models
-- Command system models
-- Configuration management models
-- Logging and theme models
-- Error handling and keepalive responses
-
-### gRPC Integration
-
-- Protocol buffer definitions for efficient communication
-- Strongly-typed gRPC services
-- Compile-time validation for service contracts
-
-### Package Features
-
-- Full XML documentation for IntelliSense
-- .NET 9.0 support with C# 13 features
-- Professional NuGet package configuration
-
-## Installation
-
-```bash
-dotnet add package Jiro.Shared --version 1.0.0
-```
-
-## Dependencies
-
-- Grpc.AspNetCore v2.66.0
-- Google.Protobuf v3.28.2
-
-## Documentation
-
-Full documentation available at: <https://huebyte.github.io/Jiro.Shared/>
-
-## Next Steps
-
-This release establishes the foundation for the Jiro ecosystem. Future releases will expand the model collection and add performance optimizations based on usage feedback.
+**Full Changelog**: <https://github.com/HueByte/Jiro.Shared/compare/6389576b21466aad9c2c539550ec17e3b5a73584...v1.0.0>
