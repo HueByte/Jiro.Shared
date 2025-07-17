@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>v1.1.0 &quot;Kaizen&quot; - Enhancement Release | Jiro.Shared Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="v1.1.0 &quot;Kaizen&quot; - Enhancement Release | Jiro.Shared Documentation ">
+      
+      
+      <link rel="icon" href="../../assets/Jiro-Icon.png">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/HueByte/Jiro.Shared/blob/main/dev/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../assets/Jiro-Icon.png" alt="Jiro.Shared">
+            Jiro.Shared
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="v110-kaizen---enhancement-release">v1.1.0 &quot;Kaizen&quot; - Enhancement Release</h1>
+
+<p><strong>Release Date</strong>: July 17, 2025<br>
+<strong>Code Name</strong>: &quot;Kaizen&quot; (Continuous Improvement)<br>
+<strong>Type</strong>: Minor Release</p>
+<hr>
+<h2 id="-overview">🎯 Overview</h2>
+<p>Version 1.1.0 introduces significant enhancements to the Jiro.Shared library with new system monitoring capabilities, database service extensions, memory cache utilities, and application-level utilities. This release focuses on improving developer experience and extending the library's functionality for better integration across the Jiro ecosystem.</p>
+<h2 id="-features-added">✨ Features Added</h2>
+<h3 id="system-information-models">System Information Models</h3>
+<ul>
+<li><strong>SystemInfo Class</strong>: Comprehensive system information capture
+<ul>
+<li>Operating system detection</li>
+<li>.NET runtime version tracking</li>
+<li>Machine name identification</li>
+<li>Processor count monitoring</li>
+<li>Total memory reporting</li>
+</ul>
+</li>
+<li><strong>ConfigurationSection Class</strong>: Enhanced configuration management
+<ul>
+<li>Flexible configuration value storage with <code>Dictionary&lt;string, object&gt;</code></li>
+<li>Type-safe configuration section handling</li>
+</ul>
+</li>
+</ul>
+<h3 id="extension-methods">Extension Methods</h3>
+<h4 id="memory-cache-extensions-memoryextensions">Memory Cache Extensions (<code>MemoryExtensions</code>)</h4>
+<ul>
+<li><strong>Generic Get Methods</strong>: Type-safe cache value retrieval
+<ul>
+<li><code>Get&lt;TItem&gt;(object key)</code> - Direct typed retrieval</li>
+<li><code>TryGetValue&lt;TItem&gt;(object key, out TItem? value)</code> - Safe retrieval with validation</li>
+</ul>
+</li>
+<li><strong>Object Get Method</strong>: Flexible cache access for dynamic scenarios</li>
+<li><strong>Null Safety</strong>: Built-in null handling and default value management</li>
+</ul>
+<h4 id="service-registration-extensions-serviceextensions">Service Registration Extensions (<code>ServiceExtensions</code>)</h4>
+<ul>
+<li><strong>MySQL DbContext Registration</strong>: <code>AddMySqlContext&lt;T&gt;(string connectionString)</code>
+<ul>
+<li>Auto-detect MySQL server version</li>
+<li>Automatic migrations assembly configuration</li>
+</ul>
+</li>
+<li><strong>SQLite DbContext Registration</strong>: <code>AddSqliteContext&lt;T&gt;(string connectionString)</code>
+<ul>
+<li>File-based SQLite support</li>
+<li>Streamlined connection string handling</li>
+</ul>
+</li>
+</ul>
+<h3 id="application-utilities">Application Utilities</h3>
+<ul>
+<li><strong>Debug Detection</strong>: <code>ApplicationUtilities.IsDebug()</code>
+<ul>
+<li>Compile-time debug mode detection</li>
+<li>Conditional compilation support</li>
+<li>Runtime environment awareness</li>
+</ul>
+</li>
+</ul>
+<h2 id="-technical-improvements">🔧 Technical Improvements</h2>
+<h3 id="enhanced-type-safety">Enhanced Type Safety</h3>
+<ul>
+<li>All new APIs leverage generic constraints for compile-time type checking</li>
+<li>Nullable reference types fully supported across new components</li>
+<li>Comprehensive XML documentation for IntelliSense support</li>
+</ul>
+<h3 id="database-integration">Database Integration</h3>
+<ul>
+<li>Support for multiple Entity Framework Core providers</li>
+<li>Simplified service registration patterns</li>
+<li>Migration assembly auto-configuration</li>
+</ul>
+<h3 id="performance-optimizations">Performance Optimizations</h3>
+<ul>
+<li>Efficient memory cache access patterns</li>
+<li>Minimal allocations in utility methods</li>
+<li>Optimized service registration workflows</li>
+</ul>
+<h2 id="-dependencies">🛠️ Dependencies</h2>
+<h3 id="new-package-dependencies">New Package Dependencies</h3>
+<ul>
+<li><strong>Microsoft.EntityFrameworkCore</strong> - Core EF functionality</li>
+<li><strong>Pomelo.EntityFrameworkCore.MySql</strong> - MySQL provider</li>
+<li><strong>Microsoft.EntityFrameworkCore.Sqlite</strong> - SQLite provider</li>
+<li><strong>Microsoft.Extensions.Caching.Memory</strong> - Memory cache abstractions</li>
+</ul>
+<h2 id="-usage-examples">📖 Usage Examples</h2>
+<h3 id="system-information">System Information</h3>
+<pre><code class="lang-csharp">var systemInfo = new SystemInfo
+{
+    OperatingSystem = Environment.OSVersion.ToString(),
+    RuntimeVersion = Environment.Version.ToString(),
+    MachineName = Environment.MachineName,
+    ProcessorCount = Environment.ProcessorCount,
+    TotalMemory = GC.GetTotalMemory(false)
+};
+</code></pre>
+<h3 id="memory-cache-extensions">Memory Cache Extensions</h3>
+<pre><code class="lang-csharp">// Type-safe cache retrieval
+var user = cache.Get&lt;User&gt;(&quot;user-123&quot;);
+
+// Safe retrieval with validation
+if (cache.TryGetValue&lt;Settings&gt;(&quot;app-settings&quot;, out var settings))
+{
+    // Use settings safely
+}
+</code></pre>
+<h3 id="service-registration">Service Registration</h3>
+<pre><code class="lang-csharp">// MySQL registration
+services.AddMySqlContext&lt;AppDbContext&gt;(connectionString);
+
+// SQLite registration
+services.AddSqliteContext&lt;LocalDbContext&gt;(&quot;app.db&quot;);
+</code></pre>
+<h2 id="-breaking-changes">🔄 Breaking Changes</h2>
+<p><strong>None</strong> - This is a minor release with full backward compatibility.</p>
+<h2 id="-migration-guide">🏗️ Migration Guide</h2>
+<p>No migration required. All existing code continues to work without changes. New features are additive and optional.</p>
+<h2 id="-testing">📋 Testing</h2>
+<ul>
+<li>All new components include comprehensive unit tests</li>
+<li>Integration tests added for database service extensions</li>
+<li>Memory cache extension tests verify type safety and null handling</li>
+<li>System information models tested across multiple environments</li>
+</ul>
+<h2 id="-deployment">🚀 Deployment</h2>
+<ul>
+<li>Version 1.1.0 has been built and packaged successfully</li>
+<li>All tests pass on .NET 9.0 runtime</li>
+<li>Ready for deployment to NuGet.org</li>
+<li>Documentation updated with new API references</li>
+</ul>
+<hr>
+<p><strong>Note</strong>: This minor release significantly enhances the utility and functionality of Jiro.Shared while maintaining full backward compatibility with existing implementations.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/HueByte/Jiro.Shared/blob/main/dev/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="footer-custom"><div class="footer-inner d-flex justify-content-between align-items-center"><div class="footer-text">Made with <strong>💖</strong> By HueByte</div><div class="footer-links"><a href="https://github.com/HueByte/Jiro.Shared" class="footer-link" target="_blank"><i class="fab fa-github"></i>GitHub</a><a href="#" class="footer-link scroll-to-top" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i>Top</a></div></div></div><script>function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}</script>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
