@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageId>Jiro.Shared</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>HueByte</Authors>
+    <Title>Jiro.Shared</Title>
+    <Summary>Shared types and models for Jiro ecosystem applications</Summary>
+    <Description>Jiro.Shared provides common types, models, and utilities used across the Jiro ecosystem, including JiroCloud and Jiro instances. This package contains shared WebSocket endpoints, gRPC service definitions, request/response models, and other foundational components.
+
+Features:
+• WebSocket endpoint definitions for real-time communication
+• gRPC protocol buffer definitions
+• Shared request and response models
+• Common data transfer objects (DTOs)
+• Type-safe communication contracts
+• Full XML documentation for IntelliSense support</Description>
+    <PackageProjectUrl>https://github.com/HueByte/Jiro.Shared</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/HueByte/Jiro.Shared</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryBranch>main</RepositoryBranch>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>Jiro-Icon.png</PackageIcon>
+    <PackageTags>jiro;shared;websocket;grpc;models;types;communication;dotnet;csharp</PackageTags>
+    <Copyright>Copyright © HueByte 2025</Copyright>
+    <PackageReleaseNotes>https://huebyte.github.io/Jiro.Shared/docs/changelog/index.html</PackageReleaseNotes>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.66.0" />
+    <PackageReference Include="Google.Protobuf" Version="3.28.2" />
+    <PackageReference Include="Grpc.Tools" Version="2.66.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\dev\assets\Jiro-Icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Grpc\*.proto" GrpcServices="Both" />
+  </ItemGroup>
+
+</Project>

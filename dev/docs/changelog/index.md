@@ -1,0 +1,32 @@
+# Changelog
+
+Welcome to the Jiro.Shared changelog. This section contains detailed information about all changes, updates, and releases for each version of the shared types and models library.
+
+## Available Versions
+
+<!-- Newest first -->
+- **[v1.0.0 "Hajimari"](v1.0.0.md)** - Initial release with WebSocket endpoints, gRPC definitions, and shared models
+
+## Resources
+
+- **[Code Names Reference](code-names.md)** - Complete guide to release code naming convention and future ideas
+
+## About This Section
+
+Each version has its own dedicated changelog file with comprehensive details about:
+
+- ✨ **Features Added** - New functionality and capabilities
+- 🔄 **Changes** - Modifications to existing features
+- 🐛 **Bug Fixes** - Issues resolved in the release
+- 🛠️ **Technical Details** - Architecture and implementation changes
+- 📊 **Metrics** - Release statistics and performance data
+
+## Versioning
+
+Jiro.Shared follows semantic versioning (SemVer) with meaningful code names:
+
+- **Code Names**: Each major release includes a Japanese-inspired code name that reflects the theme of the release
+- **Semantic Versioning**: MAJOR.MINOR.PATCH format following SemVer principles
+- **Release Branches**: Releases are tagged from the main branch
+
+This project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html) (SemVer) for version numbering.

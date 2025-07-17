@@ -1,0 +1,93 @@
+{
+	"$schema": "https://raw.githubusercontent.com/dotnet/docfx/main/schemas/docfx.schema.json",
+	"metadata": [
+		{
+			"src": [
+				{
+					"src": "../source",
+					"files": ["Jiro.Shared/**/*.csproj"]
+				}
+			],
+			"output": "_temp/api",
+			"properties": {
+				"TargetFramework": "net9.0"
+			},
+			"filter": "config/filterConfig.yml",
+			"disableGitFeatures": false
+		}
+	],
+	"build": {
+		"content": [
+			{
+				"src": ".",
+				"dest": ".",
+				"files": ["toc.yml", "index.md"]
+			},
+			{
+				"src": "docs",
+				"dest": "docs",
+				"files": ["**/*.md", "**/toc.yml"],
+				"exclude": [
+					"api/**",
+					"build/**",
+					"_site/**",
+					"_temp/**",
+					"**/bin/**",
+					"**/obj/**",
+					"**/TestResults/**"
+				]
+			},
+			{
+				"src": "api",
+				"dest": "api",
+				"files": ["index.md"]
+			},
+			{
+				"src": "_temp/api",
+				"dest": "api",
+				"files": ["*.yml", ".manifest"]
+			}
+		],
+		"resource": [
+			{
+				"files": [
+					"docs/images/**",
+					"assets/JiroBanner.png",
+					"assets/Jiro-Icon.png"
+				]
+			}
+		],
+		"overwrite": [
+			{
+				"files": ["docs/overwrite/**/*.md"],
+				"exclude": [
+					"docs/build/**",
+					"_site/**",
+					"_temp/**",
+					"**/bin/**",
+					"**/obj/**"
+				]
+			}
+		],
+		"output": "_site",
+		"template": ["default", "modern", "templates/jiro-modern"],
+		"globalMetadata": {
+			"_appName": "Jiro.Shared",
+			"_appTitle": "Jiro.Shared Documentation",
+			"_appLogoPath": "assets/Jiro-Icon.png",
+			"_appFaviconPath": "assets/Jiro-Icon.png",
+			"_appFooter": "<div class=\"footer-custom\"><div class=\"footer-inner d-flex justify-content-between align-items-center\"><div class=\"footer-text\">Made with <strong>💖</strong> By HueByte</div><div class=\"footer-links\"><a href=\"https://github.com/HueByte/Jiro.Shared\" class=\"footer-link\" target=\"_blank\"><i class=\"fab fa-github\"></i>GitHub</a><a href=\"#\" class=\"footer-link scroll-to-top\" onclick=\"scrollToTop()\"><i class=\"fas fa-arrow-up\"></i>Top</a></div></div></div><script>function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}</script>",
+			"_enableSearch": true,
+			"_enableNewTab": true,
+			"_disableNavbar": false,
+			"_disableBreadcrumb": false,
+			"_gitContribute": {
+				"repo": "https://github.com/HueByte/Jiro.Shared",
+				"branch": "main",
+				"path": "dev"
+			},
+			"_gitUrlPattern": "github",
+			"pdf": false
+		}
+	}
+}

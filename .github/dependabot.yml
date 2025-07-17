@@ -1,0 +1,51 @@
+version: 2
+updates:
+  # Enable version updates for .NET NuGet packages in Jiro.Shared
+  - package-ecosystem: "nuget"
+    directory: "/source"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "@HueByte"
+    labels:
+      - "dependencies"
+      - "jiro-shared"
+    commit-message:
+      prefix: "deps(jiro-shared)"
+      include: "scope"
+    groups:
+      # Group Microsoft packages together
+      microsoft-packages:
+        patterns:
+          - "Microsoft.*"
+          - "System.*"
+      # Group gRPC packages together
+      grpc-packages:
+        patterns:
+          - "Grpc.*"
+          - "Google.Protobuf"
+    ignore:
+      # Ignore major version updates for stable packages
+      - dependency-name: "Microsoft.*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "Grpc.*"
+        update-types: ["version-update:semver-major"]
+
+  # Enable version updates for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "10:00"
+    reviewers:
+      - "@HueByte"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "deps(actions)"
+      include: "scope"
