@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageId>Jiro.Shared</PackageId>
-    <Version>1.1.1</Version>
+    <Version>1.1.2</Version>
     <Authors>HueByte</Authors>
     <Title>Jiro.Shared</Title>
     <Summary>Shared types and models for Jiro ecosystem applications</Summary>
@@ -36,6 +36,8 @@ Features:
     <PackageReference Include="Grpc.AspNetCore" Version="2.66.0" />
     <PackageReference Include="Google.Protobuf" Version="3.28.2" />
     <PackageReference Include="Grpc.Tools" Version="2.66.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="9.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.6" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.3" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.6" />
@@ -45,6 +47,7 @@ Features:
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.6" />
     <PackageReference Include="Z.EntityFramework.Plus.EFCore" Version="9.103.9" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.2.0" />
   </ItemGroup>
 
   <ItemGroup>

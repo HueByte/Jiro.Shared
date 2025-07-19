@@ -155,4 +155,9 @@ public interface IJiroClientHub
 	Task SendErrorResponseAsync(ErrorResponse response, CancellationToken cancellationToken = default);
 
 	#endregion
+
+	/// <summary>
+	/// Sets up the events for the client hub
+	/// </summary>
+	void SetupEvents();
 }

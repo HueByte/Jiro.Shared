@@ -18,5 +18,5 @@ public class Theme
 	/// <summary>
 	/// Gets or sets the theme color scheme.
 	/// </summary>
-	public string ColorScheme { get; set; } = string.Empty;
+	public string JsonColorScheme { get; set; } = string.Empty;
 }

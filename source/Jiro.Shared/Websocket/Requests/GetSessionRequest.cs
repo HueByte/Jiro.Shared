@@ -1,5 +1,3 @@
-using Jiro.Shared.Websocket;
-
 namespace Jiro.Shared.Websocket.Requests;
 
 /// <summary>
