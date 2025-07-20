@@ -9,4 +9,9 @@ public class GetSessionRequest : TrackedObject
 	/// Gets or sets the instance ID
 	/// </summary>
 	public string InstanceId { get; set; } = string.Empty;
+
+	/// <summary>
+	/// Gets or sets the session ID
+	/// </summary>
+	public string SessionId { get; set; } = string.Empty;
 }
