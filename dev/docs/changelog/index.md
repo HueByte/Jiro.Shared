@@ -5,6 +5,8 @@ Welcome to the Jiro.Shared changelog. This section contains detailed information
 ## Available Versions
 
 <!-- Newest first -->
+- **[v1.1.3 "Kizen"](v1.1.3.md)** - Foundation refinement with enhanced session request models and improved API consistency
+- **[v1.1.2 "Shinpo"](v1.1.2.md)** - Progress and advancement with documentation improvements and bug fixes
 - **[v1.1.1 "Byakko"](v1.1.1.md)** - Response handler methods with [HubMethodName] attributes for all client-to-server responses
 - **[v1.1.0 "Kaizen"](v1.1.0.md)** - Enhancement release with system monitoring, memory cache utilities, and database extensions
 - **[v1.0.1](v1.0.1.md)** - Patch release fixing NuGet package display issues
