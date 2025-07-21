@@ -46,118 +46,42 @@ public interface IJiroClient
 	/// <summary>
 	/// Event fired when a logs request is received from the server
 	/// </summary>
-	public event Func<GetLogsRequest, Task>? LogsRequested;
+	public event Func<GetLogsRequest, Task<LogsResponse>>? LogsRequested;
 
 	/// <summary>
 	/// Event fired when a session request is received from the server
 	/// </summary>
-	public event Func<GetSessionRequest, Task>? SessionRequested;
+	public event Func<GetSessionRequest, Task<SessionResponse>>? SessionRequested;
 
 	/// <summary>
 	/// Event fired when a sessions request is received from the server
 	/// </summary>
-	public event Func<GetSessionsRequest, Task>? SessionsRequested;
+	public event Func<GetSessionsRequest, Task<SessionsResponse>>? SessionsRequested;
 
 	/// <summary>
 	/// Event fired when a config request is received from the server
 	/// </summary>
-	public event Func<GetConfigRequest, Task>? ConfigRequested;
+	public event Func<GetConfigRequest, Task<ConfigResponse>>? ConfigRequested;
 
 	/// <summary>
 	/// Event fired when a config update request is received from the server
 	/// </summary>
-	public event Func<UpdateConfigRequest, Task>? ConfigUpdateRequested;
+	public event Func<UpdateConfigRequest, Task<ConfigResponse>>? ConfigUpdateRequested;
 
 	/// <summary>
 	/// Event fired when a custom themes request is received from the server
 	/// </summary>
-	public event Func<GetCustomThemesRequest, Task>? CustomThemesRequested;
+	public event Func<GetCustomThemesRequest, Task<ThemesResponse>>? CustomThemesRequested;
 
 	/// <summary>
 	/// Event fired when a commands metadata request is received from the server
 	/// </summary>
-	public event Func<GetCommandsMetadataRequest, Task>? CommandsMetadataRequested;
-
-	#endregion
-
-	#region Client Response Methods
-
-	/// <summary>
-	/// Sends a logs response to the server
-	/// </summary>
-	/// <param name="response">The logs response</param>
-	/// <param name="cancellationToken">Cancellation token</param>
-	/// <returns>Task representing the operation</returns>
-	Task SendLogsResponseAsync(LogsResponse response, CancellationToken cancellationToken = default);
-
-	/// <summary>
-	/// Sends a session response to the server
-	/// </summary>
-	/// <param name="response">The session response</param>
-	/// <param name="cancellationToken">Cancellation token</param>
-	/// <returns>Task representing the operation</returns>
-	Task SendSessionResponseAsync(SessionResponse response, CancellationToken cancellationToken = default);
-
-	/// <summary>
-	/// Sends a sessions response to the server
-	/// </summary>
-	/// <param name="response">The sessions response</param>
-	/// <param name="cancellationToken">Cancellation token</param>
-	/// <returns>Task representing the operation</returns>
-	Task SendSessionsResponseAsync(SessionsResponse response, CancellationToken cancellationToken = default);
-
-	/// <summary>
-	/// Sends a config response to the server
-	/// </summary>
-	/// <param name="response">The config response</param>
-	/// <param name="cancellationToken">Cancellation token</param>
-	/// <returns>Task representing the operation</returns>
-	Task SendConfigResponseAsync(ConfigResponse response, CancellationToken cancellationToken = default);
-
-	/// <summary>
-	/// Sends a config update response to the server
-	/// </summary>
-	/// <param name="response">The config update response</param>
-	/// <param name="cancellationToken">Cancellation token</param>
-	/// <returns>Task representing the operation</returns>
-	Task SendConfigUpdateResponseAsync(ConfigUpdateResponse response, CancellationToken cancellationToken = default);
-
-	/// <summary>
-	/// Sends a themes response to the server
-	/// </summary>
-	/// <param name="response">The themes response</param>
-	/// <param name="cancellationToken">Cancellation token</param>
-	/// <returns>Task representing the operation</returns>
-	Task SendThemesResponseAsync(ThemesResponse response, CancellationToken cancellationToken = default);
-
-	/// <summary>
-	/// Sends a commands metadata response to the server
-	/// </summary>
-	/// <param name="response">The commands metadata response</param>
-	/// <param name="cancellationToken">Cancellation token</param>
-	/// <returns>Task representing the operation</returns>
-	Task SendCommandsMetadataResponseAsync(CommandsMetadataResponse response, CancellationToken cancellationToken = default);
-
-	/// <summary>
-	/// Sends a keepalive response to the server
-	/// </summary>
-	/// <param name="response">The keepalive response</param>
-	/// <param name="cancellationToken">Cancellation token</param>
-	/// <returns>Task representing the operation</returns>
-	Task SendKeepaliveResponseAsync(KeepaliveResponse response, CancellationToken cancellationToken = default);
-
-	/// <summary>
-	/// Sends an error response to the server
-	/// </summary>
-	/// <param name="response">The error response</param>
-	/// <param name="cancellationToken">Cancellation token</param>
-	/// <returns>Task representing the operation</returns>
-	Task SendErrorResponseAsync(ErrorResponse response, CancellationToken cancellationToken = default);
-
-	#endregion
+	public event Func<GetCommandsMetadataRequest, Task<CommandsMetadataResponse>>? CommandsMetadataRequested;
 
 	/// <summary>
 	/// Sets up the events for the client connection
 	/// </summary>
 	void SetupEvents();
+
+	#endregion
 }
