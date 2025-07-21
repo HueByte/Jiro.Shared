@@ -12,7 +12,8 @@ dev/api/*.yml
 dev/api/.manifest
 !dev/assets/JiroBanner.png
 
-
+*/CLAUDE.*.md
+CLAUDE.md
 dev-local/
 **/nuget.config
 **/.vscode
@@ -361,3 +362,4 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+.claude/settings.local.json

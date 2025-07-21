@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.SignalR;
 namespace Jiro.Shared.Websocket;
 
 /// <summary>
-/// Interface for server hub methods that can be called to send commands to clients
+/// Interface for client-to-server responses. Used by the server to define strongly-typed methods that clients can call.
 /// </summary>
-public interface IJiroHubClient
+public interface IClientToServerResponses
 {
-	#region Server Methods (Client-to-Server)
+	#region Client-to-Server Response Methods
 
 	/// <summary>
 	/// Receives logs response from the instance
@@ -62,7 +62,7 @@ public interface IJiroHubClient
 	#endregion
 
 	/// <summary>
-	/// Sets up the events for the client hub
+	/// Sets up the events for handling client responses
 	/// </summary>
 	void SetupEvents();
 }
