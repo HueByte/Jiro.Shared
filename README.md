@@ -71,7 +71,7 @@ dotnet add package Jiro.Shared
 ### Package Reference
 
 ```xml
-<PackageReference Include="Jiro.Shared" Version="1.1.0" />
+<PackageReference Include="Jiro.Shared" Version="1.1.4" />
 ```
 
 ## Usage
@@ -129,6 +129,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Releases
 
+- **[v1.1.4 "Chōwa"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.1.4)** - Interface harmony with clearer WebSocket interface naming
+- **[v1.1.3 "Kizen"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.1.3)** - Foundation refinement with enhanced session request models
+- **[v1.1.2 "Shinpo"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.1.2)** - Documentation improvements and bug fixes
+- **[v1.1.1 "Byakko"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.1.1)** - Response handler methods with SignalR attributes
 - **[v1.1.0 "Kaizen"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.1.0)** - Enhancement release with system monitoring and database utilities
 - **[v1.0.1](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.0.1)** - NuGet package display fixes
 - **[v1.0.0 "Hajimari"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.0.0)** - Initial release
