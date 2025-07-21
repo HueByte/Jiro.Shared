@@ -1,42 +1,19 @@
-# Jiro.Shared v1.1.5 "Kiban" - Foundation Strengthening
-
 ## What's Changed
 
-### ✨ Features Added
+### 📋 Detailed Changelog
 
-- **`JiroClientBase` Abstract Class**: New base class that automatically wires up SignalR hub events to IJiroClient interface events
-- **Automatic Event Wiring**: Eliminates the need for manual SignalR event registration in client implementations
-- **Built-in Logging Support**: Comprehensive logging for all WebSocket events with before/after execution tracking
-- **Constructor Flexibility**: Optional logger parameter allows for custom logging implementations
+For detailed information about changes, new features, and breaking changes, see the [**📖 Changelog**](https://huebyte.github.io/Jiro.Shared/docs/changelog/v1.1.5.html).
 
-### 🛠️ Technical Details
+### 🔄 Commits in this release:
 
-- Non-breaking change - existing IJiroClient implementations continue to work unchanged
-- Structured logging format: `[INF] {EventName} received` and `[INF] {EventName} executed`
-- Throws `NotImplementedException` for unhandled events, ensuring proper implementation
-- Minimal performance overhead with optional logging (null-checked)
+- **Rewrote the base for websocket clients to utilize strongly typed built in waiting system && Implemented base client to wire up the events"** ([`41a1177`](https://github.com/HueByte/Jiro.Shared/commit/41a1177)) by @HueByte on 2025-07-21
+- **Release preparation** ([`0b38f7a`](https://github.com/HueByte/Jiro.Shared/commit/0b38f7a)) by @HueByte on 2025-07-21
 
-### 📦 Dependencies
+### ℹ️ Release Information
 
-- Microsoft.AspNetCore.SignalR.Client v9.0.7
-- Microsoft.Extensions.Logging (via abstractions)
+- **Version**: v1.1.5
+- **Branch**: main
+- **Generated on**: 2025-07-21 19:07:26 UTC
+- **Changelog**: [https://huebyte.github.io/Jiro.Shared/docs/changelog/v1.1.5.html](https://huebyte.github.io/Jiro.Shared/docs/changelog/v1.1.5.html)
 
-### 🚀 Getting Started
-
-```csharp
-// Simple client implementation with automatic event wiring
-public class MyJiroClient : JiroClientBase
-{
-    public MyJiroClient(HubConnection connection, ILogger<MyJiroClient> logger) 
-        : base(connection, logger)
-    {
-        // Events are automatically wired up!
-        CommandReceived += async (command) => 
-        {
-            // Handle command
-        };
-    }
-}
-```
-
-**Full Changelog**: https://github.com/HueByte/Jiro.Shared/compare/v1.1.4...v1.1.5
+**Full Changelog**: <https://github.com/HueByte/Jiro.Shared/compare/v1.1.4...v1.1.5>
