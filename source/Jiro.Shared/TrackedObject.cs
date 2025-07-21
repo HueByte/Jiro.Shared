@@ -1,4 +1,4 @@
-namespace Jiro.Shared.Websocket;
+namespace Jiro.Shared;
 
 /// <summary>
 /// Base class for objects that require request ID tracking

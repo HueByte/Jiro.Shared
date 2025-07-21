@@ -6,7 +6,7 @@ namespace Jiro.Shared.Websocket;
 /// <summary>
 /// Interface for client events that can be received from the server
 /// </summary>
-public interface IJiroClientHub
+public interface IJiroSocketClient
 {
 	#region Connection Lifecycle Events
 
