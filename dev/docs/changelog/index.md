@@ -5,6 +5,7 @@ Welcome to the Jiro.Shared changelog. This section contains detailed information
 ## Available Versions
 
 <!-- Newest first -->
+- **[v1.1.5 "Kiban"](v1.1.5.md)** - Foundation strengthening with JiroClientBase abstract class for simplified client implementations
 - **[v1.1.4 "Chōwa"](v1.1.4.md)** - Interface harmony with clearer WebSocket interface naming conventions
 - **[v1.1.3 "Kizen"](v1.1.3.md)** - Foundation refinement with enhanced session request models and improved API consistency
 - **[v1.1.2 "Shinpo"](v1.1.2.md)** - Progress and advancement with documentation improvements and bug fixes

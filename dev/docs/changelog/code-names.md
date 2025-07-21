@@ -14,6 +14,7 @@ Jiro.Shared uses Japanese-inspired code names that reflect the spirit and theme 
 
 | Version | Code Name | Japanese | Meaning | Theme |
 |---------|-----------|----------|---------|--------|
+| v1.1.5 | Kiban | 基盤 | Foundation | Client Base Class & Event Wiring |
 | v1.1.4 | Chōwa | 調和 | Harmony | Interface Naming Clarity |
 | v1.1.3 | Kizen | 基盤 | Foundation Refinement | Model Enhancement & API Consistency |
 | v1.1.2 | Shinpo | 進歩 | Progress & Advancement | Documentation & Testing |
