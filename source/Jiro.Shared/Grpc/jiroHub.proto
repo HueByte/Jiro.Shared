@@ -5,23 +5,33 @@ option csharp_namespace = "JiroCloud.Api.Proto";
 import "google/protobuf/timestamp.proto";
 package JiroHubProto;
 
+// Service definition
 service JiroHubProto {
     rpc SendCommandResult (ClientMessage) returns (CommandResultResponse);
+	rpc SendSessionMessages (ClientMessage) returns (stream ChatMessage);
 }
 
+// Request message for sending command results
 message ClientMessage {
     string commandName = 1;
     DataType dataType = 2;
     oneof result {
-		TextResult textResult = 3;
-		GraphResult graphResult = 4;
-	}
+        TextResult textResult = 3;
+        GraphResult graphResult = 4;
+    }
     bool isSuccess = 5;
     string commandSyncId = 6;
     repeated Pair parameters = 7;
-	string sessionId = 8;
+    string sessionId = 8;
 }
 
+// Response message for command results
+message CommandResultResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+// Enums
 enum DataType {
     text = 0;
     graph = 1;
@@ -35,6 +45,7 @@ enum TextType {
     html = 4;
 }
 
+// Result types
 message TextResult {
     string response = 1;
     TextType textType = 2;
@@ -49,36 +60,45 @@ message GraphResult {
     map<string, string> units = 6;
 }
 
-message HelloRequest {
-    string message = 1;
+// Helper types
+message Pair {
+    string key = 1;
+    string value = 2;
 }
 
-message HelloReply {
-    string message = 1;
+// Session management (kept for potential future use)
+message Session {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    google.protobuf.Timestamp createdAt = 4;
+    google.protobuf.Timestamp updatedAt = 5;
 }
 
 message SessionsReply {
     repeated Session sessions = 1;
 }
 
-message Session {
-	string id = 1;
-	string name = 2;
-	string description = 3;
-	google.protobuf.Timestamp createdAt = 4;
-	google.protobuf.Timestamp updatedAt = 5;
+// Chat message model
+message ChatMessage {
+    string id = 1;
+    string content = 2;
+    string author = 3;
+    google.protobuf.Timestamp timestamp = 4;
+    string sessionId = 5;
+    MessageType messageType = 6;
 }
 
-message Pair {
-    string key = 1;
-    string value = 2;
+// Response containing list of chat messages
+message ChatMessagesResponse {
+    repeated ChatMessage messages = 1;
+    bool success = 2;
+    string errorMessage = 3;
 }
 
-message Empty {
-
-}
-
-message CommandResultResponse {
-    bool success = 1;
-    string message = 2;
+// Message type enum
+enum MessageType {
+    USER = 0;
+    ASSISTANT = 1;
+    SYSTEM = 2;
 }
