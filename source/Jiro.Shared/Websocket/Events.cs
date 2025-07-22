@@ -22,9 +22,19 @@ public class Events
 	public const string LogsRequested = "LogsRequested";
 
 	/// <summary>
+	/// Event fired when a client responds to a server's request for a log stream.
+	/// </summary>
+	public const string LogsStreamRequested = "LogsStreamRequested";
+
+	/// <summary>
 	/// Event fired when a client responds with session details for a specific session.
 	/// </summary>
-	public const string SessionRequested = "SessionRequested";
+	public const string SingleSessionRequested = "SingleSessionRequested";
+
+	/// <summary>
+	/// Event fired when a client responds with a list of all available sessions.
+	/// </summary>
+	public const string SessionMessagesStreamRequested = "SessionMessagesStreamRequested";
 
 	/// <summary>
 	/// Event fired when a client responds with a list of all available sessions.

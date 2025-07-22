@@ -49,9 +49,19 @@ public interface IJiroClient
 	public event Func<GetLogsRequest, Task<LogsResponse>>? LogsRequested;
 
 	/// <summary>
+	/// Event fired when a logs stream request is received from the server
+	/// </summary>
+	public event Func<GetLogsRequest, IAsyncEnumerable<LogEntry>>? LogsStreamRequested;
+
+	/// <summary>
 	/// Event fired when a session request is received from the server
 	/// </summary>
-	public event Func<GetSessionRequest, Task<SessionResponse>>? SessionRequested;
+	public event Func<GetSingleSessionRequest, Task<SessionResponse>>? SessionRequested;
+
+	/// <summary>
+	/// Event fired when a session messages stream request is received from the server
+	/// </summary>
+	public event Func<GetSingleSessionRequest, IAsyncEnumerable<ChatMessage>>? SessionMessagesStreamRequested;
 
 	/// <summary>
 	/// Event fired when a sessions request is received from the server

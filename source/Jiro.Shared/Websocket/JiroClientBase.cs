@@ -1,3 +1,6 @@
+using System.Threading.Channels;
+
+using Jiro.Shared.Extensions;
 using Jiro.Shared.Websocket.Requests;
 using Jiro.Shared.Websocket.Responses;
 
@@ -67,9 +70,19 @@ public abstract class JiroClientBase : IJiroClient
 	public event Func<GetLogsRequest, Task<LogsResponse>>? LogsRequested;
 
 	/// <summary>
+	/// Event fired when a logs stream request is received from the server
+	/// </summary>
+	public event Func<GetLogsRequest, IAsyncEnumerable<LogEntry>>? LogsStreamRequested;
+
+	/// <summary>
 	/// Event fired when a session request is received from the server
 	/// </summary>
-	public event Func<GetSessionRequest, Task<SessionResponse>>? SessionRequested;
+	public event Func<GetSingleSessionRequest, Task<SessionResponse>>? SessionRequested;
+
+	/// <summary>
+	/// Event fired when a session messages stream request is received from the server
+	/// </summary>
+	public event Func<GetSingleSessionRequest, IAsyncEnumerable<ChatMessage>>? SessionMessagesStreamRequested;
 
 	/// <summary>
 	/// Event fired when a sessions request is received from the server
@@ -143,93 +156,70 @@ public abstract class JiroClientBase : IJiroClient
 		};
 
 		// Fire-and-forget notifications
-		_hubConnection.On<CommandMessage>(Events.CommandReceived, async command =>
+		_hubConnection.OnNotification<CommandMessage>(Events.CommandReceived, async command =>
 		{
-			_logger?.LogInformation("{EventName} received", Events.CommandReceived);
 			if (CommandReceived != null)
 				await CommandReceived(command);
-			_logger?.LogInformation("{EventName} executed", Events.CommandReceived);
-		});
+		}, _logger);
 
-		_hubConnection.On(Events.KeepaliveAckReceived, async () =>
+		_hubConnection.OnNotification(Events.KeepaliveAckReceived, async () =>
 		{
-			_logger?.LogInformation("{EventName} received", Events.KeepaliveAckReceived);
 			if (KeepaliveAckReceived != null)
 				await KeepaliveAckReceived();
-			_logger?.LogInformation("{EventName} executed", Events.KeepaliveAckReceived);
-		});
+		}, _logger);
 
 		// RPC-style calls (server expects return value)
-
-		_hubConnection.On<GetLogsRequest, LogsResponse>(
+		_hubConnection.OnRequest<GetLogsRequest, LogsResponse>(
 			Events.LogsRequested,
-			async request =>
-			{
-				_logger?.LogInformation("{EventName} received: {RequestId}", Events.LogsRequested, request.RequestId);
-				var response = await LogsRequested!(request);
-				_logger?.LogInformation("{EventName} handled: {RequestId}", Events.LogsRequested, response.RequestId);
-				return response;
-			});
+			async request => await LogsRequested!(request),
+			_logger,
+			request => request.RequestId);
 
-		_hubConnection.On<GetSessionsRequest, SessionsResponse>(
+		_hubConnection.OnStream<GetLogsRequest, LogEntry>(
+			Events.LogsStreamRequested,
+			request => LogsStreamRequested!(request),
+			_logger);
+
+		_hubConnection.OnRequest<GetSessionsRequest, SessionsResponse>(
 			Events.SessionsRequested,
-			async request =>
-			{
-				_logger?.LogInformation("{EventName} received: {RequestId}", Events.SessionsRequested, request.RequestId);
-				var response = await SessionsRequested!(request);
-				_logger?.LogInformation("{EventName} handled: {RequestId}", Events.SessionsRequested, response.RequestId);
-				return response;
-			});
+			async request => await SessionsRequested!(request),
+			_logger,
+			request => request.RequestId);
 
-		_hubConnection.On<GetSessionRequest, SessionResponse>(
-			Events.SessionRequested,
-			async request =>
-			{
-				_logger?.LogInformation("{EventName} received: {RequestId}", Events.SessionRequested, request.RequestId);
-				var response = await SessionRequested!(request);
-				_logger?.LogInformation("{EventName} handled: {RequestId}", Events.SessionRequested, response.RequestId);
-				return response;
-			});
+		_hubConnection.OnRequest<GetSingleSessionRequest, SessionResponse>(
+			Events.SingleSessionRequested,
+			async request => await SessionRequested!(request),
+			_logger,
+			request => request.RequestId);
 
-		_hubConnection.On<GetConfigRequest, ConfigResponse>(
+		_hubConnection.OnStream<GetSingleSessionRequest, ChatMessage>(
+			Events.SessionMessagesStreamRequested,
+			request => SessionMessagesStreamRequested!(request),
+			_logger);
+
+		_hubConnection.OnRequest<GetConfigRequest, ConfigResponse>(
 			Events.ConfigRequested,
-			async request =>
-			{
-				_logger?.LogInformation("{EventName} received: {RequestId}", Events.ConfigRequested, request.RequestId);
-				var response = await ConfigRequested!(request);
-				_logger?.LogInformation("{EventName} handled: {RequestId}", Events.ConfigRequested, response.RequestId);
-				return response;
-			});
+			async request => await ConfigRequested!(request),
+			_logger,
+			request => request.RequestId);
 
-		_hubConnection.On<UpdateConfigRequest, ConfigResponse>(
+		_hubConnection.OnRequest<UpdateConfigRequest, ConfigResponse>(
 			Events.ConfigUpdated,
-			async request =>
-			{
-				_logger?.LogInformation("{EventName} received: {RequestId}", Events.ConfigUpdated, request.RequestId);
-				var response = await ConfigUpdateRequested!(request);
-				_logger?.LogInformation("{EventName} handled: {RequestId}", Events.ConfigUpdated, response.RequestId);
-				return response;
-			});
+			async request => await ConfigUpdateRequested!(request),
+			_logger,
+			request => request.RequestId);
 
-		_hubConnection.On<GetCustomThemesRequest, ThemesResponse>(
+		_hubConnection.OnRequest<GetCustomThemesRequest, ThemesResponse>(
 			Events.CustomThemesRequested,
-			async request =>
-			{
-				_logger?.LogInformation("{EventName} received: {RequestId}", Events.CustomThemesRequested, request.RequestId);
-				var response = await CustomThemesRequested!(request);
-				_logger?.LogInformation("{EventName} handled: {RequestId}", Events.CustomThemesRequested, response.RequestId);
-				return response;
-			});
+			async request => await CustomThemesRequested!(request),
+			_logger,
+			request => request.RequestId);
 
-		_hubConnection.On<GetCommandsMetadataRequest, CommandsMetadataResponse>(
+		_hubConnection.OnRequest<GetCommandsMetadataRequest, CommandsMetadataResponse>(
 			Events.CommandsMetadataRequested,
-			async request =>
-			{
-				_logger?.LogInformation("{EventName} received: {RequestId}", Events.CommandsMetadataRequested, request.RequestId);
-				var response = await CommandsMetadataRequested!(request);
-				_logger?.LogInformation("{EventName} handled: {RequestId}", Events.CommandsMetadataRequested, response.RequestId);
-				return response;
-			});
+			async request => await CommandsMetadataRequested!(request),
+			_logger,
+			request => request.RequestId);
 	}
 	#endregion
 

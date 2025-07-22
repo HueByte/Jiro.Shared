@@ -1,3 +1,5 @@
+using System.Threading.Channels;
+
 using Jiro.Shared.Websocket.Requests;
 using Jiro.Shared.Websocket.Responses;
 
@@ -17,10 +19,22 @@ public interface IJiroHub
 	Task<LogsResponse> RequestLogsAsync(GetLogsRequest request);
 
 	/// <summary>
+	/// Requests logs stream from the client instance
+	/// </summary>
+	[HubMethodName(Events.LogsStreamRequested)]
+	IAsyncEnumerable<LogEntry> RequestLogsStreamAsync(GetLogsRequest request);
+
+	/// <summary>
 	/// Requests a specific session from the client instance
 	/// </summary>
-	[HubMethodName(Events.SessionRequested)]
-	Task<SessionResponse> RequestSessionAsync(GetSessionRequest request);
+	[HubMethodName(Events.SingleSessionRequested)]
+	Task<SessionResponse> RequestSingleSessionAsync(GetSingleSessionRequest request);
+
+	/// <summary>
+	/// Requests a stream of messages for a specific session from the client instance
+	/// </summary>
+	[HubMethodName(Events.SessionMessagesStreamRequested)]
+	IAsyncEnumerable<ChatMessage> RequestSessionMessagesStreamAsync(GetSingleSessionRequest request);
 
 	/// <summary>
 	/// Requests all sessions from the client instance
@@ -57,11 +71,5 @@ public interface IJiroHub
 	/// </summary>
 	[HubMethodName(Events.CommandReceived)]
 	Task SendCommandAsync(CommandMessage commandMessage);
-
-	/// <summary>
-	/// Sends a keepalive acknowledgment to the client
-	/// </summary>
-	[HubMethodName(Events.KeepaliveAckReceived)]
-	Task PushSendKeepaliveAckAsync();
 }
 
