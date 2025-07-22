@@ -14,4 +14,9 @@ public class GetLogsRequest : TrackedObject
 	/// Gets or sets the maximum number of logs to retrieve (optional, defaults to 100)
 	/// </summary>
 	public int? Limit { get; set; }
+
+	/// <summary>
+	/// Gets or sets the starting point for log retrieval (optional, defaults to 0)
+	/// </summary>
+	public int? Offset { get; set; }
 }
