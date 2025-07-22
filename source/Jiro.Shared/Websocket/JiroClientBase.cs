@@ -21,6 +21,11 @@ public abstract class JiroClientBase : IJiroClient
 	/// </summary>
 	protected ILogger<JiroClientBase>? _logger;
 
+	/// <summary>
+	/// Semaphore for connection synchronization
+	/// </summary>
+	protected readonly SemaphoreSlim _connectionSemaphore = new(1, 1);
+
 	#region Connection Lifecycle Events
 
 	/// <summary>
@@ -98,43 +103,51 @@ public abstract class JiroClientBase : IJiroClient
 	/// </summary>
 	/// <param name="hubConnection">The SignalR hub connection to use</param>
 	/// <param name="logger">Optional logger instance</param>
-	protected JiroClientBase(HubConnection hubConnection, ILogger<JiroClientBase>? logger = null)
+	protected JiroClientBase(HubConnection? hubConnection = null, ILogger<JiroClientBase>? logger = null)
 	{
-		_hubConnection = hubConnection ?? throw new ArgumentNullException(nameof(hubConnection));
+		_hubConnection = hubConnection!;
 		_logger = logger;
-		SetupEvents();
+		if (_hubConnection != null)
+			SetupEvents();
 	}
 
+	#region SetupEvents
 	/// <summary>
-	/// Sets up the events for the client connection
+	/// Sets up the events for the WebSocket connection.
+	/// This method is called after the connection is established to ensure all events are ready to be invoked.
+	/// It should be called after the connection is started to ensure the events are properly registered
+	/// and can be invoked when the corresponding events occur.
 	/// </summary>
 	public virtual void SetupEvents()
 	{
+		if (_hubConnection == null)
+			return;
+
 		// Connection lifecycle events
 		_hubConnection.Closed += async (error) =>
 		{
 			if (Closed != null)
-				await Closed.Invoke(error);
+				await Closed(error);
 		};
 
 		_hubConnection.Reconnecting += async (error) =>
 		{
 			if (Reconnecting != null)
-				await Reconnecting.Invoke(error);
+				await Reconnecting(error);
 		};
 
 		_hubConnection.Reconnected += async (connectionId) =>
 		{
 			if (Reconnected != null)
-				await Reconnected.Invoke(connectionId);
+				await Reconnected(connectionId);
 		};
 
-		// Command events
-		_hubConnection.On<CommandMessage>(Events.CommandReceived, async (command) =>
+		// Fire-and-forget notifications
+		_hubConnection.On<CommandMessage>(Events.CommandReceived, async command =>
 		{
 			_logger?.LogInformation("{EventName} received", Events.CommandReceived);
 			if (CommandReceived != null)
-				await CommandReceived.Invoke(command);
+				await CommandReceived(command);
 			_logger?.LogInformation("{EventName} executed", Events.CommandReceived);
 		});
 
@@ -142,110 +155,145 @@ public abstract class JiroClientBase : IJiroClient
 		{
 			_logger?.LogInformation("{EventName} received", Events.KeepaliveAckReceived);
 			if (KeepaliveAckReceived != null)
-				await KeepaliveAckReceived.Invoke();
+				await KeepaliveAckReceived();
 			_logger?.LogInformation("{EventName} executed", Events.KeepaliveAckReceived);
 		});
 
-		// Server request events with responses
-		_hubConnection.On<GetLogsRequest, Task<LogsResponse>>(Events.LogsRequested, async (request) =>
-		{
-			_logger?.LogInformation("{EventName} received", Events.LogsRequested);
-			if (LogsRequested != null)
+		// RPC-style calls (server expects return value)
+
+		_hubConnection.On<GetLogsRequest, LogsResponse>(
+			Events.LogsRequested,
+			async request =>
 			{
-				var result = await LogsRequested.Invoke(request);
-				_logger?.LogInformation("{EventName} executed", Events.LogsRequested);
-				return result;
+				_logger?.LogInformation("{EventName} received: {RequestId}", Events.LogsRequested, request.RequestId);
+				var response = await LogsRequested!(request);
+				_logger?.LogInformation("{EventName} handled: {RequestId}", Events.LogsRequested, response.RequestId);
+				return response;
+			});
+
+		_hubConnection.On<GetSessionsRequest, SessionsResponse>(
+			Events.SessionsRequested,
+			async request =>
+			{
+				_logger?.LogInformation("{EventName} received: {RequestId}", Events.SessionsRequested, request.RequestId);
+				var response = await SessionsRequested!(request);
+				_logger?.LogInformation("{EventName} handled: {RequestId}", Events.SessionsRequested, response.RequestId);
+				return response;
+			});
+
+		_hubConnection.On<GetSessionRequest, SessionResponse>(
+			Events.SessionRequested,
+			async request =>
+			{
+				_logger?.LogInformation("{EventName} received: {RequestId}", Events.SessionRequested, request.RequestId);
+				var response = await SessionRequested!(request);
+				_logger?.LogInformation("{EventName} handled: {RequestId}", Events.SessionRequested, response.RequestId);
+				return response;
+			});
+
+		_hubConnection.On<GetConfigRequest, ConfigResponse>(
+			Events.ConfigRequested,
+			async request =>
+			{
+				_logger?.LogInformation("{EventName} received: {RequestId}", Events.ConfigRequested, request.RequestId);
+				var response = await ConfigRequested!(request);
+				_logger?.LogInformation("{EventName} handled: {RequestId}", Events.ConfigRequested, response.RequestId);
+				return response;
+			});
+
+		_hubConnection.On<UpdateConfigRequest, ConfigResponse>(
+			Events.ConfigUpdated,
+			async request =>
+			{
+				_logger?.LogInformation("{EventName} received: {RequestId}", Events.ConfigUpdated, request.RequestId);
+				var response = await ConfigUpdateRequested!(request);
+				_logger?.LogInformation("{EventName} handled: {RequestId}", Events.ConfigUpdated, response.RequestId);
+				return response;
+			});
+
+		_hubConnection.On<GetCustomThemesRequest, ThemesResponse>(
+			Events.CustomThemesRequested,
+			async request =>
+			{
+				_logger?.LogInformation("{EventName} received: {RequestId}", Events.CustomThemesRequested, request.RequestId);
+				var response = await CustomThemesRequested!(request);
+				_logger?.LogInformation("{EventName} handled: {RequestId}", Events.CustomThemesRequested, response.RequestId);
+				return response;
+			});
+
+		_hubConnection.On<GetCommandsMetadataRequest, CommandsMetadataResponse>(
+			Events.CommandsMetadataRequested,
+			async request =>
+			{
+				_logger?.LogInformation("{EventName} received: {RequestId}", Events.CommandsMetadataRequested, request.RequestId);
+				var response = await CommandsMetadataRequested!(request);
+				_logger?.LogInformation("{EventName} handled: {RequestId}", Events.CommandsMetadataRequested, response.RequestId);
+				return response;
+			});
+	}
+	#endregion
+
+	/// <summary>
+	/// Initializes the WebSocket connection with proper setup and error handling
+	/// </summary>
+	/// <param name="hubUrl">The URL of the hub to connect to</param>
+	/// <param name="apiKey">The API key for authentication</param>
+	/// <param name="exceptionHandler">Optional exception handler for connection errors</param>
+	/// <param name="cancellationToken">Cancellation token for the operation</param>
+	public virtual async Task InitializeAsync(string? hubUrl = null, string? apiKey = null, Action<Exception, string>? exceptionHandler = null, CancellationToken cancellationToken = default)
+	{
+		_logger?.LogInformation("Initializing WebSocket connection to {Url}", hubUrl);
+
+		if (_hubConnection == null)
+		{
+			throw new InvalidOperationException("HubConnection is not initialized. Ensure the connection is properly configured.");
+		}
+
+		await _connectionSemaphore.WaitAsync(cancellationToken);
+		try
+		{
+			if (_hubConnection is null)
+			{
+				throw new InvalidOperationException("HubConnection is not initialized. Ensure the connection is properly configured.");
 			}
 
-			throw new NotImplementedException($"Handler for {Events.LogsRequested} not implemented");
-		});
-
-		_hubConnection.On<GetSessionRequest, Task<SessionResponse>>(Events.SessionRequested, async (request) =>
-		{
-			_logger?.LogInformation("{EventName} received", Events.SessionRequested);
-			if (SessionRequested != null)
+			if (_hubConnection.State == HubConnectionState.Connected)
 			{
-				var result = await SessionRequested.Invoke(request);
-				_logger?.LogInformation("{EventName} executed", Events.SessionRequested);
-				return result;
+				_logger?.LogInformation("Already connected to hub at {Url}", hubUrl);
+				_logger?.LogInformation("Stopping existing connection before re-initializing");
+				await _hubConnection.StopAsync(cancellationToken);
 			}
 
-			throw new NotImplementedException($"Handler for {Events.SessionRequested} not implemented");
-		});
+			_logger?.LogInformation("Connecting to hub at {Url}", hubUrl);
 
-		_hubConnection.On<GetSessionsRequest, Task<SessionsResponse>>(Events.SessionsRequested, async (request) =>
-		{
-			_logger?.LogInformation("{EventName} received", Events.SessionsRequested);
-			if (SessionsRequested != null)
+			// Ensure API key is provided for authentication
+			if (string.IsNullOrEmpty(apiKey))
 			{
-				var result = await SessionsRequested.Invoke(request);
-				_logger?.LogInformation("{EventName} executed", Events.SessionsRequested);
-				return result;
+				throw new InvalidOperationException("API key is required for WebSocket authentication. Please configure 'WebSocket:ApiKey' or 'API_KEY' in your settings.");
 			}
 
-			throw new NotImplementedException($"Handler for {Events.SessionsRequested} not implemented");
-		});
+			// Connect
+			await _hubConnection.StartAsync(cancellationToken);
 
-		_hubConnection.On<GetConfigRequest, Task<ConfigResponse>>(Events.ConfigRequested, async (request) =>
+			SetupHandlers();
+
+			_logger?.LogInformation("Successfully connected to hub");
+		}
+		catch (Exception ex)
 		{
-			_logger?.LogInformation("{EventName} received", Events.ConfigRequested);
-			if (ConfigRequested != null)
-			{
-				var result = await ConfigRequested.Invoke(request);
-				_logger?.LogInformation("{EventName} executed", Events.ConfigRequested);
-				return result;
-			}
-
-			throw new NotImplementedException($"Handler for {Events.ConfigRequested} not implemented");
-		});
-
-		_hubConnection.On<UpdateConfigRequest, Task<ConfigResponse>>(Events.ConfigUpdated, async (request) =>
+			exceptionHandler?.Invoke(ex, "Connect");
+			throw;
+		}
+		finally
 		{
-			_logger?.LogInformation("{EventName} received", Events.ConfigUpdated);
-			if (ConfigUpdateRequested != null)
-			{
-				var result = await ConfigUpdateRequested.Invoke(request);
-				_logger?.LogInformation("{EventName} executed", Events.ConfigUpdated);
-				return result;
-			}
-
-			throw new NotImplementedException($"Handler for {Events.ConfigUpdated} not implemented");
-		});
-
-		_hubConnection.On<GetCustomThemesRequest, Task<ThemesResponse>>(Events.CustomThemesRequested, async (request) =>
-		{
-			_logger?.LogInformation("{EventName} received", Events.CustomThemesRequested);
-			if (CustomThemesRequested != null)
-			{
-				var result = await CustomThemesRequested.Invoke(request);
-				_logger?.LogInformation("{EventName} executed", Events.CustomThemesRequested);
-				return result;
-			}
-
-			throw new NotImplementedException($"Handler for {Events.CustomThemesRequested} not implemented");
-		});
-
-		_hubConnection.On<GetCommandsMetadataRequest, Task<CommandsMetadataResponse>>(Events.CommandsMetadataRequested, async (request) =>
-		{
-			_logger?.LogInformation("{EventName} received", Events.CommandsMetadataRequested);
-			if (CommandsMetadataRequested != null)
-			{
-				var result = await CommandsMetadataRequested.Invoke(request);
-				_logger?.LogInformation("{EventName} executed", Events.CommandsMetadataRequested);
-				return result;
-			}
-
-			throw new NotImplementedException($"Handler for {Events.CommandsMetadataRequested} not implemented");
-		});
+			_connectionSemaphore.Release();
+		}
 	}
 
 	/// <summary>
-	/// Override this method to implement custom initialization logic
+	/// Override this method to implement custom event handlers for the client
 	/// </summary>
-	protected virtual Task InitializeAsync()
-	{
-		return Task.CompletedTask;
-	}
+	protected abstract void SetupHandlers();
 
 	/// <summary>
 	/// Override this method to implement custom cleanup logic
