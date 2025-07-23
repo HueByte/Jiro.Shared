@@ -66,4 +66,14 @@ public class Events
 	/// </summary>
 	public const string Reconnected = "Reconnected";
 
+	/// <summary>
+	/// Event fired when a client sends logs stream to the server.
+	/// </summary>
+	public const string ReceiveLogsStream = "ReceiveLogsStream";
+
+	/// <summary>
+	/// Event fired when a client sends session messages stream to the server.
+	/// </summary>
+	public const string ReceiveSessionMessagesStream = "ReceiveSessionMessagesStream";
+
 }

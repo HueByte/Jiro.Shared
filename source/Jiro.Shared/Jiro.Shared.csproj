@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageId>Jiro.Shared</PackageId>
-    <Version>1.2.0</Version>
+    <Version>1.2.1</Version>
     <Authors>HueByte</Authors>
     <Title>Jiro.Shared</Title>
     <Summary>Shared types and models for Jiro ecosystem applications</Summary>

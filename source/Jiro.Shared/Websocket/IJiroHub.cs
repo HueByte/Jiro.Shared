@@ -1,4 +1,3 @@
-using System.Threading.Channels;
 
 using Jiro.Shared.Websocket.Requests;
 using Jiro.Shared.Websocket.Responses;
@@ -22,7 +21,7 @@ public interface IJiroHub
 	/// Requests logs stream from the client instance
 	/// </summary>
 	[HubMethodName(Events.LogsStreamRequested)]
-	IAsyncEnumerable<LogEntry> RequestLogsStreamAsync(GetLogsRequest request);
+	Task RequestLogsStreamAsync(GetLogsRequest request);
 
 	/// <summary>
 	/// Requests a specific session from the client instance
@@ -34,7 +33,7 @@ public interface IJiroHub
 	/// Requests a stream of messages for a specific session from the client instance
 	/// </summary>
 	[HubMethodName(Events.SessionMessagesStreamRequested)]
-	IAsyncEnumerable<ChatMessage> RequestSessionMessagesStreamAsync(GetSingleSessionRequest request);
+	Task RequestSessionMessagesStreamAsync(GetSingleSessionRequest request);
 
 	/// <summary>
 	/// Requests all sessions from the client instance
@@ -71,5 +70,17 @@ public interface IJiroHub
 	/// </summary>
 	[HubMethodName(Events.CommandReceived)]
 	Task SendCommandAsync(CommandMessage commandMessage);
+
+	/// <summary>
+	/// Receives logs stream from the client instance
+	/// </summary>
+	[HubMethodName(Events.ReceiveLogsStream)]
+	Task ReceiveLogsStreamAsync(IAsyncEnumerable<LogEntry> stream, CancellationToken cancellationToken = default);
+
+	/// <summary>
+	/// Receives session messages stream from the client instance
+	/// </summary>
+	[HubMethodName(Events.ReceiveSessionMessagesStream)]
+	Task ReceiveSessionMessagesStreamAsync(IAsyncEnumerable<ChatMessage> stream, CancellationToken cancellationToken = default);
 }
 

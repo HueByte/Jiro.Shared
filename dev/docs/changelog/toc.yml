@@ -5,6 +5,8 @@ items:
   href: code-names.md
 - name: Versions
   items:
+  - name: v1.2.1 "Bunri"
+    href: v1.2.1.md
   - name: v1.2.0 "Nagare"
     href: v1.2.0.md
   - name: v1.1.6 "Shinpo"

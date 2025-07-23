@@ -1,4 +1,3 @@
-using System.Threading.Channels;
 
 using Jiro.Shared.Extensions;
 using Jiro.Shared.Websocket.Requests;
@@ -72,7 +71,7 @@ public abstract class JiroClientBase : IJiroClient
 	/// <summary>
 	/// Event fired when a logs stream request is received from the server
 	/// </summary>
-	public event Func<GetLogsRequest, IAsyncEnumerable<LogEntry>>? LogsStreamRequested;
+	public event Func<GetLogsRequest, Task>? LogsStreamRequested;
 
 	/// <summary>
 	/// Event fired when a session request is received from the server
@@ -82,7 +81,7 @@ public abstract class JiroClientBase : IJiroClient
 	/// <summary>
 	/// Event fired when a session messages stream request is received from the server
 	/// </summary>
-	public event Func<GetSingleSessionRequest, IAsyncEnumerable<ChatMessage>>? SessionMessagesStreamRequested;
+	public event Func<GetSingleSessionRequest, Task>? SessionMessagesStreamRequested;
 
 	/// <summary>
 	/// Event fired when a sessions request is received from the server
@@ -175,10 +174,11 @@ public abstract class JiroClientBase : IJiroClient
 			_logger,
 			request => request.RequestId);
 
-		_hubConnection.OnStream<GetLogsRequest, LogEntry>(
-			Events.LogsStreamRequested,
-			request => LogsStreamRequested!(request),
-			_logger);
+		_hubConnection.OnNotification<GetLogsRequest>(Events.LogsStreamRequested, async request =>
+		{
+			if (LogsStreamRequested != null)
+				await LogsStreamRequested(request);
+		}, _logger);
 
 		_hubConnection.OnRequest<GetSessionsRequest, SessionsResponse>(
 			Events.SessionsRequested,
@@ -192,10 +192,11 @@ public abstract class JiroClientBase : IJiroClient
 			_logger,
 			request => request.RequestId);
 
-		_hubConnection.OnStream<GetSingleSessionRequest, ChatMessage>(
-			Events.SessionMessagesStreamRequested,
-			request => SessionMessagesStreamRequested!(request),
-			_logger);
+		_hubConnection.OnNotification<GetSingleSessionRequest>(Events.SessionMessagesStreamRequested, async request =>
+		{
+			if (SessionMessagesStreamRequested != null)
+				await SessionMessagesStreamRequested(request);
+		}, _logger);
 
 		_hubConnection.OnRequest<GetConfigRequest, ConfigResponse>(
 			Events.ConfigRequested,
@@ -291,5 +292,27 @@ public abstract class JiroClientBase : IJiroClient
 	protected virtual Task CleanupAsync()
 	{
 		return Task.CompletedTask;
+	}
+
+	/// <summary>
+	/// Sends logs stream to the server
+	/// </summary>
+	public virtual async Task ReceiveLogsStreamAsync(IAsyncEnumerable<LogEntry> stream, CancellationToken cancellationToken = default)
+	{
+		if (_hubConnection?.State == HubConnectionState.Connected)
+		{
+			await _hubConnection.InvokeAsync(Events.ReceiveLogsStream, stream, cancellationToken);
+		}
+	}
+
+	/// <summary>
+	/// Sends session messages stream to the server
+	/// </summary>
+	public virtual async Task ReceiveSessionMessagesStreamAsync(IAsyncEnumerable<ChatMessage> stream, CancellationToken cancellationToken = default)
+	{
+		if (_hubConnection?.State == HubConnectionState.Connected)
+		{
+			await _hubConnection.InvokeAsync(Events.ReceiveSessionMessagesStream, stream, cancellationToken);
+		}
 	}
 }

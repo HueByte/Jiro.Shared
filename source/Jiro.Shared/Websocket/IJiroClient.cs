@@ -1,3 +1,4 @@
+
 using Jiro.Shared.Websocket.Requests;
 using Jiro.Shared.Websocket.Responses;
 
@@ -51,7 +52,7 @@ public interface IJiroClient
 	/// <summary>
 	/// Event fired when a logs stream request is received from the server
 	/// </summary>
-	public event Func<GetLogsRequest, IAsyncEnumerable<LogEntry>>? LogsStreamRequested;
+	public event Func<GetLogsRequest, Task>? LogsStreamRequested;
 
 	/// <summary>
 	/// Event fired when a session request is received from the server
@@ -61,7 +62,7 @@ public interface IJiroClient
 	/// <summary>
 	/// Event fired when a session messages stream request is received from the server
 	/// </summary>
-	public event Func<GetSingleSessionRequest, IAsyncEnumerable<ChatMessage>>? SessionMessagesStreamRequested;
+	public event Func<GetSingleSessionRequest, Task>? SessionMessagesStreamRequested;
 
 	/// <summary>
 	/// Event fired when a sessions request is received from the server
@@ -92,6 +93,16 @@ public interface IJiroClient
 	/// Sets up the events for the client connection
 	/// </summary>
 	void SetupEvents();
+
+	/// <summary>
+	/// Sends logs stream to the server
+	/// </summary>
+	Task ReceiveLogsStreamAsync(IAsyncEnumerable<LogEntry> stream, CancellationToken cancellationToken = default);
+
+	/// <summary>
+	/// Sends session messages stream to the server
+	/// </summary>
+	Task ReceiveSessionMessagesStreamAsync(IAsyncEnumerable<ChatMessage> stream, CancellationToken cancellationToken = default);
 
 	#endregion
 }
