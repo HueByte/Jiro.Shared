@@ -14,11 +14,11 @@ public interface IJiroHubServer
 	/// Receives logs stream from the client instance
 	/// </summary>
 	[HubMethodName(Events.ReceiveLogsStream)]
-	Task ReceiveLogsStreamAsync(string requestId, IAsyncEnumerable<LogEntry> stream, CancellationToken cancellationToken = default);
+	Task ReceiveLogsStreamAsync(string requestId, IAsyncEnumerable<LogEntry> stream);
 
 	/// <summary>
 	/// Receives session messages stream from the client instance
 	/// </summary>
 	[HubMethodName(Events.ReceiveSessionMessagesStream)]
-	Task ReceiveSessionMessagesStreamAsync(string requestId, IAsyncEnumerable<ChatMessage> stream, CancellationToken cancellationToken = default);
+	Task ReceiveSessionMessagesStreamAsync(string requestId, IAsyncEnumerable<ChatMessage> stream);
 }
