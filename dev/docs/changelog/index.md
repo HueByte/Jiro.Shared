@@ -5,6 +5,9 @@ Welcome to the Jiro.Shared changelog. This section contains detailed information
 ## Available Versions
 
 <!-- Newest first -->
+- **[v1.2.2 "Tsuiseki"](v1.2.2.md)** - Stream request tracking with request ID support and improved hub method organization
+- **[v1.2.1 "Bunri"](v1.2.1.md)** - Streaming architecture refinement with two-phase streaming pattern
+- **[v1.2.0 "Nagare"](v1.2.0.md)** - Streaming support for logs and session messages with IAsyncEnumerable
 - **[v1.1.6 "Shinpo"](v1.1.6.md)** - Progress enhancement with improved connection handling, thread safety, and enhanced logging for JiroClientBase
 - **[v1.1.5 "Kiban"](v1.1.5.md)** - Foundation strengthening with JiroClientBase abstract class for simplified client implementations
 - **[v1.1.4 "Chōwa"](v1.1.4.md)** - Interface harmony with clearer WebSocket interface naming conventions
