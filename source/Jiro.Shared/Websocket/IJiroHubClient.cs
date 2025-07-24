@@ -9,7 +9,7 @@ namespace Jiro.Shared.Websocket;
 /// <summary>
 /// Interface for server-to-client events. Used by the server to push events to connected clients.
 /// </summary>
-public interface IJiroHub
+public interface IJiroHubClient
 {
 	/// <summary>
 	/// Requests logs from the client instance
@@ -70,17 +70,5 @@ public interface IJiroHub
 	/// </summary>
 	[HubMethodName(Events.CommandReceived)]
 	Task SendCommandAsync(CommandMessage commandMessage);
-
-	/// <summary>
-	/// Receives logs stream from the client instance
-	/// </summary>
-	[HubMethodName(Events.ReceiveLogsStream)]
-	Task ReceiveLogsStreamAsync(IAsyncEnumerable<LogEntry> stream, CancellationToken cancellationToken = default);
-
-	/// <summary>
-	/// Receives session messages stream from the client instance
-	/// </summary>
-	[HubMethodName(Events.ReceiveSessionMessagesStream)]
-	Task ReceiveSessionMessagesStreamAsync(IAsyncEnumerable<ChatMessage> stream, CancellationToken cancellationToken = default);
 }
 

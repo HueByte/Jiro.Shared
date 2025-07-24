@@ -297,22 +297,22 @@ public abstract class JiroClientBase : IJiroClient
 	/// <summary>
 	/// Sends logs stream to the server
 	/// </summary>
-	public virtual async Task ReceiveLogsStreamAsync(IAsyncEnumerable<LogEntry> stream, CancellationToken cancellationToken = default)
+	public virtual async Task ReceiveLogsStreamAsync(string requestId, IAsyncEnumerable<LogEntry> stream, CancellationToken cancellationToken = default)
 	{
 		if (_hubConnection?.State == HubConnectionState.Connected)
 		{
-			await _hubConnection.InvokeAsync(Events.ReceiveLogsStream, stream, cancellationToken);
+			await _hubConnection.InvokeAsync(Events.ReceiveLogsStream, requestId, stream, cancellationToken);
 		}
 	}
 
 	/// <summary>
 	/// Sends session messages stream to the server
 	/// </summary>
-	public virtual async Task ReceiveSessionMessagesStreamAsync(IAsyncEnumerable<ChatMessage> stream, CancellationToken cancellationToken = default)
+	public virtual async Task ReceiveSessionMessagesStreamAsync(string requestId, IAsyncEnumerable<ChatMessage> stream, CancellationToken cancellationToken = default)
 	{
 		if (_hubConnection?.State == HubConnectionState.Connected)
 		{
-			await _hubConnection.InvokeAsync(Events.ReceiveSessionMessagesStream, stream, cancellationToken);
+			await _hubConnection.InvokeAsync(Events.ReceiveSessionMessagesStream, requestId, stream, cancellationToken);
 		}
 	}
 }

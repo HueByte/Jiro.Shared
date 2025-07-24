@@ -97,12 +97,12 @@ public interface IJiroClient
 	/// <summary>
 	/// Sends logs stream to the server
 	/// </summary>
-	Task ReceiveLogsStreamAsync(IAsyncEnumerable<LogEntry> stream, CancellationToken cancellationToken = default);
+	Task ReceiveLogsStreamAsync(string requestId, IAsyncEnumerable<LogEntry> stream, CancellationToken cancellationToken = default);
 
 	/// <summary>
 	/// Sends session messages stream to the server
 	/// </summary>
-	Task ReceiveSessionMessagesStreamAsync(IAsyncEnumerable<ChatMessage> stream, CancellationToken cancellationToken = default);
+	Task ReceiveSessionMessagesStreamAsync(string requestId, IAsyncEnumerable<ChatMessage> stream, CancellationToken cancellationToken = default);
 
 	#endregion
 }
