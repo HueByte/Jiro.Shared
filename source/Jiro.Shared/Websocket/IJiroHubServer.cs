@@ -19,7 +19,7 @@ public interface IJiroHubServer
 	/// <param name="stream">The channel reader containing log entries from the client</param>
 	/// <returns>An ActionResult indicating the success or failure of the operation</returns>
 	[HubMethodName(Events.ReceiveLogsStream)]
-	Task<ActionResult> ReceiveLogsStreamAsync(string requestId, ChannelReader<LogEntry> stream);
+	Task ReceiveLogsStreamAsync(string requestId, ChannelReader<LogEntry> stream);
 
 	/// <summary>
 	/// Receives session messages stream from the client instance
@@ -28,5 +28,5 @@ public interface IJiroHubServer
 	/// <param name="stream">The channel reader containing chat messages from the client</param>
 	/// <returns>An ActionResult indicating the success or failure of the operation</returns>
 	[HubMethodName(Events.ReceiveSessionMessagesStream)]
-	Task<ActionResult> ReceiveSessionMessagesStreamAsync(string requestId, ChannelReader<ChatMessage> stream);
+	Task ReceiveSessionMessagesStreamAsync(string requestId, ChannelReader<ChatMessage> stream);
 }

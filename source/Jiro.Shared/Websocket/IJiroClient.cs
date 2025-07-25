@@ -111,16 +111,14 @@ public interface IJiroClient
 	/// </summary>
 	/// <param name="requestId">The unique identifier for this stream request</param>
 	/// <param name="stream">The channel reader containing log entries to send</param>
-	/// <returns>An ActionResult indicating the success or failure of the operation</returns>
-	Task<ActionResult> ReceiveLogsStreamAsync(string requestId, ChannelReader<LogEntry> stream);
+	Task ReceiveLogsStreamAsync(string requestId, ChannelReader<LogEntry> stream);
 
 	/// <summary>
 	/// Sends session messages stream to the server
 	/// </summary>
 	/// <param name="requestId">The unique identifier for this stream request</param>
 	/// <param name="stream">The channel reader containing chat messages to send</param>
-	/// <returns>An ActionResult indicating the success or failure of the operation</returns>
-	Task<ActionResult> ReceiveSessionMessagesStreamAsync(string requestId, ChannelReader<ChatMessage> stream);
+	Task ReceiveSessionMessagesStreamAsync(string requestId, ChannelReader<ChatMessage> stream);
 
 	#endregion
 }

@@ -14,6 +14,11 @@ Jiro.Shared uses Japanese-inspired code names that reflect the spirit and theme 
 
 | Version | Code Name | Japanese | Meaning | Theme |
 |---------|-----------|----------|---------|--------|
+| v1.3.0 | Ōtō | 応答 | Response/Acknowledgment | ActionResult & Response Pattern |
+| v1.2.2 | Tsuiseki | 追跡 | Tracking/Tracing | Stream Request Tracking |
+| v1.2.1 | Bunri | 分離 | Separation | Method Organization |
+| v1.2.0 | Nagare | 流れ | Flow/Stream | Streaming Infrastructure |
+| v1.1.6 | Shinpo | 進歩 | Progress & Advancement | Continued Improvements |
 | v1.1.5 | Kiban | 基盤 | Foundation | Client Base Class & Event Wiring |
 | v1.1.4 | Chōwa | 調和 | Harmony | Interface Naming Clarity |
 | v1.1.3 | Kizen | 基盤 | Foundation Refinement | Model Enhancement & API Consistency |

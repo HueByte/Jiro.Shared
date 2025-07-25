@@ -325,15 +325,12 @@ public abstract class JiroClientBase : IJiroClient
 	/// </summary>
 	/// <param name="requestId">The unique identifier for this stream request</param>
 	/// <param name="stream">The channel reader containing log entries to send</param>
-	/// <returns>An ActionResult indicating the success or failure of the operation</returns>
-	public virtual async Task<ActionResult> ReceiveLogsStreamAsync(string requestId, ChannelReader<LogEntry> stream)
+	public virtual async Task ReceiveLogsStreamAsync(string requestId, ChannelReader<LogEntry> stream)
 	{
 		if (_hubConnection?.State == HubConnectionState.Connected)
 		{
 			await _hubConnection.InvokeAsync(Events.ReceiveLogsStream, requestId, stream);
-			return new ActionResult { IsSuccess = true, Message = "Logs stream sent successfully" };
 		}
-		return new ActionResult { IsSuccess = false, Message = "Hub connection is not available" };
 	}
 
 	/// <summary>
@@ -341,14 +338,11 @@ public abstract class JiroClientBase : IJiroClient
 	/// </summary>
 	/// <param name="requestId">The unique identifier for this stream request</param>
 	/// <param name="stream">The channel reader containing chat messages to send</param>
-	/// <returns>An ActionResult indicating the success or failure of the operation</returns>
-	public virtual async Task<ActionResult> ReceiveSessionMessagesStreamAsync(string requestId, ChannelReader<ChatMessage> stream)
+	public virtual async Task ReceiveSessionMessagesStreamAsync(string requestId, ChannelReader<ChatMessage> stream)
 	{
 		if (_hubConnection?.State == HubConnectionState.Connected)
 		{
 			await _hubConnection.InvokeAsync(Events.ReceiveSessionMessagesStream, requestId, stream);
-			return new ActionResult { IsSuccess = true, Message = "Session messages stream sent successfully" };
 		}
-		return new ActionResult { IsSuccess = false, Message = "Hub connection is not available" };
 	}
 }
