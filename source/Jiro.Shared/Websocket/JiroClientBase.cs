@@ -1,4 +1,6 @@
 
+using System.Threading.Channels;
+
 using Jiro.Shared.Extensions;
 using Jiro.Shared.Websocket.Requests;
 using Jiro.Shared.Websocket.Responses;
@@ -54,11 +56,6 @@ public abstract class JiroClientBase : IJiroClient
 	/// </summary>
 	public event Func<CommandMessage, Task>? CommandReceived;
 
-	/// <summary>
-	/// Event fired when a keepalive acknowledgment is received
-	/// </summary>
-	public event Func<Task>? KeepaliveAckReceived;
-
 	#endregion
 
 	#region Server Request Events
@@ -71,7 +68,7 @@ public abstract class JiroClientBase : IJiroClient
 	/// <summary>
 	/// Event fired when a logs stream request is received from the server
 	/// </summary>
-	public event Func<GetLogsRequest, Task>? LogsStreamRequested;
+	public event Func<GetLogsRequest, Task<ActionResult>>? LogsStreamRequested;
 
 	/// <summary>
 	/// Event fired when a session request is received from the server
@@ -81,7 +78,7 @@ public abstract class JiroClientBase : IJiroClient
 	/// <summary>
 	/// Event fired when a session messages stream request is received from the server
 	/// </summary>
-	public event Func<GetSingleSessionRequest, Task>? SessionMessagesStreamRequested;
+	public event Func<GetSingleSessionRequest, Task<ActionResult>>? SessionMessagesStreamRequested;
 
 	/// <summary>
 	/// Event fired when a sessions request is received from the server
@@ -107,6 +104,16 @@ public abstract class JiroClientBase : IJiroClient
 	/// Event fired when a commands metadata request is received from the server
 	/// </summary>
 	public event Func<GetCommandsMetadataRequest, Task<CommandsMetadataResponse>>? CommandsMetadataRequested;
+
+	/// <summary>
+	/// Event fired when a remove session request is received from the server
+	/// </summary>
+	public event Func<string, Task<ActionResult>>? RemoveSessionRequested;
+
+	/// <summary>
+	/// Event fired when an update session request is received from the server
+	/// </summary>
+	public event Func<UpdateSessionRequest, Task<ActionResult>>? UpdateSessionRequested;
 
 	#endregion
 
@@ -161,12 +168,6 @@ public abstract class JiroClientBase : IJiroClient
 				await CommandReceived(command);
 		}, _logger);
 
-		_hubConnection.OnNotification(Events.KeepaliveAckReceived, async () =>
-		{
-			if (KeepaliveAckReceived != null)
-				await KeepaliveAckReceived();
-		}, _logger);
-
 		// RPC-style calls (server expects return value)
 		_hubConnection.OnRequest<GetLogsRequest, LogsResponse>(
 			Events.LogsRequested,
@@ -174,11 +175,10 @@ public abstract class JiroClientBase : IJiroClient
 			_logger,
 			request => request.RequestId);
 
-		_hubConnection.OnNotification<GetLogsRequest>(Events.LogsStreamRequested, async request =>
-		{
-			if (LogsStreamRequested != null)
-				await LogsStreamRequested(request);
-		}, _logger);
+		_hubConnection.OnRequest<GetLogsRequest, ActionResult>(Events.LogsStreamRequested,
+			async request => await LogsStreamRequested!(request),
+			_logger,
+			request => request.RequestId);
 
 		_hubConnection.OnRequest<GetSessionsRequest, SessionsResponse>(
 			Events.SessionsRequested,
@@ -192,11 +192,10 @@ public abstract class JiroClientBase : IJiroClient
 			_logger,
 			request => request.RequestId);
 
-		_hubConnection.OnNotification<GetSingleSessionRequest>(Events.SessionMessagesStreamRequested, async request =>
-		{
-			if (SessionMessagesStreamRequested != null)
-				await SessionMessagesStreamRequested(request);
-		}, _logger);
+		_hubConnection.OnRequest<GetSingleSessionRequest, ActionResult>(Events.SessionMessagesStreamRequested,
+			async request => await SessionMessagesStreamRequested!(request),
+			_logger,
+			request => request.RequestId);
 
 		_hubConnection.OnRequest<GetConfigRequest, ConfigResponse>(
 			Events.ConfigRequested,
@@ -219,6 +218,17 @@ public abstract class JiroClientBase : IJiroClient
 		_hubConnection.OnRequest<GetCommandsMetadataRequest, CommandsMetadataResponse>(
 			Events.CommandsMetadataRequested,
 			async request => await CommandsMetadataRequested!(request),
+			_logger,
+			request => request.RequestId);
+
+		_hubConnection.OnRequest<string, ActionResult>(
+			Events.RemoveSession,
+			async sessionId => await RemoveSessionRequested!(sessionId),
+			_logger);
+
+		_hubConnection.OnRequest<UpdateSessionRequest, ActionResult>(
+			Events.UpdateSession,
+			async request => await UpdateSessionRequested!(request),
 			_logger,
 			request => request.RequestId);
 	}
@@ -282,13 +292,18 @@ public abstract class JiroClientBase : IJiroClient
 	}
 
 	/// <summary>
-	/// Override this method to implement custom event handlers for the client
+	/// Override this method to implement custom event handlers for the client.
+	/// This method is called after the WebSocket connection is established to set up
+	/// application-specific event handling logic.
 	/// </summary>
 	protected abstract void SetupHandlers();
 
 	/// <summary>
-	/// Override this method to implement custom cleanup logic
+	/// Override this method to implement custom cleanup logic.
+	/// This method is called when the client is being disposed or disconnected
+	/// to perform any necessary cleanup operations.
 	/// </summary>
+	/// <returns>A task representing the asynchronous cleanup operation</returns>
 	protected virtual Task CleanupAsync()
 	{
 		return Task.CompletedTask;
@@ -297,22 +312,32 @@ public abstract class JiroClientBase : IJiroClient
 	/// <summary>
 	/// Sends logs stream to the server
 	/// </summary>
-	public virtual async Task ReceiveLogsStreamAsync(string requestId, IAsyncEnumerable<LogEntry> stream, CancellationToken cancellationToken = default)
+	/// <param name="requestId">The unique identifier for this stream request</param>
+	/// <param name="stream">The channel reader containing log entries to send</param>
+	/// <returns>An ActionResult indicating the success or failure of the operation</returns>
+	public virtual async Task<ActionResult> ReceiveLogsStreamAsync(string requestId, ChannelReader<LogEntry> stream)
 	{
 		if (_hubConnection?.State == HubConnectionState.Connected)
 		{
-			await _hubConnection.InvokeAsync(Events.ReceiveLogsStream, requestId, stream, cancellationToken);
+			await _hubConnection.InvokeAsync(Events.ReceiveLogsStream, requestId, stream);
+			return new ActionResult { IsSuccess = true, Message = "Logs stream sent successfully" };
 		}
+		return new ActionResult { IsSuccess = false, Message = "Hub connection is not available" };
 	}
 
 	/// <summary>
 	/// Sends session messages stream to the server
 	/// </summary>
-	public virtual async Task ReceiveSessionMessagesStreamAsync(string requestId, IAsyncEnumerable<ChatMessage> stream, CancellationToken cancellationToken = default)
+	/// <param name="requestId">The unique identifier for this stream request</param>
+	/// <param name="stream">The channel reader containing chat messages to send</param>
+	/// <returns>An ActionResult indicating the success or failure of the operation</returns>
+	public virtual async Task<ActionResult> ReceiveSessionMessagesStreamAsync(string requestId, ChannelReader<ChatMessage> stream)
 	{
 		if (_hubConnection?.State == HubConnectionState.Connected)
 		{
-			await _hubConnection.InvokeAsync(Events.ReceiveSessionMessagesStream, requestId, stream, cancellationToken);
+			await _hubConnection.InvokeAsync(Events.ReceiveSessionMessagesStream, requestId, stream);
+			return new ActionResult { IsSuccess = true, Message = "Session messages stream sent successfully" };
 		}
+		return new ActionResult { IsSuccess = false, Message = "Hub connection is not available" };
 	}
 }

@@ -21,7 +21,7 @@ public interface IJiroHubClient
 	/// Requests logs stream from the client instance
 	/// </summary>
 	[HubMethodName(Events.LogsStreamRequested)]
-	Task RequestLogsStreamAsync(GetLogsRequest request);
+	Task<ActionResult> RequestLogsStreamAsync(GetLogsRequest request);
 
 	/// <summary>
 	/// Requests a specific session from the client instance
@@ -33,7 +33,7 @@ public interface IJiroHubClient
 	/// Requests a stream of messages for a specific session from the client instance
 	/// </summary>
 	[HubMethodName(Events.SessionMessagesStreamRequested)]
-	Task RequestSessionMessagesStreamAsync(GetSingleSessionRequest request);
+	Task<ActionResult> RequestSessionMessagesStreamAsync(GetSingleSessionRequest request);
 
 	/// <summary>
 	/// Requests all sessions from the client instance
@@ -69,6 +69,18 @@ public interface IJiroHubClient
 	/// Sends a command to the client instance
 	/// </summary>
 	[HubMethodName(Events.CommandReceived)]
-	Task SendCommandAsync(CommandMessage commandMessage);
+	Task<ActionResult> SendCommandAsync(CommandMessage commandMessage);
+
+	/// <summary>
+	/// Removes a session from the client instance
+	/// </summary>
+	[HubMethodName(Events.RemoveSession)]
+	Task<ActionResult> RemoveSessionAsync(string sessionId);
+
+	/// <summary>
+	/// Updates a session with the provided session update message
+	/// </summary>
+	[HubMethodName(Events.UpdateSession)]
+	Task<ActionResult> UpdateSessionAsync(UpdateSessionRequest sessionUpdateMessage);
 }
 

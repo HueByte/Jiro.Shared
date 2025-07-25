@@ -7,14 +7,19 @@ namespace Jiro.Shared.Websocket;
 public class Events
 {
 	/// <summary>
+	/// Event fired when a client removes a session.
+	/// </summary>
+	public const string RemoveSession = "RemoveSession";
+
+	/// <summary>
+	/// Event fired when a client updates a session.
+	/// </summary>
+	public const string UpdateSession = "UpdateSession";
+
+	/// <summary>
 	/// Event fired when a client sends a command execution result back to the server.
 	/// </summary>
 	public const string CommandReceived = "CommandReceived";
-
-	/// <summary>
-	/// Event fired when a client acknowledges a keepalive ping from the server.
-	/// </summary>
-	public const string KeepaliveAckReceived = "KeepaliveAckReceived";
 
 	/// <summary>
 	/// Event fired when a client responds to a server's request for logs.

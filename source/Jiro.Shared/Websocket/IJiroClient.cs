@@ -1,4 +1,6 @@
 
+using System.Threading.Channels;
+
 using Jiro.Shared.Websocket.Requests;
 using Jiro.Shared.Websocket.Responses;
 
@@ -35,11 +37,6 @@ public interface IJiroClient
 	/// </summary>
 	public event Func<CommandMessage, Task>? CommandReceived;
 
-	/// <summary>
-	/// Event fired when a keepalive acknowledgment is received
-	/// </summary>
-	public event Func<Task>? KeepaliveAckReceived;
-
 	#endregion
 
 	#region Server Request Events
@@ -52,7 +49,7 @@ public interface IJiroClient
 	/// <summary>
 	/// Event fired when a logs stream request is received from the server
 	/// </summary>
-	public event Func<GetLogsRequest, Task>? LogsStreamRequested;
+	public event Func<GetLogsRequest, Task<ActionResult>>? LogsStreamRequested;
 
 	/// <summary>
 	/// Event fired when a session request is received from the server
@@ -62,7 +59,7 @@ public interface IJiroClient
 	/// <summary>
 	/// Event fired when a session messages stream request is received from the server
 	/// </summary>
-	public event Func<GetSingleSessionRequest, Task>? SessionMessagesStreamRequested;
+	public event Func<GetSingleSessionRequest, Task<ActionResult>>? SessionMessagesStreamRequested;
 
 	/// <summary>
 	/// Event fired when a sessions request is received from the server
@@ -90,6 +87,16 @@ public interface IJiroClient
 	public event Func<GetCommandsMetadataRequest, Task<CommandsMetadataResponse>>? CommandsMetadataRequested;
 
 	/// <summary>
+	/// Event fired when a remove session request is received from the server
+	/// </summary>
+	public event Func<string, Task<ActionResult>>? RemoveSessionRequested;
+
+	/// <summary>
+	/// Event fired when an update session request is received from the server
+	/// </summary>
+	public event Func<UpdateSessionRequest, Task<ActionResult>>? UpdateSessionRequested;
+
+	/// <summary>
 	/// Sets up the events for the client connection
 	/// </summary>
 	void SetupEvents();
@@ -97,12 +104,18 @@ public interface IJiroClient
 	/// <summary>
 	/// Sends logs stream to the server
 	/// </summary>
-	Task ReceiveLogsStreamAsync(string requestId, IAsyncEnumerable<LogEntry> stream, CancellationToken cancellationToken = default);
+	/// <param name="requestId">The unique identifier for this stream request</param>
+	/// <param name="stream">The channel reader containing log entries to send</param>
+	/// <returns>An ActionResult indicating the success or failure of the operation</returns>
+	Task<ActionResult> ReceiveLogsStreamAsync(string requestId, ChannelReader<LogEntry> stream);
 
 	/// <summary>
 	/// Sends session messages stream to the server
 	/// </summary>
-	Task ReceiveSessionMessagesStreamAsync(string requestId, IAsyncEnumerable<ChatMessage> stream, CancellationToken cancellationToken = default);
+	/// <param name="requestId">The unique identifier for this stream request</param>
+	/// <param name="stream">The channel reader containing chat messages to send</param>
+	/// <returns>An ActionResult indicating the success or failure of the operation</returns>
+	Task<ActionResult> ReceiveSessionMessagesStreamAsync(string requestId, ChannelReader<ChatMessage> stream);
 
 	#endregion
 }
