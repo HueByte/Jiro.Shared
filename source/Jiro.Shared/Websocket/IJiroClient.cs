@@ -89,12 +89,17 @@ public interface IJiroClient
 	/// <summary>
 	/// Event fired when a remove session request is received from the server
 	/// </summary>
-	public event Func<string, Task<ActionResult>>? RemoveSessionRequested;
+	public event Func<RemoveSessionRequest, Task<ActionResult>>? RemoveSessionRequested;
 
 	/// <summary>
 	/// Event fired when an update session request is received from the server
 	/// </summary>
 	public event Func<UpdateSessionRequest, Task<ActionResult>>? UpdateSessionRequested;
+
+	/// <summary>
+	/// Event fired when a machine info request is received from the server
+	/// </summary>
+	public event Func<MachineInfoRequest, Task<MachineInfoResponse>>? MachineInfoRequested;
 
 	/// <summary>
 	/// Sets up the events for the client connection

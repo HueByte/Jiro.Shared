@@ -74,13 +74,20 @@ public interface IJiroHubClient
 	/// <summary>
 	/// Removes a session from the client instance
 	/// </summary>
-	[HubMethodName(Events.RemoveSession)]
-	Task<ActionResult> RemoveSessionAsync(string sessionId);
+	[HubMethodName(Events.RemoveSessionRequested)]
+	Task<ActionResult> RemoveSessionAsync(RemoveSessionRequest sessionRequest);
 
 	/// <summary>
 	/// Updates a session with the provided session update message
 	/// </summary>
-	[HubMethodName(Events.UpdateSession)]
+	[HubMethodName(Events.UpdateSessionRequested)]
 	Task<ActionResult> UpdateSessionAsync(UpdateSessionRequest sessionUpdateMessage);
+
+
+	/// <summary>
+	/// Requests machine information from the client instance
+	/// </summary>
+	[HubMethodName(Events.MachineInfoRequested)]
+	Task<MachineInfoResponse> GetMachineInfoAsync(MachineInfoRequest request);
 }
 

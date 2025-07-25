@@ -108,12 +108,17 @@ public abstract class JiroClientBase : IJiroClient
 	/// <summary>
 	/// Event fired when a remove session request is received from the server
 	/// </summary>
-	public event Func<string, Task<ActionResult>>? RemoveSessionRequested;
+	public event Func<RemoveSessionRequest, Task<ActionResult>>? RemoveSessionRequested;
 
 	/// <summary>
 	/// Event fired when an update session request is received from the server
 	/// </summary>
 	public event Func<UpdateSessionRequest, Task<ActionResult>>? UpdateSessionRequested;
+
+	/// <summary>
+	/// Event fired when a machine info request is received from the server
+	/// </summary>
+	public event Func<MachineInfoRequest, Task<MachineInfoResponse>>? MachineInfoRequested;
 
 	#endregion
 
@@ -221,14 +226,20 @@ public abstract class JiroClientBase : IJiroClient
 			_logger,
 			request => request.RequestId);
 
-		_hubConnection.OnRequest<string, ActionResult>(
-			Events.RemoveSession,
-			async sessionId => await RemoveSessionRequested!(sessionId),
+		_hubConnection.OnRequest<RemoveSessionRequest, ActionResult>(
+			Events.RemoveSessionRequested,
+			async request => await RemoveSessionRequested!(request),
 			_logger);
 
 		_hubConnection.OnRequest<UpdateSessionRequest, ActionResult>(
-			Events.UpdateSession,
+			Events.UpdateSessionRequested,
 			async request => await UpdateSessionRequested!(request),
+			_logger,
+			request => request.RequestId);
+
+		_hubConnection.OnRequest<MachineInfoRequest, MachineInfoResponse>(
+			Events.MachineInfoRequested,
+			async request => await MachineInfoRequested!(request),
 			_logger,
 			request => request.RequestId);
 	}

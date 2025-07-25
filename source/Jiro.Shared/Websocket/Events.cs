@@ -7,14 +7,19 @@ namespace Jiro.Shared.Websocket;
 public class Events
 {
 	/// <summary>
+	/// Event fired when server requests machine information.
+	/// </summary>
+	public const string MachineInfoRequested = "MachineInfoRequested";
+
+	/// <summary>
 	/// Event fired when a client removes a session.
 	/// </summary>
-	public const string RemoveSession = "RemoveSession";
+	public const string RemoveSessionRequested = "RemoveSession";
 
 	/// <summary>
 	/// Event fired when a client updates a session.
 	/// </summary>
-	public const string UpdateSession = "UpdateSession";
+	public const string UpdateSessionRequested = "UpdateSession";
 
 	/// <summary>
 	/// Event fired when a client sends a command execution result back to the server.
