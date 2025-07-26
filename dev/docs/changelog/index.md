@@ -5,6 +5,7 @@ Welcome to the Jiro.Shared changelog. This section contains detailed information
 ## Available Versions
 
 <!-- Newest first -->
+- **[v1.3.2 "Seisō"](v1.3.2.md)** - Clean logging optimization by removing verbose request/response body logging
 - **[v1.3.1 "Seigō"](v1.3.1.md)** - Precision & reliability fixes with SignalR serialization improvements and enhanced logging
 - **[v1.3.0 "Ōtō"](v1.3.0.md)** - Response acknowledgment with ActionResult returns and channel-based streaming
 - **[v1.2.2 "Tsuiseki"](v1.2.2.md)** - Stream request tracking with request ID support and improved hub method organization

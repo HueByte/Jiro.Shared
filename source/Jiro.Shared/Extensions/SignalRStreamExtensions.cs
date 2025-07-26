@@ -34,17 +34,17 @@ public static class SignalRStreamExtensions
 			eventName,
 			request =>
 			{
-				logger?.LogInformation("{EventName} stream requested: {@Request}", eventName, request);
+				logger?.LogInformation("{EventName} stream requested", eventName);
 
 				try
 				{
 					var stream = streamProvider(request);
-					logger?.LogInformation("{EventName} stream created successfully: {@Request}", eventName, request);
+					logger?.LogInformation("{EventName} stream created successfully", eventName);
 					return stream;
 				}
 				catch (Exception ex)
 				{
-					logger?.LogError(ex, "{EventName} stream provider failed: {@Request}", eventName, request);
+					logger?.LogError(ex, "{EventName} stream provider failed", eventName);
 					throw;
 				}
 			});
@@ -81,12 +81,12 @@ public static class SignalRStreamExtensions
 			async request =>
 			{
 				var requestId = requestIdSelector?.Invoke(request);
-				logger?.LogInformation("{EventName} received: {RequestId}, Request: {@Request}", eventName, requestId, request);
+				logger?.LogInformation("{EventName} received: {RequestId}", eventName, requestId);
 
 				try
 				{
 					var response = await handler(request);
-					logger?.LogInformation("{EventName} handled successfully: {RequestId}, Response: {@Response}", eventName, requestId, response);
+					logger?.LogInformation("{EventName} handled successfully: {RequestId}", eventName, requestId);
 					return response;
 				}
 				catch (Exception ex)
@@ -122,7 +122,7 @@ public static class SignalRStreamExtensions
 
 		hubConnection.On<T>(eventName, async data =>
 		{
-			logger?.LogInformation("{EventName} received, Data: {@Data}", eventName, data);
+			logger?.LogInformation("{EventName} received", eventName);
 
 			try
 			{

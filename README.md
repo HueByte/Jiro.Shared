@@ -71,7 +71,7 @@ dotnet add package Jiro.Shared
 ### Package Reference
 
 ```xml
-<PackageReference Include="Jiro.Shared" Version="1.3.1" />
+<PackageReference Include="Jiro.Shared" Version="1.3.2" />
 ```
 
 ## Usage
@@ -129,6 +129,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Releases
 
+- **[v1.3.2 "Seisō"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.3.2)** - Clean logging optimization by removing verbose request/response body logging
 - **[v1.3.1 "Seigō"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.3.1)** - Precision & reliability fixes with SignalR serialization improvements
 - **[v1.3.0 "Ōtō"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.3.0)** - Response acknowledgment with ActionResult returns and channel-based streaming
 - **[v1.2.2 "Tsuiseki"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.2.2)** - Stream request tracking with request ID support
