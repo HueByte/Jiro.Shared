@@ -35,7 +35,7 @@ public static class SignalRStreamExtensions
 			request =>
 			{
 				logger?.LogInformation("{EventName} stream requested: {@Request}", eventName, request);
-				
+
 				try
 				{
 					var stream = streamProvider(request);
@@ -48,7 +48,7 @@ public static class SignalRStreamExtensions
 					throw;
 				}
 			});
-		
+
 		logger?.LogDebug("Stream handler registered for {EventName}", eventName);
 	}
 
@@ -82,7 +82,7 @@ public static class SignalRStreamExtensions
 			{
 				var requestId = requestIdSelector?.Invoke(request);
 				logger?.LogInformation("{EventName} received: {RequestId}, Request: {@Request}", eventName, requestId, request);
-				
+
 				try
 				{
 					var response = await handler(request);
@@ -95,7 +95,7 @@ public static class SignalRStreamExtensions
 					throw;
 				}
 			});
-		
+
 		logger?.LogDebug("Event handler registered for {EventName}", eventName);
 	}
 
@@ -123,7 +123,7 @@ public static class SignalRStreamExtensions
 		hubConnection.On<T>(eventName, async data =>
 		{
 			logger?.LogInformation("{EventName} received, Data: {@Data}", eventName, data);
-			
+
 			try
 			{
 				await handler(data);
@@ -135,7 +135,7 @@ public static class SignalRStreamExtensions
 				throw;
 			}
 		});
-		
+
 		logger?.LogDebug("Event handler registered for {EventName}", eventName);
 	}
 
@@ -162,7 +162,7 @@ public static class SignalRStreamExtensions
 		hubConnection.On(eventName, async () =>
 		{
 			logger?.LogInformation("{EventName} received", eventName);
-			
+
 			try
 			{
 				await handler();
@@ -174,7 +174,7 @@ public static class SignalRStreamExtensions
 				throw;
 			}
 		});
-		
+
 		logger?.LogDebug("Event handler registered for {EventName}", eventName);
 	}
 }

@@ -71,7 +71,7 @@ dotnet add package Jiro.Shared
 ### Package Reference
 
 ```xml
-<PackageReference Include="Jiro.Shared" Version="1.1.4" />
+<PackageReference Include="Jiro.Shared" Version="1.3.1" />
 ```
 
 ## Usage
@@ -129,6 +129,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Releases
 
+- **[v1.3.1 "Seigō"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.3.1)** - Precision & reliability fixes with SignalR serialization improvements
+- **[v1.3.0 "Ōtō"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.3.0)** - Response acknowledgment with ActionResult returns and channel-based streaming
+- **[v1.2.2 "Tsuiseki"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.2.2)** - Stream request tracking with request ID support
+- **[v1.2.1 "Bunri"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.2.1)** - Streaming architecture refinement with two-phase streaming pattern
+- **[v1.2.0 "Nagare"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.2.0)** - Streaming support for logs and session messages with IAsyncEnumerable
+- **[v1.1.6 "Shinpo"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.1.6)** - Progress enhancement with improved connection handling and thread safety
+- **[v1.1.5 "Kiban"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.1.5)** - Foundation strengthening with JiroClientBase abstract class
 - **[v1.1.4 "Chōwa"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.1.4)** - Interface harmony with clearer WebSocket interface naming
 - **[v1.1.3 "Kizen"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.1.3)** - Foundation refinement with enhanced session request models
 - **[v1.1.2 "Shinpo"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.1.2)** - Documentation improvements and bug fixes
