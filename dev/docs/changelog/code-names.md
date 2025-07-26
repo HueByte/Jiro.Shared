@@ -14,6 +14,7 @@ Jiro.Shared uses Japanese-inspired code names that reflect the spirit and theme 
 
 | Version | Code Name | Japanese | Meaning | Theme |
 |---------|-----------|----------|---------|--------|
+| v1.3.1 | Seigō | 精確 | Precision/Accuracy | Serialization Fixes & Enhanced Logging |
 | v1.3.0 | Ōtō | 応答 | Response/Acknowledgment | ActionResult & Response Pattern |
 | v1.2.2 | Tsuiseki | 追跡 | Tracking/Tracing | Stream Request Tracking |
 | v1.2.1 | Bunri | 分離 | Separation | Method Organization |

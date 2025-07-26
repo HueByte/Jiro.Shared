@@ -8,7 +8,7 @@ public class ConfigurationSection
 	/// <summary>
 	/// Gets or sets the configuration values.
 	/// </summary>
-	public Dictionary<string, object> Values { get; set; } = new();
+	public Dictionary<string, string> Values { get; set; } = new();
 }
 
 /// <summary>

@@ -23,7 +23,7 @@ public class CommandMetadata
 	/// <summary>
 	/// Gets or sets the parameters of the command.
 	/// </summary>
-	public Dictionary<string, Type> Parameters { get; set; } = new();
+	public Dictionary<string, string> Parameters { get; set; } = new();
 
 	/// <summary>
 	/// Gets or sets the name of the module containing the command.

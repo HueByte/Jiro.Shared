@@ -24,15 +24,32 @@ public static class SignalRStreamExtensions
 		Func<TRequest, IAsyncEnumerable<TResponse>> streamProvider,
 		ILogger? logger = null)
 	{
+		if (streamProvider == null)
+		{
+			logger?.LogWarning("Stream provider for {EventName} is null - stream requests will not be processed", eventName);
+			return;
+		}
+
 		hubConnection.On<TRequest, IAsyncEnumerable<TResponse>>(
 			eventName,
 			request =>
 			{
-				logger?.LogInformation("{EventName} received: {Request}", eventName, request);
-				var stream = streamProvider(request);
-				logger?.LogInformation("{EventName} returning stream: {Request}", eventName, request);
-				return stream;
+				logger?.LogInformation("{EventName} stream requested: {@Request}", eventName, request);
+				
+				try
+				{
+					var stream = streamProvider(request);
+					logger?.LogInformation("{EventName} stream created successfully: {@Request}", eventName, request);
+					return stream;
+				}
+				catch (Exception ex)
+				{
+					logger?.LogError(ex, "{EventName} stream provider failed: {@Request}", eventName, request);
+					throw;
+				}
 			});
+		
+		logger?.LogDebug("Stream handler registered for {EventName}", eventName);
 	}
 
 	/// <summary>
@@ -53,16 +70,33 @@ public static class SignalRStreamExtensions
 		ILogger? logger = null,
 		Func<TRequest, object>? requestIdSelector = null)
 	{
+		if (handler == null)
+		{
+			logger?.LogWarning("Event handler for {EventName} is null - requests will not be processed", eventName);
+			return;
+		}
+
 		hubConnection.On<TRequest, TResponse>(
 			eventName,
 			async request =>
 			{
 				var requestId = requestIdSelector?.Invoke(request);
-				logger?.LogInformation("{EventName} received: {RequestId}", eventName, requestId);
-				var response = await handler(request);
-				logger?.LogInformation("{EventName} handled: {RequestId}", eventName, requestId);
-				return response;
+				logger?.LogInformation("{EventName} received: {RequestId}, Request: {@Request}", eventName, requestId, request);
+				
+				try
+				{
+					var response = await handler(request);
+					logger?.LogInformation("{EventName} handled successfully: {RequestId}, Response: {@Response}", eventName, requestId, response);
+					return response;
+				}
+				catch (Exception ex)
+				{
+					logger?.LogError(ex, "{EventName} handler failed: {RequestId}", eventName, requestId);
+					throw;
+				}
 			});
+		
+		logger?.LogDebug("Event handler registered for {EventName}", eventName);
 	}
 
 	/// <summary>
@@ -80,12 +114,29 @@ public static class SignalRStreamExtensions
 		Func<T, Task> handler,
 		ILogger? logger = null)
 	{
+		if (handler == null)
+		{
+			logger?.LogWarning("Event handler for {EventName} is null - notifications will not be processed", eventName);
+			return;
+		}
+
 		hubConnection.On<T>(eventName, async data =>
 		{
-			logger?.LogInformation("{EventName} received", eventName);
-			await handler(data);
-			logger?.LogInformation("{EventName} executed", eventName);
+			logger?.LogInformation("{EventName} received, Data: {@Data}", eventName, data);
+			
+			try
+			{
+				await handler(data);
+				logger?.LogInformation("{EventName} executed successfully", eventName);
+			}
+			catch (Exception ex)
+			{
+				logger?.LogError(ex, "{EventName} handler failed", eventName);
+				throw;
+			}
 		});
+		
+		logger?.LogDebug("Event handler registered for {EventName}", eventName);
 	}
 
 	/// <summary>
@@ -102,11 +153,28 @@ public static class SignalRStreamExtensions
 		Func<Task> handler,
 		ILogger? logger = null)
 	{
+		if (handler == null)
+		{
+			logger?.LogWarning("Event handler for {EventName} is null - notifications will not be processed", eventName);
+			return;
+		}
+
 		hubConnection.On(eventName, async () =>
 		{
 			logger?.LogInformation("{EventName} received", eventName);
-			await handler();
-			logger?.LogInformation("{EventName} executed", eventName);
+			
+			try
+			{
+				await handler();
+				logger?.LogInformation("{EventName} executed successfully", eventName);
+			}
+			catch (Exception ex)
+			{
+				logger?.LogError(ex, "{EventName} handler failed", eventName);
+				throw;
+			}
 		});
+		
+		logger?.LogDebug("Event handler registered for {EventName}", eventName);
 	}
 }

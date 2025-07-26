@@ -38,7 +38,7 @@ public class ConfigResponse : TrackedObject
 	public SystemInfo SystemInfo { get; set; } = new();
 
 	/// <summary>
-	/// Gets or sets the uptime.
+	/// Gets or sets the uptime in seconds.
 	/// </summary>
-	public TimeSpan Uptime { get; set; }
+	public double UptimeSeconds { get; set; }
 }

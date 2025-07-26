@@ -285,9 +285,9 @@ public abstract class JiroClientBase : IJiroClient
 			}
 
 			// Connect
-			await _hubConnection.StartAsync(cancellationToken);
-
 			SetupHandlers();
+
+			await _hubConnection.StartAsync(cancellationToken);
 
 			_logger?.LogInformation("Successfully connected to hub");
 		}
