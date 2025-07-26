@@ -1,0 +1,264 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>v1.3.1 &quot;Seigō&quot; - Precision &amp; Reliability | Jiro.Shared Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="v1.3.1 &quot;Seigō&quot; - Precision &amp; Reliability | Jiro.Shared Documentation ">
+      
+      
+      <link rel="icon" href="../../assets/Jiro-Icon.png">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/HueByte/Jiro.Shared/blob/main/dev/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../assets/Jiro-Icon.png" alt="Jiro.Shared">
+            Jiro.Shared
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="v131-seigō---precision--reliability">v1.3.1 &quot;Seigō&quot; - Precision &amp; Reliability</h1>
+
+<p><strong>Release Date</strong>: July 26, 2025<br>
+<strong>Code Name</strong>: &quot;Seigō&quot; (精確 - Precision/Accuracy)<br>
+<strong>Type</strong>: Patch Release</p>
+<hr>
+<h2 id="-overview">🎯 Overview</h2>
+<p>Version 1.3.1 addresses critical SignalR serialization issues and enhances logging capabilities for better debugging and monitoring. This patch release ensures reliable WebSocket communication by fixing serialization problems and providing comprehensive diagnostic information.</p>
+<h2 id="-technical-details">🛠️ Technical Details</h2>
+<h3 id="signalr-serialization-fixes">SignalR Serialization Fixes</h3>
+<p>This release resolves compatibility issues with SignalR's System.Text.Json serialization by:</p>
+<ul>
+<li><strong>Non-Serializable Type Removal</strong>: Eliminated <code>Dictionary&lt;string, Type&gt;</code> and <code>TimeSpan</code> properties that caused serialization failures</li>
+<li><strong>Compatible Type Substitution</strong>: Replaced problematic types with STJ-compatible alternatives</li>
+<li><strong>Response Flow Reliability</strong>: Ensured all request/response DTOs can be properly serialized and transmitted</li>
+</ul>
+<h3 id="enhanced-logging-infrastructure">Enhanced Logging Infrastructure</h3>
+<p>Comprehensive logging improvements across all SignalR operations:</p>
+<ul>
+<li><strong>Detailed Request/Response Logging</strong>: Full serialization of request and response objects with structured logging</li>
+<li><strong>Error Tracking</strong>: Exception details captured for all failed operations</li>
+<li><strong>Handler Registration Monitoring</strong>: Warnings when event handlers are not properly configured</li>
+<li><strong>Performance Diagnostics</strong>: Timing and success/failure tracking for all WebSocket events</li>
+</ul>
+<h2 id="-fixes">🔧 Fixes</h2>
+<h3 id="critical-serialization-issues">Critical Serialization Issues</h3>
+<ul>
+<li><strong>CommandMetadata.Parameters</strong>: Changed from <code>Dictionary&lt;string, Type&gt;</code> to <code>Dictionary&lt;string, string&gt;</code> to fix CommandsMetadataRequested event serialization failures</li>
+<li><strong>ConfigurationSection.Values</strong>: Changed from <code>Dictionary&lt;string, object&gt;</code> to <code>Dictionary&lt;string, string&gt;</code> for reliable configuration transmission</li>
+<li><strong>ConfigResponse.Uptime</strong>: Changed from <code>TimeSpan</code> to <code>double UptimeSeconds</code> to ensure proper serialization</li>
+</ul>
+<h3 id="enhanced-signalr-extensions">Enhanced SignalR Extensions</h3>
+<ul>
+<li><strong>Null Handler Detection</strong>: Added warnings when event handlers are null, preventing silent failures</li>
+<li><strong>Exception Handling</strong>: Comprehensive try-catch blocks with detailed error logging for all handler types</li>
+<li><strong>Request/Response Serialization</strong>: Full object serialization in logs using structured logging (<code>{@Request}</code>, <code>{@Response}</code>)</li>
+<li><strong>Handler Registration Confirmation</strong>: Debug-level logs confirming successful event handler registration</li>
+</ul>
+<h2 id="-technical-changes">💻 Technical Changes</h2>
+<h3 id="signalrstreamextensions-improvements">SignalRStreamExtensions Improvements</h3>
+<pre><code class="lang-csharp">// Enhanced error handling and logging
+public static void OnRequest&lt;TRequest, TResponse&gt;(
+    this HubConnection hubConnection,
+    string eventName,
+    Func&lt;TRequest, Task&lt;TResponse&gt;&gt; handler,
+    ILogger? logger = null,
+    Func&lt;TRequest, object&gt;? requestIdSelector = null)
+{
+    if (handler == null)
+    {
+        logger?.LogWarning(&quot;Event handler for {EventName} is null - requests will not be processed&quot;, eventName);
+        return;
+    }
+
+    hubConnection.On&lt;TRequest, TResponse&gt;(eventName, async request =&gt;
+    {
+        var requestId = requestIdSelector?.Invoke(request);
+        logger?.LogInformation(&quot;{EventName} received: {RequestId}, Request: {@Request}&quot;, eventName, requestId, request);
+        
+        try
+        {
+            var response = await handler(request);
+            logger?.LogInformation(&quot;{EventName} handled successfully: {RequestId}, Response: {@Response}&quot;, eventName, requestId, response);
+            return response;
+        }
+        catch (Exception ex)
+        {
+            logger?.LogError(ex, &quot;{EventName} handler failed: {RequestId}&quot;, eventName, requestId);
+            throw;
+        }
+    });
+    
+    logger?.LogDebug(&quot;Event handler registered for {EventName}&quot;, eventName);
+}
+</code></pre>
+<h3 id="data-model-changes">Data Model Changes</h3>
+<pre><code class="lang-csharp">// Before v1.3.1 - Causes serialization failures
+public class CommandMetadata
+{
+    public Dictionary&lt;string, Type&gt; Parameters { get; set; } = new();
+}
+
+public class ConfigResponse : TrackedObject
+{
+    public TimeSpan Uptime { get; set; }
+}
+
+// After v1.3.1 - SignalR STJ compatible
+public class CommandMetadata
+{
+    public Dictionary&lt;string, string&gt; Parameters { get; set; } = new();
+}
+
+public class ConfigResponse : TrackedObject
+{
+    public double UptimeSeconds { get; set; }
+}
+</code></pre>
+<h2 id="-bug-fixes">🐛 Bug Fixes</h2>
+<ul>
+<li><strong>CommandsMetadataRequested Event</strong>: Fixed serialization failure that prevented client responses from reaching the server</li>
+<li><strong>Configuration Transmission</strong>: Resolved issues with complex configuration object serialization</li>
+<li><strong>Silent Handler Failures</strong>: Added logging to detect when event handlers are not properly configured</li>
+<li><strong>Response Acknowledgment</strong>: Ensured all client responses are properly serialized and transmitted to server</li>
+</ul>
+<h2 id="-debugging-improvements">🔍 Debugging Improvements</h2>
+<ul>
+<li><strong>Structured Logging</strong>: All request/response objects now use structured logging for better log analysis</li>
+<li><strong>Handler Lifecycle Tracking</strong>: Complete visibility into handler registration and execution</li>
+<li><strong>Serialization Diagnostics</strong>: Clear error messages when serialization issues occur</li>
+<li><strong>Performance Monitoring</strong>: Request processing time and success rate tracking</li>
+</ul>
+<h2 id="-deployment">🚀 Deployment</h2>
+<h3 id="non-breaking-changes">Non-Breaking Changes</h3>
+<p>This patch release maintains API compatibility while fixing critical serialization issues:</p>
+<ul>
+<li><strong>Property Name Changes</strong>: <code>TimeSpan Uptime</code> → <code>double UptimeSeconds</code></li>
+<li><strong>Type Parameter Changes</strong>: <code>Dictionary&lt;string, Type&gt;</code> → <code>Dictionary&lt;string, string&gt;</code></li>
+<li><strong>Enhanced Logging</strong>: More detailed log output (configure log levels as needed)</li>
+</ul>
+<h3 id="migration-notes">Migration Notes</h3>
+<pre><code class="lang-csharp">// Configuration response handling
+// Before: TimeSpan-based uptime
+var uptime = configResponse.Uptime;
+
+// After: Seconds-based uptime  
+var uptime = TimeSpan.FromSeconds(configResponse.UptimeSeconds);
+
+// Command metadata handling
+// Before: Type objects in parameters
+var paramType = commandMetadata.Parameters[&quot;param1&quot;]; // Type object
+
+// After: Type names as strings
+var paramTypeName = commandMetadata.Parameters[&quot;param1&quot;]; // &quot;System.String&quot;
+var paramType = Type.GetType(paramTypeName); // Convert back to Type if needed
+</code></pre>
+<h2 id="-configuration">🔧 Configuration</h2>
+<h3 id="enhanced-logging-configuration">Enhanced Logging Configuration</h3>
+<p>To take advantage of the improved logging, configure your logging levels:</p>
+<pre><code class="lang-json">{
+  &quot;Logging&quot;: {
+    &quot;LogLevel&quot;: {
+      &quot;Jiro.Shared.Extensions.SignalRStreamExtensions&quot;: &quot;Information&quot;,
+      &quot;Microsoft.AspNetCore.SignalR&quot;: &quot;Information&quot;
+    }
+  }
+}
+</code></pre>
+<hr>
+<p><strong>Note</strong>: This patch release resolves critical serialization issues affecting WebSocket communication reliability. The enhanced logging will provide better visibility into SignalR operations and help diagnose any remaining issues. No breaking API changes are introduced.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/HueByte/Jiro.Shared/blob/main/dev/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="footer-custom"><div class="footer-inner d-flex justify-content-between align-items-center"><div class="footer-text">Made with <strong>💖</strong> By HueByte</div><div class="footer-links"><a href="https://github.com/HueByte/Jiro.Shared" class="footer-link" target="_blank"><i class="fab fa-github"></i>GitHub</a><a href="#" class="footer-link scroll-to-top" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i>Top</a></div></div></div><script>function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}</script>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

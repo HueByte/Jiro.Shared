@@ -1,0 +1,272 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>v1.3.0 &quot;Ōtō&quot; - Response Acknowledgment | Jiro.Shared Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="v1.3.0 &quot;Ōtō&quot; - Response Acknowledgment | Jiro.Shared Documentation ">
+      
+      
+      <link rel="icon" href="../../assets/Jiro-Icon.png">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/HueByte/Jiro.Shared/blob/main/dev/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../assets/Jiro-Icon.png" alt="Jiro.Shared">
+            Jiro.Shared
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="v130-ōtō---response-acknowledgment">v1.3.0 &quot;Ōtō&quot; - Response Acknowledgment</h1>
+
+<p><strong>Release Date</strong>: July 25, 2025<br>
+<strong>Code Name</strong>: &quot;Ōtō&quot; (応答 - Response/Acknowledgment)<br>
+<strong>Type</strong>: Minor Release</p>
+<hr>
+<h2 id="-overview">🎯 Overview</h2>
+<p>Version 1.3.0 introduces comprehensive response acknowledgment across all WebSocket operations, replacing empty Task returns with ActionResult responses. This release also modernizes streaming operations by adopting ChannelReader<t> for improved performance and adds machine information capabilities to the client interface.</t></p>
+<h2 id="-technical-details">🛠️ Technical Details</h2>
+<h3 id="actionresult-response-pattern">ActionResult Response Pattern</h3>
+<p>All WebSocket event handlers now return ActionResult instead of empty Task, providing:</p>
+<ul>
+<li><strong>Acknowledgment Feedback</strong>: Clients can confirm successful operation completion</li>
+<li><strong>Error Reporting</strong>: Detailed error information when operations fail</li>
+<li><strong>Operation Status</strong>: Clear success/failure indication with descriptive messages</li>
+</ul>
+<h3 id="channel-based-streaming">Channel-Based Streaming</h3>
+<p>Streaming operations have been upgraded from IAsyncEnumerable<t> to ChannelReader<t>:</t></t></p>
+<ul>
+<li><strong>Better Performance</strong>: More efficient memory usage and throughput</li>
+<li><strong>Improved Backpressure</strong>: Built-in flow control mechanisms</li>
+<li><strong>Resource Management</strong>: Better cleanup and disposal patterns</li>
+</ul>
+<h2 id="-changes">🔄 Changes</h2>
+<h3 id="response-acknowledgment">Response Acknowledgment</h3>
+<ul>
+<li><strong>Event Handlers</strong>: All stream-related events updated to expect ActionResult responses</li>
+<li><strong>Interface Updates</strong>: <code>IJiroClient</code>, <code>IJiroHubServer</code>, and <code>JiroClientBase</code> aligned with new pattern</li>
+</ul>
+<h3 id="streaming-infrastructure">Streaming Infrastructure</h3>
+<ul>
+<li><strong>ChannelReader Integration</strong>: All streaming methods now use <code>ChannelReader&lt;T&gt;</code> instead of <code>IAsyncEnumerable&lt;T&gt;</code></li>
+<li><strong>Performance Optimization</strong>: Reduced memory allocation and improved throughput</li>
+<li><strong>Enhanced Control</strong>: Better flow control and cancellation support</li>
+</ul>
+<h3 id="enhanced-event-coverage">Enhanced Event Coverage</h3>
+<ul>
+<li><strong>RemoveSessionRequested</strong>: Added event handler with proper RemoveSessionRequest parameter</li>
+<li><strong>UpdateSessionRequested</strong>: Added event handler returning ActionResult for acknowledgment</li>
+<li><strong>MachineInfoRequested</strong>: New event for machine information retrieval from clients</li>
+<li><strong>Complete Coverage</strong>: All hub client methods now have corresponding event implementations</li>
+</ul>
+<h3 id="documentation-enhancements">Documentation Enhancements</h3>
+<ul>
+<li><strong>XML Documentation</strong>: Added comprehensive parameter and return value documentation</li>
+<li><strong>ActionResult Details</strong>: Detailed documentation for the new response model</li>
+<li><strong>Usage Examples</strong>: Updated examples reflecting the new patterns</li>
+</ul>
+<h2 id="-usage-examples">💻 Usage Examples</h2>
+<h3 id="actionresult-response-pattern-implementation">ActionResult Response Pattern implementation</h3>
+<pre><code class="lang-csharp">// Event handler now returns ActionResult
+LogsStreamRequested += async (request) =&gt;
+{
+    try
+    {
+        await ProcessLogsStream(request);
+        return new ActionResult 
+        { 
+            IsSuccess = true, 
+            Message = &quot;Logs stream processed successfully&quot; 
+        };
+    }
+    catch (Exception ex)
+    {
+        return new ActionResult 
+        { 
+            IsSuccess = false, 
+            Message = &quot;Failed to process logs stream&quot;,
+            Errors = new[] { ex.Message }
+        };
+    }
+};
+</code></pre>
+<h3 id="channel-based-streaming-implementation">Channel-Based Streaming implementation</h3>
+<pre><code class="lang-csharp">// Using ChannelReader for streaming (fire-and-forget)
+public async Task ReceiveLogsStreamAsync(string requestId, ChannelReader&lt;LogEntry&gt; stream)
+{
+    try
+    {
+        await foreach (var logEntry in stream.ReadAllAsync())
+        {
+            await ProcessLogEntry(logEntry);
+        }
+        
+        logger.LogInformation(&quot;Stream {RequestId} processed successfully&quot;, requestId);
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, &quot;Failed to process stream {RequestId}&quot;, requestId);
+    }
+}
+</code></pre>
+<h3 id="enhanced-event-handling">Enhanced Event Handling</h3>
+<pre><code class="lang-csharp">// Session management with proper request objects
+RemoveSessionRequested += async (removeRequest) =&gt;
+{
+    var result = await sessionManager.RemoveSessionAsync(removeRequest);
+    return new ActionResult 
+    { 
+        IsSuccess = result.Success, 
+        Message = result.Message 
+    };
+};
+
+UpdateSessionRequested += async (updateRequest) =&gt;
+{
+    var result = await sessionManager.UpdateSessionAsync(updateRequest);
+    return new ActionResult 
+    { 
+        IsSuccess = result.Success, 
+        Message = result.Message 
+    };
+};
+
+// New machine information event
+MachineInfoRequested += async (infoRequest) =&gt;
+{
+    var machineInfo = await systemService.GetMachineInfoAsync(infoRequest);
+    return new MachineInfoResponse 
+    { 
+        RequestId = infoRequest.RequestId,
+        Data = machineInfo
+    };
+};
+</code></pre>
+<h2 id="-deployment">🚀 Deployment</h2>
+<h3 id="breaking-changes">Breaking Changes</h3>
+<ul>
+<li><strong>Stream Parameters</strong>: Streaming methods now expect <code>ChannelReader&lt;T&gt;</code> instead of <code>IAsyncEnumerable&lt;T&gt;</code></li>
+<li><strong>Event Returns</strong>: Stream request events now return <code>Task&lt;ActionResult&gt;</code> for acknowledgment</li>
+<li><strong>Session Events</strong>: <code>RemoveSessionRequested</code> now takes <code>RemoveSessionRequest</code> instead of <code>string</code></li>
+<li><strong>New Events</strong>: Implementations must handle the new <code>MachineInfoRequested</code> event</li>
+</ul>
+<h3 id="migration-guide">Migration Guide</h3>
+<pre><code class="lang-csharp">// Before v1.3.0
+public event Func&lt;GetLogsRequest, Task&gt; LogsStreamRequested;
+public event Func&lt;string, Task&lt;ActionResult&gt;&gt; RemoveSessionRequested;
+public async Task ReceiveLogsStreamAsync(string requestId, IAsyncEnumerable&lt;LogEntry&gt; stream) { }
+
+// After v1.3.0
+public event Func&lt;GetLogsRequest, Task&lt;ActionResult&gt;&gt; LogsStreamRequested;
+public event Func&lt;RemoveSessionRequest, Task&lt;ActionResult&gt;&gt; RemoveSessionRequested;
+public event Func&lt;MachineInfoRequest, Task&lt;MachineInfoResponse&gt;&gt; MachineInfoRequested;
+public async Task ReceiveLogsStreamAsync(string requestId, ChannelReader&lt;LogEntry&gt; stream) 
+{
+    // Process stream (fire-and-forget)
+    await ProcessStream(requestId, stream);
+}
+</code></pre>
+<h2 id="-future-considerations">🔮 Future Considerations</h2>
+<ul>
+<li><strong>Distributed Tracing</strong>: ActionResult foundation enables future distributed tracing integration</li>
+<li><strong>Performance Monitoring</strong>: Response patterns facilitate operation performance tracking</li>
+<li><strong>Error Analytics</strong>: Structured error reporting enables better failure analysis</li>
+<li><strong>Flow Control</strong>: Channel-based streaming prepares for advanced flow control features</li>
+</ul>
+<hr>
+<p><strong>Note</strong>: This release introduces breaking changes to streaming interfaces. Please review the migration guide and update your event handlers to return ActionResult responses. The new channel-based streaming provides significant performance improvements and better resource management.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/HueByte/Jiro.Shared/blob/main/dev/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="footer-custom"><div class="footer-inner d-flex justify-content-between align-items-center"><div class="footer-text">Made with <strong>💖</strong> By HueByte</div><div class="footer-links"><a href="https://github.com/HueByte/Jiro.Shared" class="footer-link" target="_blank"><i class="fab fa-github"></i>GitHub</a><a href="#" class="footer-link scroll-to-top" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i>Top</a></div></div></div><script>function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}</script>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
