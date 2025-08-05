@@ -5,13 +5,13 @@ namespace Jiro.Shared;
 /// </summary>
 public enum CommandType
 {
-    /// <summary>
-    /// Text-based command output.
-    /// </summary>
-    Text = 0,
-    
-    /// <summary>
-    /// Graph-based command output for data visualization.
-    /// </summary>
-    Graph = 1
+	/// <summary>
+	/// Text-based command output.
+	/// </summary>
+	Text = 0,
+
+	/// <summary>
+	/// Graph-based command output for data visualization.
+	/// </summary>
+	Graph = 1
 }
