@@ -13,7 +13,7 @@ namespace Jiro.Shared.Websocket;
 /// <summary>
 /// Base class for Jiro client implementations. Provides automatic event wiring for SignalR hub connections.
 /// </summary>
-public abstract class JiroClientBase : IJiroClient
+public abstract class JiroInstanceBase : IJiroInstance
 {
 	/// <summary>
 	/// The SignalR hub connection used for communication
@@ -23,7 +23,7 @@ public abstract class JiroClientBase : IJiroClient
 	/// <summary>
 	/// Logger instance for logging events
 	/// </summary>
-	protected ILogger<JiroClientBase>? _logger;
+	protected ILogger<JiroInstanceBase>? _logger;
 
 	/// <summary>
 	/// Semaphore for connection synchronization
@@ -127,7 +127,7 @@ public abstract class JiroClientBase : IJiroClient
 	/// </summary>
 	/// <param name="hubConnection">The SignalR hub connection to use</param>
 	/// <param name="logger">Optional logger instance</param>
-	protected JiroClientBase(HubConnection? hubConnection = null, ILogger<JiroClientBase>? logger = null)
+	protected JiroInstanceBase(HubConnection? hubConnection = null, ILogger<JiroInstanceBase>? logger = null)
 	{
 		_hubConnection = hubConnection!;
 		_logger = logger;

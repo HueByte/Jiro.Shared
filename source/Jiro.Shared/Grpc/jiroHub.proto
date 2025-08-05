@@ -1,42 +1,71 @@
 ﻿syntax = "proto3";
 
-option csharp_namespace = "JiroCloud.Api.Proto";
+option csharp_namespace = "Jiro.Shared.Grpc";
 
 import "google/protobuf/timestamp.proto";
 package JiroHubProto;
 
-// Service definition
+// JiroHub Protocol Buffer Definition
+//
+// This file defines the gRPC service contract for communication between
+// Jiro instances and services. It supports command execution, real-time
+// chat messaging, and live word streaming for enhanced user experience.
+
+// JiroHubProto Service
+// Main gRPC service for handling communication between Jiro instances and services
 service JiroHubProto {
+    // Sends command execution results from Jiro instances to services
+    // Used for reporting the outcome of executed commands including text or graph data
     rpc SendCommandResult (ClientMessage) returns (CommandResultResponse);
+
+	// Retrieves historical chat messages for a given session
+	// Server streams all messages belonging to the specified session
 	rpc SendSessionMessages (ClientMessage) returns (stream ChatMessage);
+
+	// Bidirectional streaming for real-time chat communication
+	// Both client and server can send ChatMessage objects at any time
+	// Enables live chat functionality between users and AI assistants
+	rpc StreamChat (stream ChatMessage) returns (stream ChatMessage);
+
+	// Server streaming for live word-by-word message updates
+	// Allows clients to display messages as they're being generated
+	// Useful for showing typing indicators and progressive message composition
+	rpc StreamLiveWords (StreamLiveWordsRequest) returns (stream LiveWordUpdate);
 }
 
-// Request message for sending command results
+// ClientMessage
+// Represents a command execution result sent from Jiro instances
+// Contains command details, execution status, and the actual result data
 message ClientMessage {
-    string commandName = 1;
-    DataType dataType = 2;
-    oneof result {
-        TextResult textResult = 3;
-        GraphResult graphResult = 4;
+    string commandName = 1;          // Name of the executed command
+    DataType dataType = 2;           // Type of result data (text or graph)
+    oneof result {                   // Polymorphic result data
+        TextResult textResult = 3;   // Text-based command output
+        GraphResult graphResult = 4; // Graph-based command output
     }
-    bool isSuccess = 5;
-    string commandSyncId = 6;
-    repeated Pair parameters = 7;
-    string sessionId = 8;
+    bool isSuccess = 5;              // Whether command executed successfully
+    string RequestId = 6;        // Unique identifier for command synchronization
+    repeated Pair parameters = 7;    // Command parameters as key-value pairs
+    string sessionId = 8;            // Session identifier for context
 }
 
-// Response message for command results
+// CommandResultResponse
+// Server response acknowledging receipt of command execution results
 message CommandResultResponse {
     bool success = 1;
     string message = 2;
 }
 
-// Enums
+// DataType
+// Specifies the type of data contained in command execution results
 enum DataType {
     text = 0;
     graph = 1;
 }
 
+// TextType
+// Specifies the format of text data in TextResult messages
+// Helps clients properly parse and display text content
 enum TextType {
     plain = 0;
     json = 1;
@@ -45,12 +74,17 @@ enum TextType {
     html = 4;
 }
 
-// Result types
+// TextResult
+// Represents text-based command output with type specification
+// Supports various text formats including plain text, JSON, base64, markdown, and HTML
 message TextResult {
     string response = 1;
     TextType textType = 2;
 }
 
+// GraphResult
+// Represents graphical command output for data visualization
+// Contains binary graph data along with metadata like axes labels and units
 message GraphResult {
     string message = 1;
     bytes graphData = 2;
@@ -60,13 +94,16 @@ message GraphResult {
     map<string, string> units = 6;
 }
 
-// Helper types
+// Pair
+// Generic key-value pair used for passing command parameters
 message Pair {
     string key = 1;
     string value = 2;
 }
 
-// Session management (kept for potential future use)
+// Session
+// Represents a chat or command execution session
+// Tracks session metadata including creation and update timestamps
 message Session {
     string id = 1;
     string name = 2;
@@ -75,30 +112,55 @@ message Session {
     google.protobuf.Timestamp updatedAt = 5;
 }
 
+// SessionsReply
+// Contains a list of available sessions
 message SessionsReply {
     repeated Session sessions = 1;
 }
 
-// Chat message model
+// ChatMessage
+// Represents a single message in a chat conversation
+// Used for both historical messages and real-time streaming
 message ChatMessage {
-    string id = 1;
-    string content = 2;
-    string author = 3;
-    google.protobuf.Timestamp timestamp = 4;
-    string sessionId = 5;
-    MessageType messageType = 6;
+    string id = 1;                           // Unique message identifier
+    string content = 2;                      // Message text content
+    string author = 3;                       // Author name or identifier
+    google.protobuf.Timestamp timestamp = 4; // When message was created
+    string sessionId = 5;                    // Session this message belongs to
+    MessageType messageType = 6;             // Type of message (USER/ASSISTANT/SYSTEM)
 }
 
-// Response containing list of chat messages
+// ChatMessagesResponse
+// Wrapper for returning multiple chat messages with operation status
 message ChatMessagesResponse {
     repeated ChatMessage messages = 1;
     bool success = 2;
     string errorMessage = 3;
 }
 
-// Message type enum
+// MessageType
+// Identifies the sender type of a chat message
+// Used to distinguish between user input, AI responses, and system notifications
 enum MessageType {
     USER = 0;
     ASSISTANT = 1;
     SYSTEM = 2;
+}
+
+// StreamLiveWordsRequest
+// Request to start streaming live word updates for a specific message
+message StreamLiveWordsRequest {
+    string sessionId = 1;
+    string messageId = 2;
+}
+
+// LiveWordUpdate
+// Represents a single word or token being streamed as part of a message
+// Enables real-time display of message composition
+message LiveWordUpdate {
+    string messageId = 1;                    // ID of the message being streamed
+    string word = 2;                         // The word or token being added
+    int32 position = 3;                      // Position of word in the message
+    bool isComplete = 4;                     // True when message is fully streamed
+    google.protobuf.Timestamp timestamp = 5; // When this word was generated
 }
