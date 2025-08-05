@@ -86,4 +86,24 @@ public class Events
 	/// </summary>
 	public const string ReceiveSessionMessagesStream = "ReceiveSessionMessagesStream";
 
+	/// <summary>
+	/// Event fired when server requests client to stream chat messages.
+	/// </summary>
+	public const string StreamChatMessagesRequested = "StreamChatMessagesRequested";
+
+	/// <summary>
+	/// Event fired when client streams chat messages to the server.
+	/// </summary>
+	public const string StreamChatMessagesToServer = "StreamChatMessagesToServer";
+
+	/// <summary>
+	/// Event fired when server requests client to stream words.
+	/// </summary>
+	public const string StreamWordsRequested = "StreamWordsRequested";
+
+	/// <summary>
+	/// Event fired when client streams word-by-word message content to the server.
+	/// </summary>
+	public const string StreamWordsToServer = "StreamWordsToServer";
+
 }

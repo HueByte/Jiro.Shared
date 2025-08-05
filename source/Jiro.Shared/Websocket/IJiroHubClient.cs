@@ -89,5 +89,18 @@ public interface IJiroHubClient
 	/// </summary>
 	[HubMethodName(Events.MachineInfoRequested)]
 	Task<MachineInfoResponse> GetMachineInfoAsync(MachineInfoRequest request);
+
+	/// <summary>
+	/// Requests the client to start streaming chat messages to the server
+	/// </summary>
+	[HubMethodName(Events.StreamChatMessagesRequested)]
+	Task<ActionResult> RequestChatMessagesStreamAsync(StreamChatRequest request);
+
+	/// <summary>
+	/// Requests the client to start streaming word-by-word message content to the server
+	/// </summary>
+	[HubMethodName(Events.StreamWordsRequested)]
+	Task<ActionResult> RequestWordStreamAsync(StreamWordRequest request);
+
 }
 
