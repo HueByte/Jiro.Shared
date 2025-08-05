@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageId>Jiro.Shared</PackageId>
-    <Version>1.4.0</Version>
+    <Version>1.4.1</Version>
     <Authors>HueByte</Authors>
     <Title>Jiro.Shared</Title>
     <Summary>Shared types and models for Jiro ecosystem applications</Summary>
@@ -53,11 +53,17 @@ Features:
   <ItemGroup>
     <None Include="..\..\README.nuget.md" Pack="true" PackagePath="\" />
     <None Include="..\..\dev\assets\Jiro-Icon.png" Pack="true" PackagePath="\" />
-    <None Include="Grpc\jiroHub.proto" Pack="true" PackagePath="contentFiles\any\any\Grpc\" />
-    <None Include="Grpc\jiroHub.proto" Pack="true" PackagePath="content\Grpc\" />
+    <!-- Copy proto files into the package for consumers to import -->
+    <Content Include="Grpc\**\*.proto" Pack="true" PackagePath="contentFiles\any\any\Grpc\" Visible="true">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Grpc\**\*.proto" Pack="true" PackagePath="content\Grpc\" Visible="true">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
+    <!-- Generate both server and client code for this package -->
     <Protobuf Include="Grpc\*.proto" GrpcServices="Both" />
   </ItemGroup>
 
