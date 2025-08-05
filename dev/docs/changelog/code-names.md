@@ -14,6 +14,7 @@ Jiro.Shared uses Japanese-inspired code names that reflect the spirit and theme 
 
 | Version | Code Name | Japanese | Meaning | Theme |
 |---------|-----------|----------|---------|--------|
+| v1.4.0 | Tōgō | 統合 | Integration/Unification | TaskManager Integration & Proto Distribution |
 | v1.3.2 | Seisō | 整理 | Organization/Cleanup | Clean Logging Optimization |
 | v1.3.1 | Seigō | 精確 | Precision/Accuracy | Serialization Fixes & Enhanced Logging |
 | v1.3.0 | Ōtō | 応答 | Response/Acknowledgment | ActionResult & Response Pattern |

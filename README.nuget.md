@@ -10,7 +10,9 @@ Jiro.Shared provides common types, models, and utilities used across the Jiro ec
 
 - **WebSocket Endpoints**: Predefined endpoint constants for real-time communication
 - **gRPC Definitions**: Protocol buffer definitions for efficient service communication
+- **TaskManager Infrastructure**: Unified task management for distributed systems
 - **Shared Models**: Common request and response data transfer objects (DTOs)
+- **Proto File Distribution**: jiroHub.proto included for gRPC service generation
 - **Type Safety**: Strongly-typed contracts for reliable inter-service communication
 - **Documentation**: Full XML documentation for excellent IntelliSense support
 
@@ -31,7 +33,7 @@ dotnet add package Jiro.Shared
 ### Package Reference
 
 ```xml
-<PackageReference Include="Jiro.Shared" Version="1.3.2" />
+<PackageReference Include="Jiro.Shared" Version="1.4.0" />
 ```
 
 ## Usage
@@ -72,6 +74,71 @@ var sessionResponse = new SessionResponse
     SessionId = "session-123",
     IsActive = true
 };
+```
+
+### TaskManager Infrastructure (v1.4.0+)
+
+```csharp
+using Jiro.Shared.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+
+// Register TaskManager
+services.Configure<TaskManagerOptions>(options => 
+{
+    options.DefaultTimeoutSeconds = 30;
+    options.MaxPendingTasks = 1000;
+});
+services.AddSingleton<ITaskManager, TaskManager>();
+
+// Use TaskManager
+var taskManager = serviceProvider.GetService<ITaskManager>();
+var result = await taskManager.ExternalExecuteAsync<MyResponse>(
+    instanceId: "instance-1",
+    requestId: "req-123", 
+    action: () => SendCommandAsync()
+);
+```
+
+### SynchronizationToken Model (v1.4.0+)
+
+```csharp
+using Jiro.Shared;
+
+// Enhanced command tracking
+var token = new SynchronizationToken
+{
+    InstanceId = "instance-1",
+    SessionId = "session-123", 
+    RequestId = "req-456"
+};
+
+// Use with command responses
+var response = new SessionCommandResponse
+{
+    SynchronizationToken = token,
+    CommandType = CommandType.Text,
+    Result = new TextResult { Response = "Hello World" }
+};
+```
+
+### gRPC Proto File Usage (v1.4.0+)
+
+The jiroHub.proto file is automatically included in your project:
+
+```xml
+<ItemGroup>
+  <Protobuf Include="Grpc\jiroHub.proto" GrpcServices="Client" />
+</ItemGroup>
+```
+
+Generate gRPC services:
+
+```csharp
+using Jiro.Shared.Grpc;
+
+// Use generated gRPC client
+var client = new JiroHubProto.JiroHubProtoClient(channel);
+var response = await client.SendCommandResultAsync(clientMessage);
 ```
 
 ## Documentation
