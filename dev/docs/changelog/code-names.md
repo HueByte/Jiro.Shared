@@ -14,6 +14,7 @@ Jiro.Shared uses Japanese-inspired code names that reflect the spirit and theme 
 
 | Version | Code Name | Japanese | Meaning | Theme |
 |---------|-----------|----------|---------|--------|
+| v1.4.4 | Shūsei | 修正 | Correction/Fix | Interface Alignment & Event Fix |
 | v1.4.3 | Seiri | 整理 | Organization/Cleanup | Code Organization & Serialization Cleanup |
 | v1.4.2 | Nagare | 流れ | Flow | Comprehensive Streaming Support |
 | v1.4.1 | - | - | - | Bug Fixes |

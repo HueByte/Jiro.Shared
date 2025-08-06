@@ -5,6 +5,8 @@ items:
   href: code-names.md
 - name: Versions
   items:
+  - name: v1.4.4 "Shūsei"
+    href: v1.4.4.md
   - name: v1.4.3 "Seiri"
     href: v1.4.3.md
   - name: v1.4.2 "Nagare"
