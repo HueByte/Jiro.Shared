@@ -1,0 +1,719 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Interface IJiroHubClient | Jiro.Shared Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Interface IJiroHubClient | Jiro.Shared Documentation ">
+      
+      <meta name="description" content="Interface for server-to-client events. Used by the server to push events to connected clients.">
+      <link rel="icon" href="../assets/Jiro-Icon.png">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/HueByte/Jiro.Shared/new/main/apiSpec/new?filename=Jiro_Shared_Websocket_IJiroHubClient.md&amp;value=---%0Auid%3A%20Jiro.Shared.Websocket.IJiroHubClient%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../assets/Jiro-Icon.png" alt="Jiro.Shared">
+            Jiro.Shared
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Jiro.Shared.Websocket.IJiroHubClient">
+
+
+
+  <h1 id="Jiro_Shared_Websocket_IJiroHubClient" data-uid="Jiro.Shared.Websocket.IJiroHubClient" class="text-break">
+Interface IJiroHubClient  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Websocket/IJiroHubClient.cs/#L12"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Jiro.html">Jiro</a>.<a class="xref" href="Jiro.Shared.html">Shared</a>.<a class="xref" href="Jiro.Shared.Websocket.html">Websocket</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Jiro.Shared.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Interface for server-to-client events. Used by the server to push events to connected clients.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IJiroHubClient</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Jiro_Shared_Websocket_IJiroHubClient_GetMachineInfoAsync_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.GetMachineInfoAsync*"></a>
+
+  <h3 id="Jiro_Shared_Websocket_IJiroHubClient_GetMachineInfoAsync_Jiro_Shared_Websocket_Requests_MachineInfoRequest_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.GetMachineInfoAsync(Jiro.Shared.Websocket.Requests.MachineInfoRequest)">
+  GetMachineInfoAsync(MachineInfoRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Websocket/IJiroHubClient.cs/#L90"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Requests machine information from the client instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HubMethodName(&quot;MachineInfoRequested&quot;)]
+Task&lt;MachineInfoResponse&gt; GetMachineInfoAsync(MachineInfoRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Jiro.Shared.Websocket.Requests.MachineInfoRequest.html">MachineInfoRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Jiro.Shared.Websocket.Responses.MachineInfoResponse.html">MachineInfoResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Websocket_IJiroHubClient_RemoveSessionAsync_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.RemoveSessionAsync*"></a>
+
+  <h3 id="Jiro_Shared_Websocket_IJiroHubClient_RemoveSessionAsync_Jiro_Shared_Websocket_Requests_RemoveSessionRequest_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.RemoveSessionAsync(Jiro.Shared.Websocket.Requests.RemoveSessionRequest)">
+  RemoveSessionAsync(RemoveSessionRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Websocket/IJiroHubClient.cs/#L77"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Removes a session from the client instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HubMethodName(&quot;RemoveSession&quot;)]
+Task&lt;ActionResult&gt; RemoveSessionAsync(RemoveSessionRequest sessionRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sessionRequest</code> <a class="xref" href="Jiro.Shared.Websocket.Requests.RemoveSessionRequest.html">RemoveSessionRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Jiro.Shared.Websocket.Requests.ActionResult.html">ActionResult</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Websocket_IJiroHubClient_RequestChatMessagesStreamAsync_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.RequestChatMessagesStreamAsync*"></a>
+
+  <h3 id="Jiro_Shared_Websocket_IJiroHubClient_RequestChatMessagesStreamAsync_Jiro_Shared_Websocket_Requests_StreamChatRequest_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.RequestChatMessagesStreamAsync(Jiro.Shared.Websocket.Requests.StreamChatRequest)">
+  RequestChatMessagesStreamAsync(StreamChatRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Websocket/IJiroHubClient.cs/#L96"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Requests the client to start streaming chat messages to the server</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HubMethodName(&quot;StreamChatMessagesRequested&quot;)]
+Task&lt;ActionResult&gt; RequestChatMessagesStreamAsync(StreamChatRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Jiro.Shared.Websocket.Requests.StreamChatRequest.html">StreamChatRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Jiro.Shared.Websocket.Requests.ActionResult.html">ActionResult</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Websocket_IJiroHubClient_RequestCommandsMetadataAsync_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.RequestCommandsMetadataAsync*"></a>
+
+  <h3 id="Jiro_Shared_Websocket_IJiroHubClient_RequestCommandsMetadataAsync_Jiro_Shared_Websocket_Requests_GetCommandsMetadataRequest_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.RequestCommandsMetadataAsync(Jiro.Shared.Websocket.Requests.GetCommandsMetadataRequest)">
+  RequestCommandsMetadataAsync(GetCommandsMetadataRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Websocket/IJiroHubClient.cs/#L65"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Requests commands metadata from the client instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HubMethodName(&quot;CommandsMetadataRequested&quot;)]
+Task&lt;CommandsMetadataResponse&gt; RequestCommandsMetadataAsync(GetCommandsMetadataRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Jiro.Shared.Websocket.Requests.GetCommandsMetadataRequest.html">GetCommandsMetadataRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Jiro.Shared.Websocket.Responses.CommandsMetadataResponse.html">CommandsMetadataResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Websocket_IJiroHubClient_RequestConfigAsync_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.RequestConfigAsync*"></a>
+
+  <h3 id="Jiro_Shared_Websocket_IJiroHubClient_RequestConfigAsync_Jiro_Shared_Websocket_Requests_GetConfigRequest_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.RequestConfigAsync(Jiro.Shared.Websocket.Requests.GetConfigRequest)">
+  RequestConfigAsync(GetConfigRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Websocket/IJiroHubClient.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Requests configuration from the client instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HubMethodName(&quot;ConfigRequested&quot;)]
+Task&lt;ConfigResponse&gt; RequestConfigAsync(GetConfigRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Jiro.Shared.Websocket.Requests.GetConfigRequest.html">GetConfigRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Jiro.Shared.Websocket.Responses.ConfigResponse.html">ConfigResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Websocket_IJiroHubClient_RequestCustomThemesAsync_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.RequestCustomThemesAsync*"></a>
+
+  <h3 id="Jiro_Shared_Websocket_IJiroHubClient_RequestCustomThemesAsync_Jiro_Shared_Websocket_Requests_GetCustomThemesRequest_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.RequestCustomThemesAsync(Jiro.Shared.Websocket.Requests.GetCustomThemesRequest)">
+  RequestCustomThemesAsync(GetCustomThemesRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Websocket/IJiroHubClient.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Requests custom themes from the client instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HubMethodName(&quot;CustomThemesRequested&quot;)]
+Task&lt;ThemesResponse&gt; RequestCustomThemesAsync(GetCustomThemesRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Jiro.Shared.Websocket.Requests.GetCustomThemesRequest.html">GetCustomThemesRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Jiro.Shared.Websocket.Responses.ThemesResponse.html">ThemesResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Websocket_IJiroHubClient_RequestLogsAsync_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.RequestLogsAsync*"></a>
+
+  <h3 id="Jiro_Shared_Websocket_IJiroHubClient_RequestLogsAsync_Jiro_Shared_Websocket_Requests_GetLogsRequest_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.RequestLogsAsync(Jiro.Shared.Websocket.Requests.GetLogsRequest)">
+  RequestLogsAsync(GetLogsRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Websocket/IJiroHubClient.cs/#L17"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Requests logs from the client instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HubMethodName(&quot;LogsRequested&quot;)]
+Task&lt;LogsResponse&gt; RequestLogsAsync(GetLogsRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Jiro.Shared.Websocket.Requests.GetLogsRequest.html">GetLogsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Jiro.Shared.Websocket.Responses.LogsResponse.html">LogsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Websocket_IJiroHubClient_RequestLogsStreamAsync_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.RequestLogsStreamAsync*"></a>
+
+  <h3 id="Jiro_Shared_Websocket_IJiroHubClient_RequestLogsStreamAsync_Jiro_Shared_Websocket_Requests_GetLogsRequest_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.RequestLogsStreamAsync(Jiro.Shared.Websocket.Requests.GetLogsRequest)">
+  RequestLogsStreamAsync(GetLogsRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Websocket/IJiroHubClient.cs/#L23"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Requests logs stream from the client instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HubMethodName(&quot;LogsStreamRequested&quot;)]
+Task&lt;ActionResult&gt; RequestLogsStreamAsync(GetLogsRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Jiro.Shared.Websocket.Requests.GetLogsRequest.html">GetLogsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Jiro.Shared.Websocket.Requests.ActionResult.html">ActionResult</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Websocket_IJiroHubClient_RequestSessionMessagesStreamAsync_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.RequestSessionMessagesStreamAsync*"></a>
+
+  <h3 id="Jiro_Shared_Websocket_IJiroHubClient_RequestSessionMessagesStreamAsync_Jiro_Shared_Websocket_Requests_GetSingleSessionRequest_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.RequestSessionMessagesStreamAsync(Jiro.Shared.Websocket.Requests.GetSingleSessionRequest)">
+  RequestSessionMessagesStreamAsync(GetSingleSessionRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Websocket/IJiroHubClient.cs/#L35"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Requests a stream of messages for a specific session from the client instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HubMethodName(&quot;SessionMessagesStreamRequested&quot;)]
+Task&lt;ActionResult&gt; RequestSessionMessagesStreamAsync(GetSingleSessionRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Jiro.Shared.Websocket.Requests.GetSingleSessionRequest.html">GetSingleSessionRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Jiro.Shared.Websocket.Requests.ActionResult.html">ActionResult</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Websocket_IJiroHubClient_RequestSessionsAsync_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.RequestSessionsAsync*"></a>
+
+  <h3 id="Jiro_Shared_Websocket_IJiroHubClient_RequestSessionsAsync_Jiro_Shared_Websocket_Requests_GetSessionsRequest_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.RequestSessionsAsync(Jiro.Shared.Websocket.Requests.GetSessionsRequest)">
+  RequestSessionsAsync(GetSessionsRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Websocket/IJiroHubClient.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Requests all sessions from the client instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HubMethodName(&quot;SessionsRequested&quot;)]
+Task&lt;SessionsResponse&gt; RequestSessionsAsync(GetSessionsRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Jiro.Shared.Websocket.Requests.GetSessionsRequest.html">GetSessionsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Jiro.Shared.Websocket.Responses.SessionsResponse.html">SessionsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Websocket_IJiroHubClient_RequestSingleSessionAsync_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.RequestSingleSessionAsync*"></a>
+
+  <h3 id="Jiro_Shared_Websocket_IJiroHubClient_RequestSingleSessionAsync_Jiro_Shared_Websocket_Requests_GetSingleSessionRequest_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.RequestSingleSessionAsync(Jiro.Shared.Websocket.Requests.GetSingleSessionRequest)">
+  RequestSingleSessionAsync(GetSingleSessionRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Websocket/IJiroHubClient.cs/#L29"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Requests a specific session from the client instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HubMethodName(&quot;SingleSessionRequested&quot;)]
+Task&lt;SessionResponse&gt; RequestSingleSessionAsync(GetSingleSessionRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Jiro.Shared.Websocket.Requests.GetSingleSessionRequest.html">GetSingleSessionRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Jiro.Shared.Websocket.Responses.SessionResponse.html">SessionResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Websocket_IJiroHubClient_RequestWordStreamAsync_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.RequestWordStreamAsync*"></a>
+
+  <h3 id="Jiro_Shared_Websocket_IJiroHubClient_RequestWordStreamAsync_Jiro_Shared_Websocket_Requests_StreamWordRequest_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.RequestWordStreamAsync(Jiro.Shared.Websocket.Requests.StreamWordRequest)">
+  RequestWordStreamAsync(StreamWordRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Websocket/IJiroHubClient.cs/#L102"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Requests the client to start streaming word-by-word message content to the server</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HubMethodName(&quot;StreamWordsRequested&quot;)]
+Task&lt;ActionResult&gt; RequestWordStreamAsync(StreamWordRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Jiro.Shared.Websocket.Requests.StreamWordRequest.html">StreamWordRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Jiro.Shared.Websocket.Requests.ActionResult.html">ActionResult</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Websocket_IJiroHubClient_SendCommandAsync_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.SendCommandAsync*"></a>
+
+  <h3 id="Jiro_Shared_Websocket_IJiroHubClient_SendCommandAsync_Jiro_Shared_Websocket_Requests_CommandMessage_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.SendCommandAsync(Jiro.Shared.Websocket.Requests.CommandMessage)">
+  SendCommandAsync(CommandMessage)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Websocket/IJiroHubClient.cs/#L71"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sends a command to the client instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HubMethodName(&quot;CommandReceived&quot;)]
+Task&lt;ActionResult&gt; SendCommandAsync(CommandMessage commandMessage)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>commandMessage</code> <a class="xref" href="Jiro.Shared.Websocket.Requests.CommandMessage.html">CommandMessage</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Jiro.Shared.Websocket.Requests.ActionResult.html">ActionResult</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Websocket_IJiroHubClient_UpdateConfigAsync_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.UpdateConfigAsync*"></a>
+
+  <h3 id="Jiro_Shared_Websocket_IJiroHubClient_UpdateConfigAsync_Jiro_Shared_Websocket_Requests_UpdateConfigRequest_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.UpdateConfigAsync(Jiro.Shared.Websocket.Requests.UpdateConfigRequest)">
+  UpdateConfigAsync(UpdateConfigRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Websocket/IJiroHubClient.cs/#L53"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sends a configuration update to the client instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HubMethodName(&quot;ConfigUpdated&quot;)]
+Task&lt;ConfigUpdateResponse&gt; UpdateConfigAsync(UpdateConfigRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Jiro.Shared.Websocket.Requests.UpdateConfigRequest.html">UpdateConfigRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Jiro.Shared.Websocket.Responses.ConfigUpdateResponse.html">ConfigUpdateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Websocket_IJiroHubClient_UpdateSessionAsync_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.UpdateSessionAsync*"></a>
+
+  <h3 id="Jiro_Shared_Websocket_IJiroHubClient_UpdateSessionAsync_Jiro_Shared_Websocket_Requests_UpdateSessionRequest_" data-uid="Jiro.Shared.Websocket.IJiroHubClient.UpdateSessionAsync(Jiro.Shared.Websocket.Requests.UpdateSessionRequest)">
+  UpdateSessionAsync(UpdateSessionRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Websocket/IJiroHubClient.cs/#L83"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Updates a session with the provided session update message</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HubMethodName(&quot;UpdateSession&quot;)]
+Task&lt;ActionResult&gt; UpdateSessionAsync(UpdateSessionRequest sessionUpdateMessage)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sessionUpdateMessage</code> <a class="xref" href="Jiro.Shared.Websocket.Requests.UpdateSessionRequest.html">UpdateSessionRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Jiro.Shared.Websocket.Requests.ActionResult.html">ActionResult</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Websocket/IJiroHubClient.cs/#L12" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="footer-custom"><div class="footer-inner d-flex justify-content-between align-items-center"><div class="footer-text">Made with <strong>💖</strong> By HueByte</div><div class="footer-links"><a href="https://github.com/HueByte/Jiro.Shared" class="footer-link" target="_blank"><i class="fab fa-github"></i>GitHub</a><a href="#" class="footer-link scroll-to-top" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i>Top</a></div></div></div><script>function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}</script>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,316 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>v1.4.4 &quot;Shūsei&quot; - Interface Alignment &amp; Event Fix | Jiro.Shared Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="v1.4.4 &quot;Shūsei&quot; - Interface Alignment &amp; Event Fix | Jiro.Shared Documentation ">
+      
+      
+      <link rel="icon" href="../../assets/Jiro-Icon.png">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/HueByte/Jiro.Shared/blob/main/dev/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../assets/Jiro-Icon.png" alt="Jiro.Shared">
+            Jiro.Shared
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="v144-shūsei---interface-alignment--event-fix">v1.4.4 &quot;Shūsei&quot; - Interface Alignment &amp; Event Fix</h1>
+
+<p><strong>Release Date</strong>: 2025-01-08<br>
+<strong>Code Name</strong>: &quot;Shūsei&quot; (修正 - Correction/Fix)<br>
+<strong>Type</strong>: Patch Release</p>
+<hr>
+<h2 id="-overview">🎯 Overview</h2>
+<p>Version 1.4.4 is a focused bug fix release that resolves an interface implementation mismatch in the <code>JiroInstanceBase</code> class. This release ensures proper alignment between the <code>IJiroInstance</code> interface and its implementation, specifically correcting the <code>CommandReceived</code> event signature to return the expected <code>ActionResult</code>.</p>
+<p>The &quot;Shūsei&quot; release embodies the Japanese concept of correction and refinement, fixing implementation inconsistencies while maintaining full backward compatibility.</p>
+<h2 id="-fixed-issues">🐛 Fixed Issues</h2>
+<h3 id="-interface-implementation-mismatch">⚠️ Interface Implementation Mismatch</h3>
+<p><strong>Issue</strong>: The <code>JiroInstanceBase</code> class did not properly implement the <code>IJiroInstance</code> interface for the <code>CommandReceived</code> event.</p>
+<p><strong>Problem</strong>:</p>
+<pre><code class="lang-csharp">// Interface definition (IJiroInstance.cs:38)
+public event Func&lt;CommandMessage, Task&lt;ActionResult&gt;&gt;? CommandReceived;
+
+// Implementation (JiroInstanceBase.cs:57) - INCORRECT
+public event Func&lt;CommandMessage, Task&gt;? CommandReceived;
+</code></pre>
+<p><strong>Resolution</strong>:</p>
+<pre><code class="lang-csharp">// Fixed implementation (JiroInstanceBase.cs:57) - CORRECT
+public event Func&lt;CommandMessage, Task&lt;ActionResult&gt;&gt;? CommandReceived;
+</code></pre>
+<h3 id="event-handling-correction">Event Handling Correction</h3>
+<p><strong>Issue</strong>: The event setup used fire-and-forget notification pattern instead of request-response pattern.</p>
+<p><strong>Before (v1.4.3)</strong>:</p>
+<pre><code class="lang-csharp">// Used OnNotification (fire-and-forget)
+_hubConnection.OnNotification&lt;CommandMessage&gt;(Events.CommandReceived, async command =&gt;
+{
+    if (CommandReceived != null)
+        await CommandReceived(command);
+}, _logger);
+</code></pre>
+<p><strong>After (v1.4.4)</strong>:</p>
+<pre><code class="lang-csharp">// Uses OnRequest (expects return value)
+_hubConnection.OnRequest&lt;CommandMessage, ActionResult&gt;(
+    Events.CommandReceived,
+    async command =&gt; await CommandReceived!(command),
+    _logger);
+</code></pre>
+<h2 id="-technical-changes">🔧 Technical Changes</h2>
+<h3 id="files-modified">Files Modified</h3>
+<ul>
+<li><strong><code>Websocket/JiroClientBase.cs</code></strong>:
+<ul>
+<li>Line 57: Updated <code>CommandReceived</code> event signature</li>
+<li>Lines 169-173: Changed from <code>OnNotification</code> to <code>OnRequest</code> setup</li>
+</ul>
+</li>
+</ul>
+<h3 id="impact-analysis">Impact Analysis</h3>
+<ul>
+<li><strong>Interface Compliance</strong>: <code>JiroInstanceBase</code> now fully implements <code>IJiroInstance</code></li>
+<li><strong>Return Value Handling</strong>: Commands now properly return <code>ActionResult</code> to the server</li>
+<li><strong>WebSocket Communication</strong>: Correct request-response pattern established</li>
+<li><strong>Backward Compatibility</strong>: Maintained - existing implementations will need to return <code>ActionResult</code></li>
+</ul>
+<h2 id="-key-improvements">🚀 Key Improvements</h2>
+<h3 id="architecture-correctness">Architecture Correctness</h3>
+<ul>
+<li><strong>Interface Alignment</strong>: Perfect match between interface contract and implementation</li>
+<li><strong>Proper Communication Pattern</strong>: Commands now follow request-response pattern as intended</li>
+<li><strong>Type Safety</strong>: Ensures <code>ActionResult</code> is returned from command execution</li>
+</ul>
+<h3 id="enhanced-reliability">Enhanced Reliability</h3>
+<ul>
+<li><strong>Contract Enforcement</strong>: Interface compliance ensures consistent behavior across implementations</li>
+<li><strong>Response Handling</strong>: Server can now properly receive command execution results</li>
+<li><strong>Error Propagation</strong>: Failures can be communicated back through <code>ActionResult.IsSuccess</code></li>
+</ul>
+<h2 id="-breaking-changes">📋 Breaking Changes</h2>
+<h3 id="-command-handler-return-type">⚠️ Command Handler Return Type</h3>
+<p><strong>Impact</strong>: Implementations of <code>CommandReceived</code> event handlers must now return <code>Task&lt;ActionResult&gt;</code>.</p>
+<p><strong>Migration Required</strong>:</p>
+<p><strong>Before (v1.4.3)</strong>:</p>
+<pre><code class="lang-csharp">client.CommandReceived += async (command) =&gt;
+{
+    // Process command
+    await ProcessCommand(command);
+    // No return value
+};
+</code></pre>
+<p><strong>After (v1.4.4)</strong>:</p>
+<pre><code class="lang-csharp">client.CommandReceived += async (command) =&gt;
+{
+    try
+    {
+        // Process command
+        await ProcessCommand(command);
+        
+        // Return success result
+        return new ActionResult 
+        { 
+            IsSuccess = true, 
+            Message = &quot;Command executed successfully&quot; 
+        };
+    }
+    catch (Exception ex)
+    {
+        // Return error result
+        return new ActionResult 
+        { 
+            IsSuccess = false, 
+            Message = &quot;Command execution failed&quot;,
+            Errors = new[] { ex.Message }
+        };
+    }
+};
+</code></pre>
+<h2 id="-migration-guide">🔄 Migration Guide</h2>
+<h3 id="for-existing-implementations">For Existing Implementations</h3>
+<ol>
+<li><strong>Update Event Handlers</strong>: Modify <code>CommandReceived</code> event handlers to return <code>Task&lt;ActionResult&gt;</code></li>
+<li><strong>Add Success Responses</strong>: Return <code>ActionResult</code> with <code>IsSuccess = true</code> for successful operations</li>
+<li><strong>Handle Errors</strong>: Return <code>ActionResult</code> with <code>IsSuccess = false</code> and error details for failures</li>
+<li><strong>Test Integration</strong>: Verify command execution results are properly communicated to the server</li>
+</ol>
+<h3 id="example-implementation">Example Implementation</h3>
+<pre><code class="lang-csharp">public class MyJiroClient : JiroInstanceBase
+{
+    protected override void SetupHandlers()
+    {
+        CommandReceived += async (command) =&gt;
+        {
+            _logger?.LogInformation(&quot;Executing command: {Command}&quot;, command.Command);
+            
+            try
+            {
+                // Execute the command
+                var result = await ExecuteCommandAsync(command);
+                
+                return new ActionResult
+                {
+                    IsSuccess = true,
+                    Message = $&quot;Command '{command.Command}' executed successfully&quot;
+                };
+            }
+            catch (Exception ex)
+            {
+                _logger?.LogError(ex, &quot;Command execution failed: {Command}&quot;, command.Command);
+                
+                return new ActionResult
+                {
+                    IsSuccess = false,
+                    Message = &quot;Command execution failed&quot;,
+                    Errors = new[] { ex.Message }
+                };
+            }
+        };
+    }
+}
+</code></pre>
+<h2 id="-verification">🧪 Verification</h2>
+<h3 id="build-verification">Build Verification</h3>
+<ul>
+<li><strong>✅ Compilation</strong>: All projects compile without errors</li>
+<li><strong>✅ Interface Compliance</strong>: <code>JiroInstanceBase</code> fully implements <code>IJiroInstance</code></li>
+<li><strong>✅ Type Safety</strong>: No type mismatches in event signatures</li>
+<li><strong>✅ Documentation</strong>: XML documentation updated to reflect return type</li>
+</ul>
+<h3 id="testing-recommendations">Testing Recommendations</h3>
+<p>For applications updating to v1.4.4:</p>
+<ol>
+<li><strong>Unit Tests</strong>: Verify command handlers return proper <code>ActionResult</code> objects</li>
+<li><strong>Integration Tests</strong>: Test end-to-end command execution with result handling</li>
+<li><strong>Error Scenarios</strong>: Ensure error conditions return appropriate failure results</li>
+</ol>
+<h2 id="-benefits">📈 Benefits</h2>
+<h3 id="developer-experience">Developer Experience</h3>
+<ul>
+<li><strong>Clear Contracts</strong>: Interface and implementation are now perfectly aligned</li>
+<li><strong>Better Error Handling</strong>: Commands can communicate success/failure back to server</li>
+<li><strong>IDE Support</strong>: IntelliSense correctly shows return type requirements</li>
+</ul>
+<h3 id="system-reliability">System Reliability</h3>
+<ul>
+<li><strong>Consistent Behavior</strong>: All implementations must follow same return pattern</li>
+<li><strong>Error Visibility</strong>: Failed commands can be properly tracked and logged</li>
+<li><strong>Integration Clarity</strong>: Clear communication pattern between client and server</li>
+</ul>
+<h2 id="-dependencies">🔗 Dependencies</h2>
+<p>No dependency changes in this release. All dependencies remain consistent with v1.4.3:</p>
+<ul>
+<li>Grpc.AspNetCore: 2.71.0</li>
+<li>Google.Protobuf: 3.31.1</li>
+<li>Microsoft.AspNetCore.SignalR: 1.2.0</li>
+<li>Microsoft.AspNetCore.SignalR.Client: 9.0.8</li>
+</ul>
+<h2 id="-compatibility">⚡ Compatibility</h2>
+<h3 id="backward-compatibility">Backward Compatibility</h3>
+<ul>
+<li><strong>⚠️ Limited</strong>: Command handlers require modification to return <code>ActionResult</code></li>
+<li><strong>Transport Layer</strong>: WebSocket and gRPC communication protocols unchanged</li>
+<li><strong>Data Models</strong>: All request/response models remain identical</li>
+</ul>
+<h3 id="forward-compatibility">Forward Compatibility</h3>
+<ul>
+<li><strong>ActionResult Contract</strong>: Stable interface for command execution results</li>
+<li><strong>Extensible Design</strong>: <code>ActionResult</code> supports additional metadata through <code>Errors</code> array</li>
+</ul>
+<hr>
+<p><strong>Implementation Note</strong>: This release corrects a critical interface implementation mismatch that could lead to runtime errors or unexpected behavior. While it requires minimal code changes in consuming applications, it ensures proper contract compliance and enables reliable command result communication between clients and servers.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/HueByte/Jiro.Shared/blob/main/dev/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="footer-custom"><div class="footer-inner d-flex justify-content-between align-items-center"><div class="footer-text">Made with <strong>💖</strong> By HueByte</div><div class="footer-links"><a href="https://github.com/HueByte/Jiro.Shared" class="footer-link" target="_blank"><i class="fab fa-github"></i>GitHub</a><a href="#" class="footer-link scroll-to-top" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i>Top</a></div></div></div><script>function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}</script>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
