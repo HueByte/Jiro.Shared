@@ -65,7 +65,7 @@ public class SessionCommandResponseSerializationTests
 		Assert.Equal("graph", deserialized.CommandType);
 		Assert.True(deserialized.IsSuccess);
 		Assert.NotNull(deserialized.Result);
-		
+
 		// Result is deserialized as JsonElement, verify structure
 		var resultElement = (JsonElement)deserialized.Result;
 		Assert.True(resultElement.TryGetProperty("message", out var messageProperty));
