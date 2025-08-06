@@ -21,28 +21,14 @@ public class SessionCommandResponse : TrackedObject
 	public bool IsSuccess { get; set; }
 
 	/// <summary>
-	/// Gets or sets the type of command result.
+	/// Gets or sets the type of command result as a string.
+	/// Applications should use their own CommandType enum for type safety.
 	/// </summary>
-	public CommandType CommandType { get; set; }
+	public string CommandType { get; set; } = string.Empty;
 
 	/// <summary>
-	/// Gets or sets the polymorphic command result data.
+	/// Gets or sets the command result data.
+	/// Applications should cast this to their specific ICommandResult implementation.
 	/// </summary>
-	public CommandResult? Result { get; set; }
-
-	/// <summary>
-	/// Gets or sets the text type when Result is a TextResult.
-	/// This is a convenience property for backward compatibility.
-	/// </summary>
-	public TextType? TextType
-	{
-		get => (Result as TextResult)?.TextType;
-		set
-		{
-			if (Result is TextResult textResult && value.HasValue)
-			{
-				textResult.TextType = value.Value;
-			}
-		}
-	}
+	public object? Result { get; set; }
 }

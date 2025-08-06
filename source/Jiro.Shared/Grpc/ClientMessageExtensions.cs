@@ -45,7 +45,7 @@ public static class ClientMessageExtensions
 		if (textResult == null)
 			throw new ArgumentException("TextResult is null for text data type", nameof(clientMessage));
 
-		// Create response object that directly contains the data frontend expects
+		// Create response object with generic result - consuming applications will handle typed conversion
 		return new SessionCommandResponse
 		{
 			RequestId = clientMessage.RequestId,
@@ -57,11 +57,11 @@ public static class ClientMessageExtensions
 			},
 			CommandName = clientMessage.CommandName,
 			IsSuccess = clientMessage.IsSuccess,
-			CommandType = Jiro.Shared.CommandType.Text,
-			Result = new Jiro.Shared.TextResult
+			CommandType = "text",
+			Result = new
 			{
 				Response = textResult.Response,
-				TextType = ConvertTextType(textResult.TextType)
+				TextType = textResult.TextType.ToString().ToLower()
 			}
 		};
 	}
@@ -72,7 +72,7 @@ public static class ClientMessageExtensions
 		if (graphResult == null)
 			throw new ArgumentException("GraphResult is null for graph data type", nameof(clientMessage));
 
-		// Create response object that directly contains the data frontend expects
+		// Create response object with generic result - consuming applications will handle typed conversion
 		return new SessionCommandResponse
 		{
 			RequestId = clientMessage.RequestId,
@@ -84,8 +84,8 @@ public static class ClientMessageExtensions
 			},
 			CommandName = clientMessage.CommandName,
 			IsSuccess = clientMessage.IsSuccess,
-			CommandType = Jiro.Shared.CommandType.Graph,
-			Result = new Jiro.Shared.GraphResult
+			CommandType = "graph",
+			Result = new
 			{
 				Message = graphResult.Message,
 				Data = graphResult.GraphData?.ToByteArray() != null
@@ -99,16 +99,4 @@ public static class ClientMessageExtensions
 		};
 	}
 
-	private static Jiro.Shared.TextType ConvertTextType(TextType protoTextType)
-	{
-		return protoTextType switch
-		{
-			TextType.Plain => Jiro.Shared.TextType.Plain,
-			TextType.Json => Jiro.Shared.TextType.Json,
-			TextType.Base64 => Jiro.Shared.TextType.Base64,
-			TextType.Markdown => Jiro.Shared.TextType.Markdown,
-			TextType.Html => Jiro.Shared.TextType.Html,
-			_ => Jiro.Shared.TextType.Plain
-		};
-	}
 }

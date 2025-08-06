@@ -5,6 +5,7 @@ Welcome to the Jiro.Shared changelog. This section contains detailed information
 ## Available Versions
 
 <!-- Newest first -->
+- **[v1.4.3 "Seiri"](v1.4.3.md)** - Organization & cleanup with code deduplication and serialization fixes
 - **[v1.4.2 "Nagare"](v1.4.2.md)** - Flow enhancement with comprehensive streaming support for chat, logs, and word-by-word content
 - **[v1.4.1 "Kaizen"](v1.4.1.md)** - Continuous improvement with performance optimizations and bug fixes
 - **[v1.4.0 "Shinpo"](v1.4.0.md)** - Advanced progress with enhanced features and architectural improvements
