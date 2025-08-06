@@ -35,7 +35,7 @@ public interface IJiroInstance
 	/// <summary>
 	/// Event fired when a command is received from the server
 	/// </summary>
-	public event Func<CommandMessage, Task>? CommandReceived;
+	public event Func<CommandMessage, Task<ActionResult>>? CommandReceived;
 
 	#endregion
 

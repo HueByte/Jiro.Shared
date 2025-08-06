@@ -54,7 +54,7 @@ public abstract class JiroInstanceBase : IJiroInstance
 	/// <summary>
 	/// Event fired when a command is received from the server
 	/// </summary>
-	public event Func<CommandMessage, Task>? CommandReceived;
+	public event Func<CommandMessage, Task<ActionResult>>? CommandReceived;
 
 	#endregion
 
@@ -166,12 +166,11 @@ public abstract class JiroInstanceBase : IJiroInstance
 				await Reconnected(connectionId);
 		};
 
-		// Fire-and-forget notifications
-		_hubConnection.OnNotification<CommandMessage>(Events.CommandReceived, async command =>
-		{
-			if (CommandReceived != null)
-				await CommandReceived(command);
-		}, _logger);
+		// Command execution (server expects return value)
+		_hubConnection.OnRequest<CommandMessage, ActionResult>(
+			Events.CommandReceived,
+			async command => await CommandReceived!(command),
+			_logger);
 
 		// RPC-style calls (server expects return value)
 		_hubConnection.OnRequest<GetLogsRequest, LogsResponse>(
