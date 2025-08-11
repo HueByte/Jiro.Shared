@@ -114,7 +114,17 @@ public class TaskManager : IInstanceTaskManager, IDisposable
 	{
 		if (_disposed) return;
 
-		_ = PerformHealthCheckAsync();
+		_ = Task.Run(async () =>
+		{
+			try
+			{
+				await PerformHealthCheckAsync();
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "Unhandled exception in health check background task");
+			}
+		});
 	}
 
 	/// <summary>
@@ -280,7 +290,17 @@ public class TaskManager : IInstanceTaskManager, IDisposable
 	{
 		if (_disposed) return;
 
-		_ = ProcessQueueAsync();
+		_ = Task.Run(async () =>
+		{
+			try
+			{
+				await ProcessQueueAsync();
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "Unhandled exception in queue processing background task");
+			}
+		});
 	}
 
 	/// <summary>
@@ -703,10 +723,27 @@ public class TaskManager : IInstanceTaskManager, IDisposable
 		{
 			await Task.Delay(_defaultTimeout).ConfigureAwait(false);
 
-			if (_pendingStreams.TryRemove(requestId, out var removedTask))
+			// Use lock-free coordination to prevent race conditions
+			if (_pendingStreams.TryGetValue(requestId, out var streamTask) &&
+				_pendingStreams.TryRemove(requestId, out _))
 			{
 				_logger.LogWarning("Channel stream request [{Request}] timed out after {Timeout}s", requestId, _defaultTimeout.TotalSeconds);
+
+				// Complete the channel writer with timeout exception
 				writer.TryComplete(new TimeoutException($"Stream request '{requestId}' timed out after {_defaultTimeout.TotalSeconds}s"));
+
+				// Dispose the stream task if it implements IDisposable
+				if (streamTask is IDisposable disposable)
+				{
+					try
+					{
+						disposable.Dispose();
+					}
+					catch (Exception disposeEx)
+					{
+						_logger.LogWarning(disposeEx, "Error disposing timed out stream [{Request}]", requestId);
+					}
+				}
 			}
 		}
 		catch (Exception ex)
@@ -721,20 +758,46 @@ public class TaskManager : IInstanceTaskManager, IDisposable
 
 	/// <summary>
 	/// Cleans up all resources associated with a stream request.
+	/// Coordinates with timeout monitor to prevent race conditions.
 	/// </summary>
 	private async Task CleanupStreamRequest(string requestId)
 	{
 		try
 		{
-			_pendingStreams.TryRemove(requestId, out _);
+			// Remove stream first, then handle monitor cleanup
+			if (_pendingStreams.TryRemove(requestId, out var removedStream))
+			{
+				// Dispose the stream if it implements IDisposable
+				if (removedStream is IDisposable disposable)
+				{
+					try
+					{
+						disposable.Dispose();
+					}
+					catch (Exception disposeEx)
+					{
+						_logger.LogWarning(disposeEx, "Error disposing stream during cleanup [{Request}]", requestId);
+					}
+				}
+			}
+
+			// Clean up timeout monitor if it exists
 			if (_timeoutMonitors.TryRemove(requestId, out var monitor))
 			{
 				try
 				{
-					await monitor.ConfigureAwait(false);
+					// Give monitor a chance to complete, but don't wait indefinitely
+					var timeout = Task.Delay(TimeSpan.FromSeconds(2));
+					var completed = await Task.WhenAny(monitor, timeout);
+
+					if (completed == timeout)
+					{
+						_logger.LogWarning("Timeout monitor for [{Request}] did not complete within cleanup timeout", requestId);
+					}
 				}
-				catch
+				catch (Exception monitorEx)
 				{
+					_logger.LogWarning(monitorEx, "Error waiting for timeout monitor during cleanup [{Request}]", requestId);
 				}
 			}
 		}
@@ -787,16 +850,14 @@ public class TaskManager : IInstanceTaskManager, IDisposable
 				}
 			}
 
+			// Complete successfully after all data is written
 			channelStreamTask.Writer.TryComplete();
 		}
 		catch (Exception ex)
 		{
 			_logger.LogError(ex, "Error copying channel stream for request {RequestId}", requestId);
 			channelStreamTask.Writer.TryComplete(ex);
-		}
-		finally
-		{
-			await CleanupStreamRequest(requestId);
+			throw;
 		}
 	}
 
@@ -873,17 +934,29 @@ public class TaskManager : IInstanceTaskManager, IDisposable
 		CancellationToken cancellationToken)
 		where TResponse : TrackedObject
 	{
-		using var cts = cancellationToken == default
-			? new CancellationTokenSource(_defaultTimeout)
-			: CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+		if (cancellationToken == default)
+		{
+			using var cts = new CancellationTokenSource(_defaultTimeout);
+			var delay = Task.Delay(_defaultTimeout, cts.Token);
+			var completed = await Task.WhenAny(responseTask, delay).ConfigureAwait(false);
+			if (completed != responseTask)
+				throw new TimeoutException($"'{requestId}' timed out after {_defaultTimeout.TotalSeconds}s");
 
-		var delay = Task.Delay(_defaultTimeout, cts.Token);
-		var completed = await Task.WhenAny(responseTask, delay).ConfigureAwait(false);
-		if (completed != responseTask)
-			throw new TimeoutException($"'{requestId}' timed out after {_defaultTimeout.TotalSeconds}s");
+			cts.Cancel();
+			return (TResponse)await responseTask.ConfigureAwait(false);
+		}
+		else
+		{
+			using var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+			cts.CancelAfter(_defaultTimeout);
 
-		cts.Cancel();
-		return (TResponse)await responseTask.ConfigureAwait(false);
+			var delay = Task.Delay(_defaultTimeout, cts.Token);
+			var completed = await Task.WhenAny(responseTask, delay).ConfigureAwait(false);
+			if (completed != responseTask)
+				throw new TimeoutException($"'{requestId}' timed out after {_defaultTimeout.TotalSeconds}s");
+
+			return (TResponse)await responseTask.ConfigureAwait(false);
+		}
 	}
 
 	#endregion

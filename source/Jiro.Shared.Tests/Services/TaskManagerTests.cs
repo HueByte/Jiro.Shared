@@ -201,21 +201,15 @@ public class TaskManagerTests
 
 		Assert.True(actionCalled);
 
-		// Write test data to source channel in background
-		var writeTask = Task.Run(async () =>
+		// Write test data to source channel first, then set the result
+		foreach (var item in testData)
 		{
-			foreach (var item in testData)
-			{
-				await writer.WriteAsync(item);
-			}
-			writer.Complete();
-		});
+			await writer.WriteAsync(item);
+		}
+		writer.Complete();
 
 		// Simulate setting the channel result
 		await taskManager.SetChannelStreamResultAsync(requestId, sourceChannel.Reader);
-
-		// Wait for writing to complete
-		await writeTask;
 
 		// Get the buffered channel reader
 		var resultReader = await channelTask;
