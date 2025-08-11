@@ -1,0 +1,1196 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class ClientMessage | Jiro.Shared Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class ClientMessage | Jiro.Shared Documentation ">
+      
+      <meta name="description" content="ClientMessage Represents a command execution result sent from Jiro instances Contains command details, execution status, and the actual result data">
+      <link rel="icon" href="../assets/Jiro-Icon.png">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/HueByte/Jiro.Shared/new/main/apiSpec/new?filename=Jiro_Shared_Grpc_ClientMessage.md&amp;value=---%0Auid%3A%20Jiro.Shared.Grpc.ClientMessage%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../assets/Jiro-Icon.png" alt="Jiro.Shared">
+            Jiro.Shared
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Jiro.Shared.Grpc.ClientMessage">
+
+
+
+  <h1 id="Jiro_Shared_Grpc_ClientMessage" data-uid="Jiro.Shared.Grpc.ClientMessage" class="text-break">
+Class ClientMessage  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L146"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Jiro.html">Jiro</a>.<a class="xref" href="Jiro.Shared.html">Shared</a>.<a class="xref" href="Jiro.Shared.Grpc.html">Grpc</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Jiro.Shared.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>ClientMessage
+Represents a command execution result sent from Jiro instances
+Contains command details, execution status, and the actual result data</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class ClientMessage : IMessage&lt;ClientMessage&gt;, IEquatable&lt;ClientMessage&gt;, IDeepCloneable&lt;ClientMessage&gt;, IBufferMessage, IMessage</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">ClientMessage</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><span class="xref">IMessage</span>&lt;<a class="xref" href="Jiro.Shared.Grpc.ClientMessage.html">ClientMessage</a>&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="Jiro.Shared.Grpc.ClientMessage.html">ClientMessage</a>&gt;</div>
+      <div><span class="xref">IDeepCloneable</span>&lt;<a class="xref" href="Jiro.Shared.Grpc.ClientMessage.html">ClientMessage</a>&gt;</div>
+      <div><span class="xref">IBufferMessage</span></div>
+      <div><span class="xref">IMessage</span></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Jiro.Shared.Grpc.ClientMessageExtensions.html#Jiro_Shared_Grpc_ClientMessageExtensions_ToTrackedObject_Jiro_Shared_Grpc_ClientMessage_">ClientMessageExtensions.ToTrackedObject(ClientMessage)</a>
+  </div>
+  <div>
+      <a class="xref" href="Jiro.Shared.Grpc.ClientMessageExtensions.html#Jiro_Shared_Grpc_ClientMessageExtensions_ToTrackedObject_Jiro_Shared_Grpc_ClientMessage_System_String_">ClientMessageExtensions.ToTrackedObject(ClientMessage, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Jiro_Shared_Grpc_ClientMessage__ctor_" data-uid="Jiro.Shared.Grpc.ClientMessage.#ctor*"></a>
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage__ctor" data-uid="Jiro.Shared.Grpc.ClientMessage.#ctor">
+  ClientMessage()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L170"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ClientMessage()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Grpc_ClientMessage__ctor_" data-uid="Jiro.Shared.Grpc.ClientMessage.#ctor*"></a>
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage__ctor_Jiro_Shared_Grpc_ClientMessage_" data-uid="Jiro.Shared.Grpc.ClientMessage.#ctor(Jiro.Shared.Grpc.ClientMessage)">
+  ClientMessage(ClientMessage)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L178"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ClientMessage(ClientMessage other)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>other</code> <a class="xref" href="Jiro.Shared.Grpc.ClientMessage.html">ClientMessage</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_CommandNameFieldNumber" data-uid="Jiro.Shared.Grpc.ClientMessage.CommandNameFieldNumber">
+  CommandNameFieldNumber
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L206"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Field number for the &quot;commandName&quot; field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int CommandNameFieldNumber = 1</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_DataTypeFieldNumber" data-uid="Jiro.Shared.Grpc.ClientMessage.DataTypeFieldNumber">
+  DataTypeFieldNumber
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L221"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Field number for the &quot;dataType&quot; field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int DataTypeFieldNumber = 2</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_GraphResultFieldNumber" data-uid="Jiro.Shared.Grpc.ClientMessage.GraphResultFieldNumber">
+  GraphResultFieldNumber
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L251"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Field number for the &quot;graphResult&quot; field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int GraphResultFieldNumber = 4</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_IsSuccessFieldNumber" data-uid="Jiro.Shared.Grpc.ClientMessage.IsSuccessFieldNumber">
+  IsSuccessFieldNumber
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L266"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Field number for the &quot;isSuccess&quot; field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int IsSuccessFieldNumber = 5</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_ParametersFieldNumber" data-uid="Jiro.Shared.Grpc.ClientMessage.ParametersFieldNumber">
+  ParametersFieldNumber
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L296"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Field number for the &quot;parameters&quot; field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int ParametersFieldNumber = 7</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_RequestIdFieldNumber" data-uid="Jiro.Shared.Grpc.ClientMessage.RequestIdFieldNumber">
+  RequestIdFieldNumber
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L281"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Field number for the &quot;RequestId&quot; field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int RequestIdFieldNumber = 6</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_SessionIdFieldNumber" data-uid="Jiro.Shared.Grpc.ClientMessage.SessionIdFieldNumber">
+  SessionIdFieldNumber
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L310"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Field number for the &quot;sessionId&quot; field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int SessionIdFieldNumber = 8</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_TextResultFieldNumber" data-uid="Jiro.Shared.Grpc.ClientMessage.TextResultFieldNumber">
+  TextResultFieldNumber
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L236"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Field number for the &quot;textResult&quot; field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int TextResultFieldNumber = 3</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Jiro_Shared_Grpc_ClientMessage_CommandName_" data-uid="Jiro.Shared.Grpc.ClientMessage.CommandName*"></a>
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_CommandName" data-uid="Jiro.Shared.Grpc.ClientMessage.CommandName">
+  CommandName
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L211"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Name of the executed command</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string CommandName { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Grpc_ClientMessage_DataType_" data-uid="Jiro.Shared.Grpc.ClientMessage.DataType*"></a>
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_DataType" data-uid="Jiro.Shared.Grpc.ClientMessage.DataType">
+  DataType
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L226"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Type of result data (text or graph)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DataType DataType { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Jiro.Shared.Grpc.DataType.html">DataType</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Grpc_ClientMessage_Descriptor_" data-uid="Jiro.Shared.Grpc.ClientMessage.Descriptor*"></a>
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_Descriptor" data-uid="Jiro.Shared.Grpc.ClientMessage.Descriptor">
+  Descriptor
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L158"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static MessageDescriptor Descriptor { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">MessageDescriptor</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Grpc_ClientMessage_GraphResult_" data-uid="Jiro.Shared.Grpc.ClientMessage.GraphResult*"></a>
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_GraphResult" data-uid="Jiro.Shared.Grpc.ClientMessage.GraphResult">
+  GraphResult
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L255"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Graph-based command output</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphResult GraphResult { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Jiro.Shared.Grpc.GraphResult.html">GraphResult</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Grpc_ClientMessage_IsSuccess_" data-uid="Jiro.Shared.Grpc.ClientMessage.IsSuccess*"></a>
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_IsSuccess" data-uid="Jiro.Shared.Grpc.ClientMessage.IsSuccess">
+  IsSuccess
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L271"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Whether command executed successfully</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsSuccess { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Grpc_ClientMessage_Parameters_" data-uid="Jiro.Shared.Grpc.ClientMessage.Parameters*"></a>
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_Parameters" data-uid="Jiro.Shared.Grpc.ClientMessage.Parameters">
+  Parameters
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L303"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Command parameters as key-value pairs</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RepeatedField&lt;Pair&gt; Parameters { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">RepeatedField</span>&lt;<a class="xref" href="Jiro.Shared.Grpc.Pair.html">Pair</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Grpc_ClientMessage_Parser_" data-uid="Jiro.Shared.Grpc.ClientMessage.Parser*"></a>
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_Parser" data-uid="Jiro.Shared.Grpc.ClientMessage.Parser">
+  Parser
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L154"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static MessageParser&lt;ClientMessage&gt; Parser { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">MessageParser</span>&lt;<a class="xref" href="Jiro.Shared.Grpc.ClientMessage.html">ClientMessage</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Grpc_ClientMessage_RequestId_" data-uid="Jiro.Shared.Grpc.ClientMessage.RequestId*"></a>
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_RequestId" data-uid="Jiro.Shared.Grpc.ClientMessage.RequestId">
+  RequestId
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L286"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Unique identifier for command synchronization</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string RequestId { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Grpc_ClientMessage_ResultCase_" data-uid="Jiro.Shared.Grpc.ClientMessage.ResultCase*"></a>
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_ResultCase" data-uid="Jiro.Shared.Grpc.ClientMessage.ResultCase">
+  ResultCase
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L332"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ClientMessage.ResultOneofCase ResultCase { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Jiro.Shared.Grpc.ClientMessage.html">ClientMessage</a>.<a class="xref" href="Jiro.Shared.Grpc.ClientMessage.ResultOneofCase.html">ResultOneofCase</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Grpc_ClientMessage_SessionId_" data-uid="Jiro.Shared.Grpc.ClientMessage.SessionId*"></a>
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_SessionId" data-uid="Jiro.Shared.Grpc.ClientMessage.SessionId">
+  SessionId
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L315"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Session identifier for context</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string SessionId { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Grpc_ClientMessage_TextResult_" data-uid="Jiro.Shared.Grpc.ClientMessage.TextResult*"></a>
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_TextResult" data-uid="Jiro.Shared.Grpc.ClientMessage.TextResult">
+  TextResult
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L240"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Text-based command output</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TextResult TextResult { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Jiro.Shared.Grpc.TextResult.html">TextResult</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Jiro_Shared_Grpc_ClientMessage_CalculateSize_" data-uid="Jiro.Shared.Grpc.ClientMessage.CalculateSize*"></a>
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_CalculateSize" data-uid="Jiro.Shared.Grpc.ClientMessage.CalculateSize">
+  CalculateSize()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L477"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the size of this message in Protocol Buffer wire format, in bytes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CalculateSize()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The number of bytes required to write this message
+to a coded output stream.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Grpc_ClientMessage_ClearResult_" data-uid="Jiro.Shared.Grpc.ClientMessage.ClearResult*"></a>
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_ClearResult" data-uid="Jiro.Shared.Grpc.ClientMessage.ClearResult">
+  ClearResult()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L338"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearResult()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Grpc_ClientMessage_Clone_" data-uid="Jiro.Shared.Grpc.ClientMessage.Clone*"></a>
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_Clone" data-uid="Jiro.Shared.Grpc.ClientMessage.Clone">
+  Clone()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L199"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a deep clone of this object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ClientMessage Clone()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Jiro.Shared.Grpc.ClientMessage.html">ClientMessage</a></dt>
+    <dd><p>A deep clone of this object.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Grpc_ClientMessage_Equals_" data-uid="Jiro.Shared.Grpc.ClientMessage.Equals*"></a>
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_Equals_Jiro_Shared_Grpc_ClientMessage_" data-uid="Jiro.Shared.Grpc.ClientMessage.Equals(Jiro.Shared.Grpc.ClientMessage)">
+  Equals(ClientMessage)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L351"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Indicates whether the current object is equal to another object of the same type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(ClientMessage other)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>other</code> <a class="xref" href="Jiro.Shared.Grpc.ClientMessage.html">ClientMessage</a></dt>
+    <dd><p>An object to compare with this object.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the current object is equal to the <code class="paramref">other</code> parameter; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Grpc_ClientMessage_Equals_" data-uid="Jiro.Shared.Grpc.ClientMessage.Equals*"></a>
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_Equals_System_Object_" data-uid="Jiro.Shared.Grpc.ClientMessage.Equals(System.Object)">
+  Equals(object)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L345"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines whether the specified object is equal to the current object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object other)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>other</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the specified object  is equal to the current object; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Grpc_ClientMessage_GetHashCode_" data-uid="Jiro.Shared.Grpc.ClientMessage.GetHashCode*"></a>
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_GetHashCode" data-uid="Jiro.Shared.Grpc.ClientMessage.GetHashCode">
+  GetHashCode()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L372"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Serves as the default hash function.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>A hash code for the current object.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Grpc_ClientMessage_MergeFrom_" data-uid="Jiro.Shared.Grpc.ClientMessage.MergeFrom*"></a>
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_MergeFrom_Google_Protobuf_CodedInputStream_" data-uid="Jiro.Shared.Grpc.ClientMessage.MergeFrom(Google.Protobuf.CodedInputStream)">
+  MergeFrom(CodedInputStream)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L549"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Merges the data from the specified coded input stream with the current message.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MergeFrom(CodedInputStream input)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>input</code> <span class="xref">CodedInputStream</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section" id="Jiro_Shared_Grpc_ClientMessage_MergeFrom_Google_Protobuf_CodedInputStream__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>See the user guide for precise merge semantics.</p>
+</div>
+
+
+
+
+  <a id="Jiro_Shared_Grpc_ClientMessage_MergeFrom_" data-uid="Jiro.Shared.Grpc.ClientMessage.MergeFrom*"></a>
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_MergeFrom_Jiro_Shared_Grpc_ClientMessage_" data-uid="Jiro.Shared.Grpc.ClientMessage.MergeFrom(Jiro.Shared.Grpc.ClientMessage)">
+  MergeFrom(ClientMessage)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L509"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Merges the given message into this one.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MergeFrom(ClientMessage other)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>other</code> <a class="xref" href="Jiro.Shared.Grpc.ClientMessage.html">ClientMessage</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section" id="Jiro_Shared_Grpc_ClientMessage_MergeFrom_Jiro_Shared_Grpc_ClientMessage__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>See the user guide for precise merge semantics.</p>
+</div>
+
+
+
+
+  <a id="Jiro_Shared_Grpc_ClientMessage_ToString_" data-uid="Jiro.Shared.Grpc.ClientMessage.ToString*"></a>
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_ToString" data-uid="Jiro.Shared.Grpc.ClientMessage.ToString">
+  ToString()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L391"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns a string that represents the current object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A string that represents the current object.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Grpc_ClientMessage_WriteTo_" data-uid="Jiro.Shared.Grpc.ClientMessage.WriteTo*"></a>
+
+  <h3 id="Jiro_Shared_Grpc_ClientMessage_WriteTo_Google_Protobuf_CodedOutputStream_" data-uid="Jiro.Shared.Grpc.ClientMessage.WriteTo(Google.Protobuf.CodedOutputStream)">
+  WriteTo(CodedOutputStream)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L397"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Writes the data to the given coded output stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void WriteTo(CodedOutputStream output)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>output</code> <span class="xref">CodedOutputStream</span></dt>
+    <dd><p>Coded output stream to write the data to. Must not be null.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/obj/Release/net9.0/Grpc/JiroHub.cs/#L146" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="footer-custom"><div class="footer-inner d-flex justify-content-between align-items-center"><div class="footer-text">Made with <strong>💖</strong> By HueByte</div><div class="footer-links"><a href="https://github.com/HueByte/Jiro.Shared" class="footer-link" target="_blank"><i class="fab fa-github"></i>GitHub</a><a href="#" class="footer-link scroll-to-top" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i>Top</a></div></div></div><script>function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}</script>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

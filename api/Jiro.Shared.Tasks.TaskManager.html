@@ -1,0 +1,617 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class TaskManager | Jiro.Shared Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class TaskManager | Jiro.Shared Documentation ">
+      
+      <meta name="description" content="Manages asynchronous tasks and streaming operations with timeout monitoring, queueing, and resource limits. Provides thread-safe execution of fire-and-forget dispatches with external result completion.">
+      <link rel="icon" href="../assets/Jiro-Icon.png">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/HueByte/Jiro.Shared/new/main/apiSpec/new?filename=Jiro_Shared_Tasks_TaskManager.md&amp;value=---%0Auid%3A%20Jiro.Shared.Tasks.TaskManager%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../assets/Jiro-Icon.png" alt="Jiro.Shared">
+            Jiro.Shared
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Jiro.Shared.Tasks.TaskManager">
+
+
+
+  <h1 id="Jiro_Shared_Tasks_TaskManager" data-uid="Jiro.Shared.Tasks.TaskManager" class="text-break">
+Class TaskManager  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Tasks/TaskManager.cs/#L49"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Jiro.html">Jiro</a>.<a class="xref" href="Jiro.Shared.html">Shared</a>.<a class="xref" href="Jiro.Shared.Tasks.html">Tasks</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Jiro.Shared.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Manages asynchronous tasks and streaming operations with timeout monitoring, queueing, and resource limits.
+Provides thread-safe execution of fire-and-forget dispatches with external result completion.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class TaskManager : IInstanceTaskManager, ITaskManager, IDisposable</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">TaskManager</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="Jiro.Shared.Tasks.IInstanceTaskManager.html">IInstanceTaskManager</a></div>
+      <div><a class="xref" href="Jiro.Shared.Tasks.ITaskManager.html">ITaskManager</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+  <h2 id="Jiro_Shared_Tasks_TaskManager_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>The TaskManager supports two primary operation modes:</p>
+<ul><li>Regular Tasks: Fire-and-forget execution with external result completion via <a class="xref" href="Jiro.Shared.Tasks.TaskManager.html#Jiro_Shared_Tasks_TaskManager_SetTaskResult__1_System_String___0_">SetTaskResult&lt;TResponse&gt;(string, TResponse)</a></li><li>Stream Tasks: Channel-based streaming with real-time data flow via <a class="xref" href="Jiro.Shared.Tasks.TaskManager.html#Jiro_Shared_Tasks_TaskManager_SetChannelStreamResultAsync__1_System_String_System_Threading_Channels_ChannelReader___0__">SetChannelStreamResultAsync&lt;TResult&gt;(string, ChannelReader&lt;TResult&gt;)</a></li></ul>
+<p>Example usage for regular tasks:</p>
+<pre><code class="lang-csharp">// Execute a command and wait for external result
+var result = await taskManager.ExternalExecuteAsync&lt;CommandResult&gt;(
+    instanceId: "instance-1",
+    requestId: "req-123",
+    dispatchAsync: () =&gt; hubContext.Clients.Group(instanceId).SendAsync("ExecuteCommand", command),
+    cancellationToken: cancellationToken);
+<p>// Later, when the external service receives the result:
+taskManager.SetTaskResult(&quot;req-123&quot;, commandResult);</p></code></pre>
+<p>Example usage for streaming:</p>
+<pre><code class="lang-csharp">// Start a streaming operation
+var reader = await taskManager.GetChannelStreamResponseAsync&lt;StreamItem&gt;(
+    instanceId: "instance-1",
+    connectionId: "conn-456",
+    requestId: "stream-789",
+    streamInvoker: () =&gt; hubContext.Clients.Client(connectionId).SendAsync("StartStream", parameters));
+<p>// Consume the stream
+await foreach (var item in reader.ReadAllAsync())
+{
+ProcessStreamItem(item);
+}</p></code></pre>
+</div>
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Jiro_Shared_Tasks_TaskManager__ctor_" data-uid="Jiro.Shared.Tasks.TaskManager.#ctor*"></a>
+
+  <h3 id="Jiro_Shared_Tasks_TaskManager__ctor_Microsoft_Extensions_Logging_ILogger_Jiro_Shared_Tasks_TaskManager__Microsoft_Extensions_Options_IOptions_Jiro_Shared_Tasks_TaskManagerOptions__" data-uid="Jiro.Shared.Tasks.TaskManager.#ctor(Microsoft.Extensions.Logging.ILogger{Jiro.Shared.Tasks.TaskManager},Microsoft.Extensions.Options.IOptions{Jiro.Shared.Tasks.TaskManagerOptions})">
+  TaskManager(ILogger&lt;TaskManager&gt;, IOptions&lt;TaskManagerOptions&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Tasks/TaskManager.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a new instance of the TaskManager with the specified configuration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TaskManager(ILogger&lt;TaskManager&gt; logger, IOptions&lt;TaskManagerOptions&gt; options)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>logger</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1">ILogger</a>&lt;<a class="xref" href="Jiro.Shared.Tasks.TaskManager.html">TaskManager</a>&gt;</dt>
+    <dd><p>Logger instance for diagnostics and monitoring.</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.options.ioptions-1">IOptions</a>&lt;<a class="xref" href="Jiro.Shared.Tasks.TaskManagerOptions.html">TaskManagerOptions</a>&gt;</dt>
+    <dd><p>Configuration options for task management behavior.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
+    <dd><p>Thrown when logger or options is null.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
+    <dd><p>Thrown when options validation fails.</p>
+</dd>
+  </dl>
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Jiro_Shared_Tasks_TaskManager_CancelTask_" data-uid="Jiro.Shared.Tasks.TaskManager.CancelTask*"></a>
+
+  <h3 id="Jiro_Shared_Tasks_TaskManager_CancelTask_System_String_" data-uid="Jiro.Shared.Tasks.TaskManager.CancelTask(System.String)">
+  CancelTask(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Tasks/TaskManager.cs/#L876"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Cancels a pending task with the specified request identifier.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CancelTask(string requestId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>requestId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique identifier of the request to cancel.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section" id="Jiro_Shared_Tasks_TaskManager_CancelTask_System_String__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>If the request exists, its TaskCompletionSource will be set to canceled state.
+If no pending request is found, a warning is logged but no exception is thrown.</p>
+</div>
+
+
+
+
+  <a id="Jiro_Shared_Tasks_TaskManager_Dispose_" data-uid="Jiro.Shared.Tasks.TaskManager.Dispose*"></a>
+
+  <h3 id="Jiro_Shared_Tasks_TaskManager_Dispose" data-uid="Jiro.Shared.Tasks.TaskManager.Dispose">
+  Dispose()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Tasks/TaskManager.cs/#L966"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Tasks_TaskManager_ExecuteAsync_" data-uid="Jiro.Shared.Tasks.TaskManager.ExecuteAsync*"></a>
+
+  <h3 id="Jiro_Shared_Tasks_TaskManager_ExecuteAsync__1_System_String_System_String_System_Func_System_Threading_Tasks_Task___0___System_Threading_CancellationToken_" data-uid="Jiro.Shared.Tasks.TaskManager.ExecuteAsync``1(System.String,System.String,System.Func{System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
+  ExecuteAsync&lt;TResponse&gt;(string, string, Func&lt;Task&lt;TResponse&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Tasks/TaskManager.cs/#L546"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Executes a dispatch that immediately returns a value and optionally waits for an external response.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;TResponse&gt; ExecuteAsync&lt;TResponse&gt;(string instanceId, string requestId, Func&lt;Task&lt;TResponse&gt;&gt; dispatchAsync, CancellationToken cancellationToken = default) where TResponse : TrackedObject</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instanceId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>requestId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>dispatchAsync</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TResponse&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TResponse&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TResponse</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Tasks_TaskManager_ExternalExecuteAsync_" data-uid="Jiro.Shared.Tasks.TaskManager.ExternalExecuteAsync*"></a>
+
+  <h3 id="Jiro_Shared_Tasks_TaskManager_ExternalExecuteAsync__1_System_String_System_String_System_Func_System_Threading_Tasks_Task__System_Threading_CancellationToken_" data-uid="Jiro.Shared.Tasks.TaskManager.ExternalExecuteAsync``1(System.String,System.String,System.Func{System.Threading.Tasks.Task},System.Threading.CancellationToken)">
+  ExternalExecuteAsync&lt;TResponse&gt;(string, string, Func&lt;Task&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Tasks/TaskManager.cs/#L533"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Executes a fire-and-forget dispatch and waits for an external response.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;TResponse&gt; ExternalExecuteAsync&lt;TResponse&gt;(string instanceId, string requestId, Func&lt;Task&gt; dispatchAsync, CancellationToken cancellationToken = default) where TResponse : TrackedObject</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instanceId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>requestId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>dispatchAsync</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TResponse&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TResponse</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Tasks_TaskManager_GetChannelStreamResponseAsync_" data-uid="Jiro.Shared.Tasks.TaskManager.GetChannelStreamResponseAsync*"></a>
+
+  <h3 id="Jiro_Shared_Tasks_TaskManager_GetChannelStreamResponseAsync__1_System_String_System_String_System_String_System_Func_System_Threading_Tasks_Task__System_Threading_CancellationToken_" data-uid="Jiro.Shared.Tasks.TaskManager.GetChannelStreamResponseAsync``1(System.String,System.String,System.String,System.Func{System.Threading.Tasks.Task},System.Threading.CancellationToken)">
+  GetChannelStreamResponseAsync&lt;TResult&gt;(string, string, string, Func&lt;Task&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Tasks/TaskManager.cs/#L661"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a channel-based stream response asynchronously for the specified request.
+This method creates a buffered channel that will be populated by SetChannelStreamResultAsync.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;ChannelReader&lt;TResult&gt;&gt; GetChannelStreamResponseAsync&lt;TResult&gt;(string instanceId, string connectionId, string requestId, Func&lt;Task&gt; streamInvoker, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instanceId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>connectionId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>requestId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>streamInvoker</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.channels.channelreader-1">ChannelReader</a>&lt;TResult&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TResult</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Tasks_TaskManager_GetRequestInstanceId_" data-uid="Jiro.Shared.Tasks.TaskManager.GetRequestInstanceId*"></a>
+
+  <h3 id="Jiro_Shared_Tasks_TaskManager_GetRequestInstanceId_System_String_" data-uid="Jiro.Shared.Tasks.TaskManager.GetRequestInstanceId(System.String)">
+  GetRequestInstanceId(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Tasks/TaskManager.cs/#L899"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Retrieves the instance identifier associated with a pending request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetRequestInstanceId(string requestId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>requestId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique identifier of the request.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The instance identifier associated with the specified request.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Jiro_Shared_Tasks_TaskManager_GetRequestInstanceId_System_String__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This method only works for regular tasks managed via ExternalExecuteAsync or ExecuteAsync.
+Stream requests are managed separately and will not be found by this method.</p>
+</div>
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></dt>
+    <dd><p>Thrown when no pending request exists for the specified requestId.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Jiro_Shared_Tasks_TaskManager_SetChannelStreamResultAsync_" data-uid="Jiro.Shared.Tasks.TaskManager.SetChannelStreamResultAsync*"></a>
+
+  <h3 id="Jiro_Shared_Tasks_TaskManager_SetChannelStreamResultAsync__1_System_String_System_Threading_Channels_ChannelReader___0__" data-uid="Jiro.Shared.Tasks.TaskManager.SetChannelStreamResultAsync``1(System.String,System.Threading.Channels.ChannelReader{``0})">
+  SetChannelStreamResultAsync&lt;TResult&gt;(string, ChannelReader&lt;TResult&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Tasks/TaskManager.cs/#L815"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sets the channel stream result from a ChannelReader provided by the client.
+This method copies data from the provided ChannelReader to the internal buffered channel
+to ensure data is available when the consumer reads it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task SetChannelStreamResultAsync&lt;TResult&gt;(string requestId, ChannelReader&lt;TResult&gt; reader)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>requestId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>reader</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.channels.channelreader-1">ChannelReader</a>&lt;TResult&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TResult</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Jiro_Shared_Tasks_TaskManager_SetTaskResult_" data-uid="Jiro.Shared.Tasks.TaskManager.SetTaskResult*"></a>
+
+  <h3 id="Jiro_Shared_Tasks_TaskManager_SetTaskResult__1_System_String___0_" data-uid="Jiro.Shared.Tasks.TaskManager.SetTaskResult``1(System.String,``0)">
+  SetTaskResult&lt;TResponse&gt;(string, TResponse)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Tasks/TaskManager.cs/#L635"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sets the result for a pending task, typically called by external systems (e.g., external services, SignalR hubs).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetTaskResult&lt;TResponse&gt;(string requestId, TResponse result) where TResponse : TrackedObject</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>requestId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique identifier of the pending request.</p>
+</dd>
+    <dt><code>result</code> <span class="xref">TResponse</span></dt>
+    <dd><p>The result object to set for the pending task.</p>
+</dd>
+  </dl>
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TResponse</code></dt>
+    <dd><p>The type of the response object, must inherit from TrackedObject.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="Jiro_Shared_Tasks_TaskManager_SetTaskResult__1_System_String___0__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This method assigns the requestId to the result object and completes the associated TaskCompletionSource.
+If no pending task exists for the requestId, a warning is logged but no exception is thrown.
+This is used for regular request-response patterns, not for stream operations.</p>
+</div>
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/HueByte/Jiro.Shared/blob/main/source/Jiro.Shared/Tasks/TaskManager.cs/#L49" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="footer-custom"><div class="footer-inner d-flex justify-content-between align-items-center"><div class="footer-text">Made with <strong>💖</strong> By HueByte</div><div class="footer-links"><a href="https://github.com/HueByte/Jiro.Shared" class="footer-link" target="_blank"><i class="fab fa-github"></i>GitHub</a><a href="#" class="footer-link scroll-to-top" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i>Top</a></div></div></div><script>function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}</script>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

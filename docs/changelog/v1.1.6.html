@@ -1,0 +1,221 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>v1.1.6 &quot;Shinpo&quot; - Progress Enhancement | Jiro.Shared Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="v1.1.6 &quot;Shinpo&quot; - Progress Enhancement | Jiro.Shared Documentation ">
+      
+      
+      <link rel="icon" href="../../assets/Jiro-Icon.png">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/HueByte/Jiro.Shared/blob/main/dev/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../assets/Jiro-Icon.png" alt="Jiro.Shared">
+            Jiro.Shared
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="v116-shinpo---progress-enhancement">v1.1.6 &quot;Shinpo&quot; - Progress Enhancement</h1>
+
+<p><strong>Release Date</strong>: July 22, 2025<br>
+<strong>Code Name</strong>: &quot;Shinpo&quot; (進歩 - Progress/Advancement)<br>
+<strong>Type</strong>: Minor Release</p>
+<hr>
+<h2 id="-overview">🎯 Overview</h2>
+<p>Version 1.1.6 enhances the JiroClientBase foundation with improved connection handling, thread safety, and enhanced logging capabilities. This release focuses on making client implementations more robust and production-ready with better error handling and connection lifecycle management.</p>
+<h2 id="-features-added">✨ Features Added</h2>
+<ul>
+<li><strong>Enhanced Connection Management</strong>: New <code>InitializeAsync</code> method with comprehensive connection setup and error handling</li>
+<li><strong>Thread-Safe Operations</strong>: Added <code>SemaphoreSlim</code> for connection synchronization to prevent race conditions</li>
+<li><strong>Improved RPC Handling</strong>: Streamlined server-to-client RPC calls with better request/response tracking</li>
+<li><strong>Enhanced Logging</strong>: Request/response correlation with RequestId tracking for better observability</li>
+<li><strong>Flexible Constructor</strong>: Constructor now accepts optional HubConnection for more flexible initialization patterns</li>
+<li><strong>Abstract Handler Setup</strong>: New <code>SetupHandlers()</code> abstract method enforces proper handler implementation</li>
+</ul>
+<h2 id="-changes">🔄 Changes</h2>
+<h3 id="connection-lifecycle-improvements">Connection Lifecycle Improvements</h3>
+<ul>
+<li><strong>Initialization Method</strong>: New <code>InitializeAsync()</code> with parameters for hub URL, API key, and exception handling</li>
+<li><strong>Connection State Management</strong>: Automatic detection and handling of existing connections before re-initialization</li>
+<li><strong>API Key Validation</strong>: Built-in validation ensures proper authentication configuration</li>
+<li><strong>Graceful Reconnection</strong>: Improved reconnection handling with proper state management</li>
+</ul>
+<h3 id="enhanced-event-system">Enhanced Event System</h3>
+<ul>
+<li><strong>RPC Method Signatures</strong>: Simplified RPC event signatures removing unnecessary <code>Task&lt;&gt;</code> wrapper for direct return types</li>
+<li><strong>Request Correlation</strong>: All RPC calls now log with RequestId for better traceability</li>
+<li><strong>Null-Safe Event Handling</strong>: Improved null checking for event handlers</li>
+<li><strong>Structured Logging</strong>: Enhanced logging format with request/response correlation</li>
+</ul>
+<h3 id="code-quality-improvements">Code Quality Improvements</h3>
+<ul>
+<li><strong>Thread Safety</strong>: Connection operations protected by semaphore</li>
+<li><strong>Error Handling</strong>: Comprehensive exception handling in connection methods</li>
+<li><strong>Documentation</strong>: Enhanced XML documentation for all public methods</li>
+<li><strong>Validation</strong>: Input validation for critical parameters like API keys</li>
+</ul>
+<h2 id="-bug-fixes">🐛 Bug Fixes</h2>
+<ul>
+<li><strong>Race Conditions</strong>: Fixed potential race conditions during connection initialization</li>
+<li><strong>Event Registration</strong>: Resolved timing issues with event setup during connection lifecycle</li>
+<li><strong>Memory Leaks</strong>: Improved disposal patterns for connection resources</li>
+</ul>
+<h2 id="-technical-details">🛠️ Technical Details</h2>
+<h3 id="breaking-changes">Breaking Changes</h3>
+<ul>
+<li><strong>SetupHandlers()</strong>: Now abstract method - derived classes must implement this method</li>
+<li><strong>Constructor Changes</strong>: HubConnection parameter is now optional (nullable)</li>
+</ul>
+<h3 id="non-breaking-changes">Non-Breaking Changes</h3>
+<ul>
+<li>All existing IJiroClient interface methods remain unchanged</li>
+<li>Existing event signatures are backward compatible</li>
+<li>Legacy initialization patterns continue to work</li>
+</ul>
+<h3 id="performance-improvements">Performance Improvements</h3>
+<ul>
+<li>Reduced memory allocations in event handling</li>
+<li>Optimized logging with null-checked conditional execution</li>
+<li>Improved connection pooling with semaphore-based synchronization</li>
+</ul>
+<h2 id="-usage-example">💻 Usage Example</h2>
+<pre><code class="lang-csharp">// Enhanced client implementation with new initialization pattern
+public class MyJiroClient : JiroClientBase
+{
+    public MyJiroClient(ILogger&lt;MyJiroClient&gt; logger) 
+        : base(logger: logger) // HubConnection now optional
+    {
+    }
+
+    protected override void SetupHandlers()
+    {
+        // Required implementation for event handlers
+        CommandReceived += async command =&gt; 
+        {
+            // Handle command with enhanced logging
+        };
+        
+        LogsRequested += async request =&gt; 
+        {
+            // RequestId automatically logged for correlation
+            return new LogsResponse { RequestId = request.RequestId };
+        };
+    }
+
+    // Enhanced initialization with error handling
+    public async Task ConnectAsync(string hubUrl, string apiKey)
+    {
+        await InitializeAsync(
+            hubUrl: hubUrl,
+            apiKey: apiKey,
+            exceptionHandler: (ex, context) =&gt; Console.WriteLine($&quot;Error in {context}: {ex.Message}&quot;)
+        );
+    }
+}
+</code></pre>
+<h2 id="-deployment">🚀 Deployment</h2>
+<ul>
+<li>Version 1.1.6 has been built, tested, and is ready for deployment to NuGet.org</li>
+<li>All tests pass on .NET 9.0 runtime</li>
+<li>Package metadata updated with latest version information</li>
+<li>Enhanced thread safety validated under load testing</li>
+</ul>
+<hr>
+<p><strong>Note</strong>: This release significantly improves the robustness and production-readiness of JiroClientBase, making it easier to build reliable, thread-safe Jiro clients with comprehensive logging and error handling capabilities.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/HueByte/Jiro.Shared/blob/main/dev/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="footer-custom"><div class="footer-inner d-flex justify-content-between align-items-center"><div class="footer-text">Made with <strong>💖</strong> By HueByte</div><div class="footer-links"><a href="https://github.com/HueByte/Jiro.Shared" class="footer-link" target="_blank"><i class="fab fa-github"></i>GitHub</a><a href="#" class="footer-link scroll-to-top" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i>Top</a></div></div></div><script>function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}</script>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

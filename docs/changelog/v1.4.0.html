@@ -1,0 +1,327 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>v1.4.0 &quot;Tōgō&quot; - Integration &amp; Unification | Jiro.Shared Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="v1.4.0 &quot;Tōgō&quot; - Integration &amp; Unification | Jiro.Shared Documentation ">
+      
+      
+      <link rel="icon" href="../../assets/Jiro-Icon.png">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/HueByte/Jiro.Shared/blob/main/dev/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../assets/Jiro-Icon.png" alt="Jiro.Shared">
+            Jiro.Shared
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="v140-tōgō---integration--unification">v1.4.0 &quot;Tōgō&quot; - Integration &amp; Unification</h1>
+
+<p><strong>Release Date</strong>: TBD<br>
+<strong>Code Name</strong>: &quot;Tōgō&quot; (統合 - Integration/Unification)<br>
+<strong>Type</strong>: Minor Release</p>
+<hr>
+<h2 id="-overview">🎯 Overview</h2>
+<p>Version 1.4.0 represents a significant step toward unified architecture by integrating TaskManager infrastructure from JiroCloud services into Jiro.Shared. This release introduces enhanced command synchronization, improved gRPC integration, and comprehensive testing infrastructure while maintaining full backward compatibility.</p>
+<p>The &quot;Tōgō&quot; release focuses on unifying distributed system components under a shared foundation, making it easier for Jiro ecosystem applications to manage asynchronous operations and inter-service communication.</p>
+<h2 id="-major-features">🚀 Major Features</h2>
+<h3 id="taskmanager-infrastructure-integration">TaskManager Infrastructure Integration</h3>
+<ul>
+<li><strong>Unified Task Management</strong>: Migrated TaskManager from JiroCloud services to Jiro.Shared for ecosystem-wide availability</li>
+<li><strong>Distributed System Support</strong>: Built-in support for managing tasks across multiple Jiro instances</li>
+<li><strong>Timeout Management</strong>: Automatic timeout monitoring and cleanup for long-running operations</li>
+<li><strong>Stream Operations</strong>: Channel-based streaming support for real-time data processing</li>
+</ul>
+<p><strong>New Components:</strong></p>
+<pre><code class="lang-csharp">// Task management interfaces
+public interface ITaskManager { }
+public interface IInstanceTaskManager { }
+
+// Core implementation
+public class TaskManager : ITaskManager, IInstanceTaskManager, IDisposable
+
+// Supporting models
+public class QueuedRequest
+public class InstanceManagedTask  
+public class ChannelStreamTask
+public class TaskManagerOptions
+</code></pre>
+<h3 id="enhanced-command-response-architecture">Enhanced Command Response Architecture</h3>
+<ul>
+<li><strong>SynchronizationToken Model</strong>: New token-based command tracking replacing simple string IDs</li>
+<li><strong>Polymorphic Results</strong>: Improved command result handling with type-safe polymorphism</li>
+<li><strong>Session Integration</strong>: Enhanced session and instance correlation for distributed scenarios</li>
+</ul>
+<p><strong>Key Models:</strong></p>
+<pre><code class="lang-csharp">public class SynchronizationToken
+{
+    public string InstanceId { get; set; }
+    public string SessionId { get; set; }
+    public string RequestId { get; set; }
+}
+
+public enum CommandType { Text = 0, Graph = 1 }
+
+public abstract class CommandResult
+public class TextResult : CommandResult
+public class GraphResult : CommandResult
+</code></pre>
+<h3 id="grpc-protocol-buffer-distribution">gRPC Protocol Buffer Distribution</h3>
+<ul>
+<li><strong>Proto File Packaging</strong>: jiroHub.proto now included in NuGet package for client generation</li>
+<li><strong>Service Generation Support</strong>: Consuming projects can generate gRPC services from shared proto definitions</li>
+<li><strong>Version Synchronization</strong>: Ensures protocol consistency across Jiro ecosystem components</li>
+</ul>
+<h2 id="-technical-improvements">🛠️ Technical Improvements</h2>
+<h3 id="namespace-reorganization">Namespace Reorganization</h3>
+<ul>
+<li><strong>Tasks Namespace</strong>: All task management components moved to <code>Jiro.Shared.Tasks</code></li>
+<li><strong>Shared Models</strong>: Core models relocated to root <code>Jiro.Shared</code> namespace for better accessibility</li>
+<li><strong>gRPC Extensions</strong>: Enhanced ClientMessage conversion with proper type disambiguation</li>
+</ul>
+<h3 id="test-infrastructure">Test Infrastructure</h3>
+<ul>
+<li><strong>Complete Test Suite</strong>: Added comprehensive test coverage for TaskManager functionality</li>
+<li><strong>CI Integration</strong>: Tests run automatically on PR and main branch commits</li>
+<li><strong>Mock Support</strong>: Full Moq integration for unit testing scenarios</li>
+</ul>
+<h3 id="build--packaging">Build &amp; Packaging</h3>
+<ul>
+<li><strong>NuGet Enhancement</strong>: Proto files included in package for downstream code generation</li>
+<li><strong>Content Files</strong>: Proper content file packaging for modern NuGet compatibility</li>
+<li><strong>Version Synchronization</strong>: Updated to .NET 9.0 with latest dependency versions</li>
+</ul>
+<h2 id="-breaking-changes">🔧 Breaking Changes</h2>
+<h3 id="namespace-updates">Namespace Updates</h3>
+<p>Applications using TaskManager components from JiroCloud services need namespace updates:</p>
+<pre><code class="lang-csharp">// Before v1.4.0
+using JiroCloud.Core.Services.ResponseTask;
+using JiroCloud.Core.Services.ResponseTask.Models;
+
+// After v1.4.0  
+using Jiro.Shared.Tasks;
+using Jiro.Shared.Tasks.Models;
+</code></pre>
+<h3 id="model-relocations">Model Relocations</h3>
+<p>Shared models moved from websocket-specific namespaces:</p>
+<pre><code class="lang-csharp">// Before v1.4.0
+using Jiro.Shared.Websocket.Models;
+
+// After v1.4.0
+using Jiro.Shared; // SynchronizationToken, CommandType, CommandResult
+</code></pre>
+<h3 id="command-response-architecture">Command Response Architecture</h3>
+<p>Enhanced command response model with synchronization tokens:</p>
+<pre><code class="lang-csharp">// Before v1.4.0
+public class SessionCommandResponse
+{
+    public string CommandSyncId { get; set; }
+}
+
+// After v1.4.0
+public class SessionCommandResponse  
+{
+    public SynchronizationToken SynchronizationToken { get; set; }
+}
+</code></pre>
+<h2 id="-nuget-package-changes">📦 NuGet Package Changes</h2>
+<h3 id="proto-file-distribution">Proto File Distribution</h3>
+<p>The jiroHub.proto file is now included in the NuGet package:</p>
+<pre><code class="lang-xml">&lt;ItemGroup&gt;
+  &lt;Protobuf Include=&quot;Grpc\jiroHub.proto&quot; GrpcServices=&quot;Client&quot; /&gt;
+&lt;/ItemGroup&gt;
+</code></pre>
+<h3 id="content-files-structure">Content Files Structure</h3>
+<pre><code class="lang-sh">contentFiles/any/any/Grpc/jiroHub.proto
+content/Grpc/jiroHub.proto
+</code></pre>
+<h2 id="-testing--ci">🧪 Testing &amp; CI</h2>
+<h3 id="test-coverage">Test Coverage</h3>
+<ul>
+<li><strong>TaskManager Tests</strong>: Complete test suite covering all TaskManager operations</li>
+<li><strong>Mock Integration</strong>: Moq-based testing for logger and configuration dependencies</li>
+<li><strong>Timeout Scenarios</strong>: Comprehensive timeout and cancellation testing</li>
+<li><strong>Stream Operations</strong>: Channel-based streaming operation tests</li>
+</ul>
+<h3 id="continuous-integration">Continuous Integration</h3>
+<ul>
+<li><strong>Automated Testing</strong>: Tests run on every PR and main branch commit</li>
+<li><strong>Code Coverage</strong>: Coverage collection and reporting via Codecov</li>
+<li><strong>Build Verification</strong>: Multi-configuration build testing (Debug/Release)</li>
+</ul>
+<h2 id="-migration-guide">🔍 Migration Guide</h2>
+<h3 id="for-jirocloud-applications">For JiroCloud Applications</h3>
+<ol>
+<li><p><strong>Update Namespaces</strong>:</p>
+<pre><code class="lang-csharp">// Replace all instances
+using JiroCloud.Core.Services.ResponseTask;
+// With
+using Jiro.Shared.Tasks;
+</code></pre>
+</li>
+<li><p><strong>Update Model References</strong>:</p>
+<pre><code class="lang-csharp">// Old websocket-specific imports
+using Jiro.Shared.Websocket.Models.SynchronizationToken;
+// New shared imports  
+using Jiro.Shared.SynchronizationToken;
+</code></pre>
+</li>
+<li><p><strong>Command Response Updates</strong>:</p>
+<pre><code class="lang-csharp">// Update command sync ID usage
+response.SynchronizationToken.RequestId // instead of CommandSyncId
+response.SynchronizationToken.SessionId
+response.SynchronizationToken.InstanceId
+</code></pre>
+</li>
+</ol>
+<h3 id="for-new-applications">For New Applications</h3>
+<ol>
+<li><p><strong>Install Updated Package</strong>:</p>
+<pre><code class="lang-xml">&lt;PackageReference Include=&quot;Jiro.Shared&quot; Version=&quot;1.4.0&quot; /&gt;
+</code></pre>
+</li>
+<li><p><strong>TaskManager Registration</strong>:</p>
+<pre><code class="lang-csharp">services.Configure&lt;TaskManagerOptions&gt;(options =&gt; 
+{
+    options.DefaultTimeoutSeconds = 30;
+    options.MaxPendingTasks = 1000;
+});
+services.AddSingleton&lt;ITaskManager, TaskManager&gt;();
+</code></pre>
+</li>
+<li><p><strong>Proto File Usage</strong>:</p>
+<pre><code class="lang-xml">&lt;ItemGroup&gt;
+  &lt;Protobuf Include=&quot;Grpc\jiroHub.proto&quot; GrpcServices=&quot;Both&quot; /&gt;
+&lt;/ItemGroup&gt;
+</code></pre>
+</li>
+</ol>
+<h2 id="-issues-addressed">🐛 Issues Addressed</h2>
+<ul>
+<li><strong>Task Management Fragmentation</strong>: Unified task management across Jiro ecosystem</li>
+<li><strong>Command Synchronization</strong>: Enhanced command tracking with comprehensive token system</li>
+<li><strong>gRPC Integration</strong>: Simplified service generation with packaged proto files</li>
+<li><strong>Testing Infrastructure</strong>: Complete test coverage for reliability assurance</li>
+<li><strong>Namespace Consistency</strong>: Logical organization of shared components</li>
+</ul>
+<h2 id="-performance-improvements">📈 Performance Improvements</h2>
+<ul>
+<li><strong>Efficient Task Tracking</strong>: Optimized concurrent dictionary usage for task management</li>
+<li><strong>Memory Management</strong>: Proper disposal patterns and resource cleanup</li>
+<li><strong>Stream Processing</strong>: Channel-based streaming with backpressure handling</li>
+<li><strong>Timeout Monitoring</strong>: Background service for automatic task cleanup</li>
+</ul>
+<h2 id="-dependencies">🔗 Dependencies</h2>
+<h3 id="updated-dependencies">Updated Dependencies</h3>
+<ul>
+<li>Microsoft.EntityFrameworkCore.* → 9.0.8</li>
+<li>Microsoft.AspNetCore.SignalR.Client → 9.0.8</li>
+<li>Microsoft.Extensions.* → 9.0.8</li>
+<li>Z.EntityFramework.Plus.EFCore → 9.103.9.2</li>
+</ul>
+<h3 id="test-dependencies">Test Dependencies</h3>
+<ul>
+<li>Microsoft.NET.Test.Sdk → 17.14.1</li>
+<li>xUnit → 2.9.3</li>
+<li>xUnit.runner.visualstudio → 3.1.3</li>
+<li>Coverlet.collector → 6.0.4</li>
+</ul>
+<hr>
+<p><strong>Note</strong>: This release provides a unified foundation for task management and command synchronization across the Jiro ecosystem. The integration of TaskManager infrastructure enables more sophisticated distributed system scenarios while maintaining the simplicity and reliability that Jiro.Shared is known for.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/HueByte/Jiro.Shared/blob/main/dev/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="footer-custom"><div class="footer-inner d-flex justify-content-between align-items-center"><div class="footer-text">Made with <strong>💖</strong> By HueByte</div><div class="footer-links"><a href="https://github.com/HueByte/Jiro.Shared" class="footer-link" target="_blank"><i class="fab fa-github"></i>GitHub</a><a href="#" class="footer-link scroll-to-top" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i>Top</a></div></div></div><script>function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}</script>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

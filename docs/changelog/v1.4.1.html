@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>v1.4.1 &quot;Teikyō&quot; - Enhanced Proto File Distribution | Jiro.Shared Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="v1.4.1 &quot;Teikyō&quot; - Enhanced Proto File Distribution | Jiro.Shared Documentation ">
+      
+      
+      <link rel="icon" href="../../assets/Jiro-Icon.png">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/HueByte/Jiro.Shared/blob/main/dev/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../assets/Jiro-Icon.png" alt="Jiro.Shared">
+            Jiro.Shared
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="v141-teikyō---enhanced-proto-file-distribution">v1.4.1 &quot;Teikyō&quot; - Enhanced Proto File Distribution</h1>
+
+<p><strong>Release Date</strong>: 2025-08-05<br>
+<strong>Code Name</strong>: &quot;Teikyō&quot; (提供 - Provision/Supply)<br>
+<strong>Type</strong>: Patch Release</p>
+<hr>
+<h2 id="-overview">🎯 Overview</h2>
+<p>Version 1.4.1 focuses on improving gRPC protocol buffer file distribution in the NuGet package, making it significantly easier for consumers to import and use the shared proto definitions. This patch release enhances the packaging approach based on best practices for gRPC proto file sharing.</p>
+<p>The &quot;Teikyō&quot; release ensures that proto files are properly provisioned to consuming projects with enhanced visibility and accessibility.</p>
+<h2 id="-key-improvements">🚀 Key Improvements</h2>
+<h3 id="enhanced-proto-file-packaging">Enhanced Proto File Packaging</h3>
+<ul>
+<li><strong>Improved Content Configuration</strong>: Updated proto file packaging to use enhanced <code>&lt;Content&gt;</code> tags with proper visibility settings</li>
+<li><strong>Copy to Output Directory</strong>: Proto files are now automatically copied to the output directory with <code>CopyToOutputDirectory=&quot;PreserveNewest&quot;</code></li>
+<li><strong>Enhanced Visibility</strong>: Added <code>Visible=&quot;true&quot;</code> attribute to make proto files visible in consuming project Solution Explorer</li>
+<li><strong>Wildcard Pattern Support</strong>: Uses <code>Grpc\**\*.proto</code> pattern to automatically include future proto files in subdirectories</li>
+</ul>
+<p><strong>Updated Configuration:</strong></p>
+<pre><code class="lang-xml">&lt;ItemGroup&gt;
+  &lt;!-- Copy proto files into the package for consumers to import --&gt;
+  &lt;Content Include=&quot;Grpc\**\*.proto&quot; Pack=&quot;true&quot; PackagePath=&quot;contentFiles\any\any\Grpc\&quot; Visible=&quot;true&quot;&gt;
+    &lt;CopyToOutputDirectory&gt;PreserveNewest&lt;/CopyToOutputDirectory&gt;
+  &lt;/Content&gt;
+  &lt;Content Include=&quot;Grpc\**\*.proto&quot; Pack=&quot;true&quot; PackagePath=&quot;content\Grpc\&quot; Visible=&quot;true&quot;&gt;
+    &lt;CopyToOutputDirectory&gt;PreserveNewest&lt;/CopyToOutputDirectory&gt;
+  &lt;/Content&gt;
+&lt;/ItemGroup&gt;
+</code></pre>
+<h3 id="consumer-experience-improvements">Consumer Experience Improvements</h3>
+<ul>
+<li><strong>Better Project Integration</strong>: Proto files now appear directly in consuming projects' file explorer</li>
+<li><strong>Simplified Import Process</strong>: Enhanced support for <code>AdditionalImportDirs</code> in consuming projects</li>
+<li><strong>Backward Compatibility</strong>: Maintains support for both modern PackageReference and legacy packages.config workflows</li>
+<li><strong>Documentation Alignment</strong>: Package configuration now follows established best practices for gRPC proto sharing</li>
+</ul>
+<h2 id="-technical-changes">🛠️ Technical Changes</h2>
+<h3 id="package-structure-enhancement">Package Structure Enhancement</h3>
+<p>The proto files are now packaged in both content paths for maximum compatibility:</p>
+<pre><code class="lang-sh">contentFiles/any/any/Grpc/jiroHub.proto  # Modern .NET Core/5+ projects
+content/Grpc/jiroHub.proto                # Legacy .NET Framework projects
+</code></pre>
+<h3 id="build-integration">Build Integration</h3>
+<ul>
+<li><strong>Automatic Discovery</strong>: Wildcard patterns ensure future proto files are automatically included</li>
+<li><strong>Output Directory Copying</strong>: Proto files are available in consuming project's output directory</li>
+<li><strong>Enhanced Visibility</strong>: Proto files appear in Solution Explorer for better developer experience</li>
+</ul>
+<h2 id="-for-package-consumers">📦 For Package Consumers</h2>
+<h3 id="recommended-usage-pattern">Recommended Usage Pattern</h3>
+<p>Consuming projects can now more easily reference the shared proto files:</p>
+<pre><code class="lang-xml">&lt;ItemGroup&gt;
+  &lt;!-- Reference the shared contracts package with path generation --&gt;
+  &lt;PackageReference Include=&quot;Jiro.Shared&quot; Version=&quot;1.4.1&quot; GeneratePathProperty=&quot;true&quot; /&gt;
+  
+  &lt;!-- Include proto files with import directory support --&gt;
+  &lt;Protobuf Include=&quot;Protos\*.proto&quot;
+            ProtoRoot=&quot;Protos&quot;
+            AdditionalImportDirs=&quot;$(PkgJiro_Shared)\content\Grpc&quot;
+            GrpcServices=&quot;Both&quot; /&gt;
+&lt;/ItemGroup&gt;
+</code></pre>
+<h3 id="import-in-proto-files">Import in Proto Files</h3>
+<pre><code class="lang-proto">syntax = &quot;proto3&quot;;
+import &quot;jiroHub.proto&quot;;  // Now more reliably resolved
+
+option csharp_namespace = &quot;YourProject.Services&quot;;
+// Your service definitions here
+</code></pre>
+<h2 id="-migration-notes">🔧 Migration Notes</h2>
+<p>This is a patch release with no breaking changes. Existing consumers will automatically benefit from the improved packaging without any code changes required.</p>
+<h3 id="for-new-consumers">For New Consumers</h3>
+<ul>
+<li>Proto files are now more visible in Solution Explorer</li>
+<li>Import resolution is more reliable across different project configurations</li>
+<li>Enhanced support for both modern and legacy .NET project styles</li>
+</ul>
+<h2 id="-issues-addressed">🐛 Issues Addressed</h2>
+<ul>
+<li><strong>Proto File Visibility</strong>: Proto files now appear properly in consuming project file explorers</li>
+<li><strong>Import Resolution</strong>: Enhanced reliability of proto file import resolution in consuming projects</li>
+<li><strong>Package Compatibility</strong>: Improved support for different NuGet package consumption patterns</li>
+<li><strong>Build Integration</strong>: Better integration with MSBuild and gRPC tooling workflows</li>
+</ul>
+<h2 id="-benefits">📈 Benefits</h2>
+<ul>
+<li><strong>Developer Experience</strong>: Proto files are now visible and easily accessible in consuming projects</li>
+<li><strong>Build Reliability</strong>: Enhanced build-time proto file resolution and copying</li>
+<li><strong>Future-Proofing</strong>: Wildcard patterns automatically include new proto files</li>
+<li><strong>Standards Compliance</strong>: Package structure follows established gRPC proto sharing best practices</li>
+</ul>
+<h2 id="-dependencies">🔗 Dependencies</h2>
+<p>No dependency changes in this release. All dependencies remain the same as v1.4.0.</p>
+<hr>
+<p><strong>Note</strong>: This patch release focuses exclusively on improving the gRPC proto file distribution experience. The enhanced packaging approach makes it significantly easier for consumers to import and use the shared jiroHub.proto definitions in their own projects.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/HueByte/Jiro.Shared/blob/main/dev/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="footer-custom"><div class="footer-inner d-flex justify-content-between align-items-center"><div class="footer-text">Made with <strong>💖</strong> By HueByte</div><div class="footer-links"><a href="https://github.com/HueByte/Jiro.Shared" class="footer-link" target="_blank"><i class="fab fa-github"></i>GitHub</a><a href="#" class="footer-link scroll-to-top" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i>Top</a></div></div></div><script>function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}</script>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

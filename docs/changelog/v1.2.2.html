@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>v1.2.2 &quot;Tsuiseki&quot; - Stream Request Tracking | Jiro.Shared Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="v1.2.2 &quot;Tsuiseki&quot; - Stream Request Tracking | Jiro.Shared Documentation ">
+      
+      
+      <link rel="icon" href="../../assets/Jiro-Icon.png">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/HueByte/Jiro.Shared/blob/main/dev/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../assets/Jiro-Icon.png" alt="Jiro.Shared">
+            Jiro.Shared
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="v122-tsuiseki---stream-request-tracking">v1.2.2 &quot;Tsuiseki&quot; - Stream Request Tracking</h1>
+
+<p><strong>Release Date</strong>: July 24, 2025<br>
+<strong>Code Name</strong>: &quot;Tsuiseki&quot; (追跡 - Tracking/Tracing)<br>
+<strong>Type</strong>: Patch Release</p>
+<hr>
+<h2 id="-overview">🎯 Overview</h2>
+<p>Version 1.2.2 enhances the streaming architecture with request ID tracking and improves the separation between server-to-client and client-to-server methods. This release provides better traceability for streaming operations and cleaner architectural boundaries in the hub implementation.</p>
+<h2 id="-technical-details">🛠️ Technical Details</h2>
+<h3 id="request-id-tracking-for-streams">Request ID Tracking for Streams</h3>
+<p>All streaming operations now include request ID tracking, enabling:</p>
+<ul>
+<li>Better correlation between stream requests and responses</li>
+<li>Improved debugging and monitoring capabilities</li>
+<li>Enhanced error tracking for streaming operations</li>
+</ul>
+<h3 id="method-separation-in-hub">Method Separation in Hub</h3>
+<p>The hub implementation now clearly separates:</p>
+<ul>
+<li><strong>Server-to-Client Methods</strong>: Operations initiated by the server</li>
+<li><strong>Client-to-Server Methods</strong>: Operations initiated by the client</li>
+</ul>
+<p>This separation provides:</p>
+<ul>
+<li>Clearer API boundaries</li>
+<li>Better security modeling</li>
+<li>Improved maintainability</li>
+</ul>
+<h2 id="-changes">🔄 Changes</h2>
+<h3 id="streaming-infrastructure">Streaming Infrastructure</h3>
+<ul>
+<li><strong>Request ID Support</strong>: All stream requests now include tracking identifiers</li>
+<li><strong>Method Organization</strong>: Clear separation of directional methods in hub implementation</li>
+<li><strong>Improved Traceability</strong>: Enhanced logging and debugging for streaming operations</li>
+</ul>
+<h3 id="architecture-improvements">Architecture Improvements</h3>
+<ul>
+<li><strong>Cleaner Boundaries</strong>: Distinct separation between server and client initiated operations</li>
+<li><strong>Better Organization</strong>: Methods grouped by communication direction</li>
+<li><strong>Enhanced Clarity</strong>: More intuitive API structure for developers</li>
+</ul>
+<h2 id="-usage-examples">💻 Usage Examples</h2>
+<h3 id="stream-request-with-tracking">Stream Request with Tracking</h3>
+<pre><code class="lang-csharp">// Server initiates stream request with tracking
+var requestId = Guid.NewGuid().ToString();
+await hubConnection.InvokeAsync(&quot;RequestLogsStreamAsync&quot;, new GetLogsRequest
+{
+    SessionId = &quot;session-123&quot;,
+    Count = 100,
+    RequestId = requestId  // Now tracked throughout the stream lifecycle
+});
+
+// Client can correlate responses using the request ID
+LogsStreamRequested += async (request) =&gt;
+{
+    logger.LogInformation($&quot;Processing stream request: {request.RequestId}&quot;);
+    await ReceiveLogsStreamAsync(GetLogStreamAsync(request));
+};
+</code></pre>
+<h3 id="hub-method-organization">Hub Method Organization</h3>
+<pre><code class="lang-csharp">public class JiroHub : Hub&lt;IJiroClient&gt;
+{
+    // Server-to-Client Methods
+    public async Task NotifyClientAsync(Notification notification) { }
+    public async Task RequestClientDataAsync(DataRequest request) { }
+    
+    // Client-to-Server Methods  
+    public async Task ReceiveLogsStreamAsync(IAsyncEnumerable&lt;LogEntry&gt; stream) { }
+    public async Task UpdateConfigurationAsync(Configuration config) { }
+}
+</code></pre>
+<h2 id="-deployment">🚀 Deployment</h2>
+<ul>
+<li>Version 1.2.2 maintains full backward compatibility</li>
+<li>No breaking changes to public APIs</li>
+<li>Existing streaming operations continue to work without modification</li>
+<li>Request ID is optional for backward compatibility</li>
+</ul>
+<h2 id="-future-considerations">🔮 Future Considerations</h2>
+<ul>
+<li>Request ID tracking foundation enables future distributed tracing support</li>
+<li>Method separation prepares for potential security enhancements</li>
+<li>Improved organization facilitates future API expansions</li>
+</ul>
+<hr>
+<p><strong>Note</strong>: This release focuses on internal improvements and architectural refinements. While there are no breaking changes, the enhanced tracking and organization provide a stronger foundation for future streaming enhancements.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/HueByte/Jiro.Shared/blob/main/dev/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="footer-custom"><div class="footer-inner d-flex justify-content-between align-items-center"><div class="footer-text">Made with <strong>💖</strong> By HueByte</div><div class="footer-links"><a href="https://github.com/HueByte/Jiro.Shared" class="footer-link" target="_blank"><i class="fab fa-github"></i>GitHub</a><a href="#" class="footer-link scroll-to-top" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i>Top</a></div></div></div><script>function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}</script>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

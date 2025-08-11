@@ -1,0 +1,276 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>v1.4.2 &quot;Nagare&quot; - Comprehensive Streaming Support | Jiro.Shared Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="v1.4.2 &quot;Nagare&quot; - Comprehensive Streaming Support | Jiro.Shared Documentation ">
+      
+      
+      <link rel="icon" href="../../assets/Jiro-Icon.png">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/HueByte/Jiro.Shared/blob/main/dev/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../assets/Jiro-Icon.png" alt="Jiro.Shared">
+            Jiro.Shared
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="v142-nagare---comprehensive-streaming-support">v1.4.2 &quot;Nagare&quot; - Comprehensive Streaming Support</h1>
+
+<p><strong>Release Date</strong>: 2025-08-06<br>
+<strong>Code Name</strong>: &quot;Nagare&quot; (流れ - Flow)<br>
+<strong>Type</strong>: Minor Release</p>
+<hr>
+<h2 id="-overview">🎯 Overview</h2>
+<p>Version 1.4.2 introduces comprehensive streaming capabilities for both gRPC and SignalR communication methods, enabling real-time data flow between Jiro instances and JiroCloud. This release adds three essential streaming functionalities: chat messages, logs, and word-by-word message content.</p>
+<p>The &quot;Nagare&quot; release establishes a robust foundation for streaming communication, allowing for efficient real-time data transmission across the Jiro ecosystem.</p>
+<h2 id="-key-features">🚀 Key Features</h2>
+<h3 id="grpc-streaming-services">gRPC Streaming Services</h3>
+<ul>
+<li><strong>StreamChatMessagesToServer</strong>: Client streaming for chat messages from Jiro instances to JiroCloud</li>
+<li><strong>StreamLogsToServer</strong>: Client streaming for logs with enhanced metadata support</li>
+<li><strong>StreamWordsToServer</strong>: Client streaming for word-by-word message content delivery</li>
+</ul>
+<p><strong>Updated gRPC Service Definition:</strong></p>
+<pre><code class="lang-proto">service JiroHubProto {
+    // Existing services...
+    
+    // Client streaming for chat messages from client to server
+    rpc StreamChatMessagesToServer (stream ChatMessage) returns (ChatStreamResponse);
+    
+    // Client streaming for logs from client to server
+    rpc StreamLogsToServer (stream LogEntry) returns (LogStreamResponse);
+    
+    // Client streaming for word-by-word message content from client to server
+    rpc StreamWordsToServer (stream WordStreamUpdate) returns (WordStreamResponse);
+}
+</code></pre>
+<h3 id="signalr-streaming-integration">SignalR Streaming Integration</h3>
+<ul>
+<li><strong>Enhanced Hub Interfaces</strong>: Added streaming request and receive methods to both client and server interfaces</li>
+<li><strong>Event Coordination</strong>: New events for managing streaming operations</li>
+<li><strong>Channel-Based Streaming</strong>: Support for <code>ChannelReader&lt;T&gt;</code> streaming patterns</li>
+</ul>
+<p><strong>New SignalR Events:</strong></p>
+<pre><code class="lang-csharp">// Server-to-client requests
+public const string StreamChatMessagesRequested = &quot;StreamChatMessagesRequested&quot;;
+public const string StreamWordsRequested = &quot;StreamWordsRequested&quot;;
+
+// Client-to-server streaming
+public const string StreamChatMessagesToServer = &quot;StreamChatMessagesToServer&quot;;
+public const string StreamWordsToServer = &quot;StreamWordsToServer&quot;;
+</code></pre>
+<h2 id="-technical-enhancements">🔧 Technical Enhancements</h2>
+<h3 id="protocol-buffer-message-types">Protocol Buffer Message Types</h3>
+<h4 id="enhanced-logentry">Enhanced LogEntry</h4>
+<pre><code class="lang-proto">message LogEntry {
+    string id = 1;
+    string level = 2;                        // Log level (DEBUG, INFO, WARN, ERROR)
+    string message = 3;                      // Log message content
+    string source = 4;                       // Source component or module
+    google.protobuf.Timestamp timestamp = 5; // When log was generated
+    map&lt;string, string&gt; metadata = 6;        // Additional log metadata
+}
+</code></pre>
+<h4 id="word-streaming-support">Word Streaming Support</h4>
+<pre><code class="lang-proto">message WordStreamUpdate {
+    string sessionId = 1;                    // Session ID for the message
+    string messageId = 2;                    // ID of the message being streamed
+    string word = 3;                         // The word or token being sent
+    int32 position = 4;                      // Position of word in the message
+    bool isComplete = 5;                     // True when message is fully streamed
+    google.protobuf.Timestamp timestamp = 6; // When this word was sent
+}
+</code></pre>
+<h3 id="signalr-interface-updates">SignalR Interface Updates</h3>
+<h4 id="client-interface-ijirohubclient">Client Interface (IJiroHubClient)</h4>
+<pre><code class="lang-csharp">// Request streaming operations from client
+Task&lt;ActionResult&gt; RequestChatMessagesStreamAsync(StreamChatRequest request);
+Task&lt;ActionResult&gt; RequestWordStreamAsync(StreamWordRequest request);
+</code></pre>
+<h4 id="server-interface-ijirohubserver">Server Interface (IJiroHubServer)</h4>
+<pre><code class="lang-csharp">// Receive streaming data from client
+Task ReceiveChatMessagesStreamAsync(string requestId, ChannelReader&lt;ChatMessage&gt; stream);
+Task ReceiveWordStreamAsync(string requestId, ChannelReader&lt;WordUpdate&gt; stream);
+</code></pre>
+<h2 id="-new-types-and-models">🛠️ New Types and Models</h2>
+<h3 id="request-types">Request Types</h3>
+<ul>
+<li><strong>StreamChatRequest</strong>: Configuration for chat message streaming with session ID and buffer size</li>
+<li><strong>StreamWordRequest</strong>: Configuration for word streaming with message ID and buffer settings</li>
+</ul>
+<h3 id="response-types">Response Types</h3>
+<ul>
+<li><strong>WordUpdate</strong>: SignalR word update with message context and completion status</li>
+<li><strong>ChatStreamResponse</strong>: gRPC response for chat streaming operations</li>
+<li><strong>LogStreamResponse</strong>: gRPC response for log streaming operations</li>
+<li><strong>WordStreamResponse</strong>: gRPC response for word streaming operations</li>
+</ul>
+<h2 id="-communication-flow">📋 Communication Flow</h2>
+<h3 id="complete-streaming-pattern">Complete Streaming Pattern</h3>
+<ol>
+<li><strong>Server Request Phase</strong>: JiroCloud requests streaming via <code>IJiroHubClient</code> methods</li>
+<li><strong>Client Response Phase</strong>: Jiro instance responds by sending stream data via <code>IJiroHubServer</code> methods</li>
+<li><strong>Data Flow</strong>: Real-time streaming of chat messages, logs, or word-by-word content</li>
+</ol>
+<h3 id="supported-streaming-types">Supported Streaming Types</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Chat Messages</strong></td>
+<td>Full chat message streaming</td>
+<td>Real-time conversation sync</td>
+</tr>
+<tr>
+<td><strong>Logs</strong></td>
+<td>System log streaming with metadata</td>
+<td>Live monitoring and debugging</td>
+</tr>
+<tr>
+<td><strong>Word Stream</strong></td>
+<td>Word-by-word content delivery</td>
+<td>Progressive message display</td>
+</tr>
+</tbody>
+</table>
+<h2 id="-migration-and-compatibility">🔄 Migration and Compatibility</h2>
+<h3 id="backward-compatibility">Backward Compatibility</h3>
+<ul>
+<li><strong>100% Compatible</strong>: No breaking changes to existing APIs</li>
+<li><strong>Additive Changes</strong>: All new functionality is additive</li>
+<li><strong>Existing Integrations</strong>: Current gRPC and SignalR usage continues unchanged</li>
+</ul>
+<h3 id="for-existing-consumers">For Existing Consumers</h3>
+<ul>
+<li>Streaming features are opt-in and don't affect existing workflows</li>
+<li>Previous communication patterns remain fully supported</li>
+<li>No code changes required for existing implementations</li>
+</ul>
+<h2 id="-issues-resolved">🐛 Issues Resolved</h2>
+<ul>
+<li><strong>Duplicate Method Definitions</strong>: Cleaned up overlapping streaming method definitions</li>
+<li><strong>Directional Clarity</strong>: Removed unused server-to-client streaming to maintain clear client-to-server flow</li>
+<li><strong>Event Naming</strong>: Established consistent event naming convention for streaming operations</li>
+<li><strong>Interface Consistency</strong>: Aligned SignalR and gRPC streaming patterns</li>
+</ul>
+<h2 id="-performance-benefits">📈 Performance Benefits</h2>
+<ul>
+<li><strong>Efficient Streaming</strong>: Channel-based streaming reduces memory overhead</li>
+<li><strong>Real-time Capability</strong>: Enables true real-time communication between instances</li>
+<li><strong>Scalable Architecture</strong>: Streaming design supports high-throughput scenarios</li>
+<li><strong>Reduced Latency</strong>: Direct streaming eliminates request-response roundtrip delays</li>
+</ul>
+<h2 id="-dependencies">🔗 Dependencies</h2>
+<p>No dependency changes in this release. All dependencies remain consistent with v1.4.1:</p>
+<ul>
+<li>Grpc.AspNetCore: 2.71.0</li>
+<li>Google.Protobuf: 3.31.1</li>
+<li>Microsoft.AspNetCore.SignalR: 1.2.0</li>
+<li>Microsoft.AspNetCore.SignalR.Client: 9.0.8</li>
+</ul>
+<hr>
+<p><strong>Implementation Note</strong>: This release establishes the streaming infrastructure foundation for the Jiro ecosystem. The three streaming types (chat, logs, words) provide comprehensive real-time communication capabilities between Jiro instances and JiroCloud services.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/HueByte/Jiro.Shared/blob/main/dev/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="footer-custom"><div class="footer-inner d-flex justify-content-between align-items-center"><div class="footer-text">Made with <strong>💖</strong> By HueByte</div><div class="footer-links"><a href="https://github.com/HueByte/Jiro.Shared" class="footer-link" target="_blank"><i class="fab fa-github"></i>GitHub</a><a href="#" class="footer-link scroll-to-top" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i>Top</a></div></div></div><script>function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}</script>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

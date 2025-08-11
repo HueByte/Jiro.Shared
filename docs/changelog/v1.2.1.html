@@ -1,0 +1,263 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>v1.2.1 &quot;Bunri&quot; - Streaming Architecture Refinement | Jiro.Shared Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="v1.2.1 &quot;Bunri&quot; - Streaming Architecture Refinement | Jiro.Shared Documentation ">
+      
+      
+      <link rel="icon" href="../../assets/Jiro-Icon.png">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/HueByte/Jiro.Shared/blob/main/dev/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../assets/Jiro-Icon.png" alt="Jiro.Shared">
+            Jiro.Shared
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="v121-bunri---streaming-architecture-refinement">v1.2.1 &quot;Bunri&quot; - Streaming Architecture Refinement</h1>
+
+<p><strong>Release Date</strong>: July 23, 2025<br>
+<strong>Code Name</strong>: &quot;Bunri&quot; (分離 - Separation/Division)<br>
+<strong>Type</strong>: Patch Release</p>
+<hr>
+<h2 id="-overview">🎯 Overview</h2>
+<p>Version 1.2.1 refines the streaming architecture introduced in v1.2.0 by separating the streaming request and response patterns. This release addresses architectural concerns with the single-method streaming approach and implements a cleaner, more maintainable two-phase pattern for streaming operations.</p>
+<h2 id="-breaking-changes">🔧 Breaking Changes</h2>
+<h3 id="streaming-method-architecture-refactoring">Streaming Method Architecture Refactoring</h3>
+<p>The streaming methods have been fundamentally restructured to use a two-phase approach:</p>
+<h4 id="before-v120">Before (v1.2.0)</h4>
+<pre><code class="lang-csharp">// Single method returning IAsyncEnumerable
+IAsyncEnumerable&lt;LogEntry&gt; RequestLogsStreamAsync(GetLogsRequest request);
+IAsyncEnumerable&lt;ChatMessage&gt; RequestSessionMessagesStreamAsync(GetSingleSessionRequest request);
+</code></pre>
+<h4 id="after-v121">After (v1.2.1)</h4>
+<pre><code class="lang-csharp">// Phase 1: Request streaming (server notifies client)
+Task RequestLogsStreamAsync(GetLogsRequest request);
+Task RequestSessionMessagesStreamAsync(GetSingleSessionRequest request);
+
+// Phase 2: Receive streaming (client sends stream back)
+Task ReceiveLogsStreamAsync(IAsyncEnumerable&lt;LogEntry&gt; stream, CancellationToken cancellationToken = default);
+Task ReceiveSessionMessagesStreamAsync(IAsyncEnumerable&lt;ChatMessage&gt; stream, CancellationToken cancellationToken = default);
+</code></pre>
+<h3 id="event-handler-changes">Event Handler Changes</h3>
+<p>Stream request event handlers now return <code>Task</code> instead of <code>IAsyncEnumerable</code>:</p>
+<pre><code class="lang-csharp">// Updated event signatures
+public event Func&lt;GetLogsRequest, Task&gt;? LogsStreamRequested;
+public event Func&lt;GetSingleSessionRequest, Task&gt;? SessionMessagesStreamRequested;
+</code></pre>
+<h3 id="new-event-constants">New Event Constants</h3>
+<p>Added new event constants for the receive phase:</p>
+<ul>
+<li><code>Events.ReceiveLogsStream</code> - Event fired when client sends logs stream to server</li>
+<li><code>Events.ReceiveSessionMessagesStream</code> - Event fired when client sends session messages stream to server</li>
+</ul>
+<h2 id="-technical-details">🛠️ Technical Details</h2>
+<h3 id="implementation-changes">Implementation Changes</h3>
+<ol>
+<li><strong>IJiroHub Interface</strong>: Updated streaming methods to return <code>Task</code> and added new receive methods</li>
+<li><strong>IJiroClient Interface</strong>: Updated event signatures and added receive method declarations</li>
+<li><strong>JiroClientBase Class</strong>: Modified event wiring from <code>OnStream</code> to <code>OnNotification</code> for requests</li>
+<li><strong>Events Class</strong>: Added new constants for receive stream events</li>
+</ol>
+<h3 id="migration-guide">Migration Guide</h3>
+<p>If you were using the previous streaming methods:</p>
+<ol>
+<li><p><strong>Server-side (Hub)</strong>:</p>
+<ul>
+<li>Replace <code>IAsyncEnumerable&lt;T&gt;</code> returns with <code>Task</code></li>
+<li>Implement separate <code>Receive*StreamAsync</code> methods for handling incoming streams</li>
+</ul>
+</li>
+<li><p><strong>Client-side</strong>:</p>
+<ul>
+<li>Update event handlers to return <code>Task</code> instead of <code>IAsyncEnumerable&lt;T&gt;</code></li>
+<li>Use the new <code>Receive*StreamAsync</code> methods to send stream data back to server</li>
+</ul>
+</li>
+<li><p><strong>Event Handling</strong>:</p>
+<ul>
+<li>Stream requests are now fire-and-forget notifications</li>
+<li>Stream data is sent separately using the receive methods</li>
+</ul>
+</li>
+</ol>
+<h3 id="architecture-benefits">Architecture Benefits</h3>
+<ul>
+<li><strong>Cleaner separation of concerns</strong>: Request and response phases are clearly distinct</li>
+<li><strong>Better error handling</strong>: Each phase can handle errors independently</li>
+<li><strong>Improved maintainability</strong>: Easier to debug and extend streaming functionality</li>
+<li><strong>IAsyncEnumerable streaming</strong>: Uses <code>IAsyncEnumerable&lt;T&gt;</code> with cancellation token support for robust stream handling</li>
+<li><strong>Cancellation support</strong>: Built-in cancellation token support for proper resource cleanup</li>
+</ul>
+<h2 id="-changes">🔄 Changes</h2>
+<h3 id="streaming-infrastructure-improvements">Streaming Infrastructure Improvements</h3>
+<ul>
+<li><strong>Two-Phase Streaming</strong>: Clear separation between requesting streams and receiving stream data</li>
+<li><strong>IAsyncEnumerable Transport</strong>: Leverages <code>IAsyncEnumerable&lt;T&gt;</code> for reliable stream data transport</li>
+<li><strong>Cancellation Token Support</strong>: Built-in cancellation support for proper resource cleanup</li>
+<li><strong>Event Architecture</strong>: Simplified event handling with distinct phases</li>
+<li><strong>Error Isolation</strong>: Better error handling between request and response phases</li>
+</ul>
+<h3 id="code-quality-enhancements">Code Quality Enhancements</h3>
+<ul>
+<li><strong>Method Naming Clarity</strong>: Clear distinction between <code>Request*</code> and <code>Receive*</code> methods</li>
+<li><strong>Type Safety</strong>: Strong typing with <code>IAsyncEnumerable&lt;T&gt;</code> and proper cancellation token support</li>
+<li><strong>Event Consistency</strong>: Consistent event pattern across all streaming operations</li>
+</ul>
+<h2 id="-usage-examples">💻 Usage Examples</h2>
+<h3 id="server-side-implementation">Server-Side Implementation</h3>
+<pre><code class="lang-csharp">// Phase 1: Server requests stream from client
+await hubConnection.InvokeAsync(&quot;RequestLogsStreamAsync&quot;, new GetLogsRequest
+{
+    SessionId = &quot;session-123&quot;,
+    Count = 100
+});
+
+// Phase 2: Server receives stream from client (handled automatically)
+public async Task ReceiveLogsStreamAsync(IAsyncEnumerable&lt;LogEntry&gt; stream, CancellationToken cancellationToken = default)
+{
+    await foreach (var logEntry in stream.WithCancellation(cancellationToken))
+    {
+        // Process each log entry as it arrives
+        await ProcessLogEntry(logEntry);
+    }
+}
+</code></pre>
+<h3 id="client-side-implementation">Client-Side Implementation</h3>
+<pre><code class="lang-csharp">// Phase 1: Handle stream request from server
+LogsStreamRequested += async (request) =&gt;
+{
+    // Phase 2: Send stream back to server using async enumerable
+    await ReceiveLogsStreamAsync(GetLogStreamAsync(request));
+};
+
+// Helper method to create async enumerable stream
+private async IAsyncEnumerable&lt;LogEntry&gt; GetLogStreamAsync(GetLogsRequest request, CancellationToken cancellationToken = default)
+{
+    // Generate log entries based on request
+    for (int i = 0; i &lt; request.Count; i++)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        
+        var logEntry = await GetLogEntryAsync(request.SessionId, i);
+        yield return logEntry;
+        
+        // Simulate streaming delay
+        await Task.Delay(100, cancellationToken);
+    }
+}
+</code></pre>
+<h2 id="-deployment">🚀 Deployment</h2>
+<ul>
+<li>Version 1.2.1 maintains full backward compatibility for non-streaming operations</li>
+<li>Streaming operations require code updates as outlined in the migration guide</li>
+<li>All tests updated and validated with the new streaming architecture</li>
+<li>Package documentation updated with new streaming patterns</li>
+</ul>
+<h2 id="-future-considerations">🔮 Future Considerations</h2>
+<ul>
+<li>The two-phase streaming architecture provides a solid foundation for advanced streaming scenarios</li>
+<li>IAsyncEnumerable-based transport enables natural integration with .NET's async streaming patterns</li>
+<li>Built-in cancellation token support allows for proper resource cleanup and operation cancellation</li>
+<li>Clear separation allows for independent evolution of request and response phases</li>
+</ul>
+<hr>
+<p><strong>Note</strong>: This release represents a significant architectural improvement to the streaming infrastructure. While it introduces breaking changes to streaming operations, the new pattern provides better maintainability, error handling, and extensibility for future streaming enhancements.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/HueByte/Jiro.Shared/blob/main/dev/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="footer-custom"><div class="footer-inner d-flex justify-content-between align-items-center"><div class="footer-text">Made with <strong>💖</strong> By HueByte</div><div class="footer-links"><a href="https://github.com/HueByte/Jiro.Shared" class="footer-link" target="_blank"><i class="fab fa-github"></i>GitHub</a><a href="#" class="footer-link scroll-to-top" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i>Top</a></div></div></div><script>function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}</script>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

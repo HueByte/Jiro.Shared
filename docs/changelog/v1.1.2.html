@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>v1.1.2 &quot;Shinpo&quot; - Progress &amp; Advancement | Jiro.Shared Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="v1.1.2 &quot;Shinpo&quot; - Progress &amp; Advancement | Jiro.Shared Documentation ">
+      
+      
+      <link rel="icon" href="../../assets/Jiro-Icon.png">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/HueByte/Jiro.Shared/blob/main/dev/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../assets/Jiro-Icon.png" alt="Jiro.Shared">
+            Jiro.Shared
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="v112-shinpo---progress--advancement">v1.1.2 &quot;Shinpo&quot; - Progress &amp; Advancement</h1>
+
+<p><strong>Release Date</strong>: July 19, 2025<br>
+<strong>Code Name</strong>: &quot;Shinpo&quot; (Progress &amp; Advancement)<br>
+<strong>Type</strong>: Patch Release</p>
+<hr>
+<h2 id="-overview">🎯 Overview</h2>
+<p>Version 1.1.2 is a patch release focused on incremental improvements, bug fixes, and documentation updates to further stabilize and enhance the Jiro.Shared library. This release continues the theme of progress and advancement, ensuring a robust foundation for future development.</p>
+<h2 id="-features-added">✨ Features Added</h2>
+<ul>
+<li><strong>Improved Documentation</strong>: Expanded XML documentation for all WebSocket request and response models for better IntelliSense and API clarity.</li>
+<li><strong>Additional Unit Tests</strong>: Added tests for new response handler methods and edge cases in <code>IJiroServerHub</code>.</li>
+</ul>
+<h2 id="-bug-fixes">🐛 Bug Fixes</h2>
+<ul>
+<li><strong>Response Handler Consistency</strong>: Fixed minor inconsistencies in <code>[HubMethodName]</code> attributes and ensured all client-to-server responses are properly mapped.</li>
+<li><strong>Typo Corrections</strong>: Corrected typos in model property names and documentation comments.</li>
+</ul>
+<h2 id="-changes">🔄 Changes</h2>
+<ul>
+<li><strong>Changelog Updates</strong>: Standardized changelog format across all versions for consistency.</li>
+<li><strong>NuGet Metadata</strong>: Updated package metadata for improved discoverability and presentation.</li>
+</ul>
+<h2 id="-technical-details">🛠️ Technical Details</h2>
+<ul>
+<li><strong>Backward Compatibility</strong>: No breaking changes; all updates are backward compatible.</li>
+<li><strong>Test Coverage</strong>: Increased unit test coverage for response handlers and WebSocket models.</li>
+<li><strong>Documentation</strong>: All new and updated APIs include XML documentation.</li>
+</ul>
+<h2 id="-deployment">🚀 Deployment</h2>
+<ul>
+<li>Version 1.1.2 has been built, tested, and is ready for deployment to NuGet.org.</li>
+<li>All tests pass on .NET 9.0 runtime.</li>
+</ul>
+<hr>
+<p><strong>Note</strong>: This patch release is part of the ongoing effort to improve code quality, documentation, and developer experience in the Jiro.Shared library.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/HueByte/Jiro.Shared/blob/main/dev/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="footer-custom"><div class="footer-inner d-flex justify-content-between align-items-center"><div class="footer-text">Made with <strong>💖</strong> By HueByte</div><div class="footer-links"><a href="https://github.com/HueByte/Jiro.Shared" class="footer-link" target="_blank"><i class="fab fa-github"></i>GitHub</a><a href="#" class="footer-link scroll-to-top" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i>Top</a></div></div></div><script>function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}</script>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
