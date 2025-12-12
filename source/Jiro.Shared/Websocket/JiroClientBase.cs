@@ -18,7 +18,7 @@ public abstract class JiroInstanceBase : IJiroInstance
 	/// <summary>
 	/// The SignalR hub connection used for communication
 	/// </summary>
-	protected HubConnection _hubConnection;
+	protected HubConnection? _hubConnection;
 
 	/// <summary>
 	/// Logger instance for logging events
@@ -129,7 +129,7 @@ public abstract class JiroInstanceBase : IJiroInstance
 	/// <param name="logger">Optional logger instance</param>
 	protected JiroInstanceBase(HubConnection? hubConnection = null, ILogger<JiroInstanceBase>? logger = null)
 	{
-		_hubConnection = hubConnection!;
+		_hubConnection = hubConnection;
 		_logger = logger;
 		if (_hubConnection != null)
 			SetupEvents();

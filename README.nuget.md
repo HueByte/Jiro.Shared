@@ -33,7 +33,7 @@ dotnet add package Jiro.Shared
 ### Package Reference
 
 ```xml
-<PackageReference Include="Jiro.Shared" Version="1.4.0" />
+<PackageReference Include="Jiro.Shared" Version="1.4.5" />
 ```
 
 ## Usage

@@ -22,7 +22,7 @@
         <img src="https://img.shields.io/github/license/HueByte/Jiro.Shared?style=for-the-badge&color=green" alt="License"/>
     </a>
     <a href="https://dotnet.microsoft.com/download">
-        <img src="https://img.shields.io/badge/.NET-9.0-purple?style=for-the-badge" alt=".NET 9.0"/>
+        <img src="https://img.shields.io/badge/.NET-10.0-purple?style=for-the-badge" alt=".NET 10.0"/>
     </a>
     <a href="https://github.com/HueByte/Jiro.Shared">
         <img src="https://img.shields.io/github/languages/code-size/HueByte/Jiro.Shared?style=for-the-badge&color=purple" alt="Code Size"/>
@@ -71,7 +71,7 @@ dotnet add package Jiro.Shared
 ### Package Reference
 
 ```xml
-<PackageReference Include="Jiro.Shared" Version="1.4.0" />
+<PackageReference Include="Jiro.Shared" Version="1.4.5" />
 ```
 
 ## Usage
@@ -129,6 +129,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Releases
 
+- **[v1.4.5 "Shinka"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.4.5)** - .NET 10 target, dependency refresh, and security-patched JSON stack
+- **[v1.4.4 "Shūsei"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.4.4)** - Interface alignment and event fixes for WebSocket endpoints
+- **[v1.4.3 "Seiri"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.4.3)** - Organization & cleanup with code deduplication and serialization fixes
+- **[v1.4.2 "Nagare"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.4.2)** - Flow enhancement with comprehensive streaming support for chat, logs, and word-by-word content
+- **[v1.4.1 "Kaizen"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.4.1)** - Continuous improvement with performance optimizations and bug fixes
 - **[v1.4.0 "Tōgō"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.4.0)** - Integration & unification with TaskManager infrastructure, SynchronizationToken architecture, and gRPC proto file distribution
 - **[v1.3.2 "Seisō"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.3.2)** - Clean logging optimization by removing verbose request/response body logging
 - **[v1.3.1 "Seigō"](https://github.com/HueByte/Jiro.Shared/releases/tag/v1.3.1)** - Precision & reliability fixes with SignalR serialization improvements

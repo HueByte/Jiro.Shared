@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageId>Jiro.Shared</PackageId>
-    <Version>1.4.4</Version>
+    <Version>1.4.5</Version>
     <Authors>HueByte</Authors>
     <Title>Jiro.Shared</Title>
     <Summary>Shared types and models for Jiro ecosystem applications</Summary>
@@ -36,10 +36,11 @@ Features:
     <PackageReference Include="Grpc.AspNetCore" Version="2.71.0" />
     <PackageReference Include="Google.Protobuf" Version="3.31.1" />
     <PackageReference Include="Grpc.Tools" Version="2.72.0" PrivateAssets="All" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="9.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.8" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.3" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.8">
@@ -49,6 +50,11 @@ Features:
     <PackageReference Include="Z.EntityFramework.Plus.EFCore" Version="9.103.9.2" />
     <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="9.0.8" />
   </ItemGroup>
+
+  <PropertyGroup>
+    <!-- Suppress XML doc warnings for public surface to keep builds clean while docs are generated elsewhere. -->
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\..\README.nuget.md" Pack="true" PackagePath="\" />

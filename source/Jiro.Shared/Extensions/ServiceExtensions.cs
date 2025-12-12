@@ -1,14 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-
-/// <summary>
-/// Provides extension methods for registering Entity Framework Core DbContext types with various database providers.
-/// </summary>
 namespace Jiro.Shared.Extensions;
 
 public static class ServiceExtensions
 {
+	/// <summary>
+	/// Provides extension methods for registering Entity Framework Core DbContext types with various database providers.
+	/// </summary>
 	/// <summary>
 	/// Registers a MySQL DbContext of type <typeparamref name="T"/> with the specified connection string.
 	/// </summary>

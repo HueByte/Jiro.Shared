@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>Jiro.Shared</id>
-    <version>1.4.4</version>
+    <version>1.4.5</version>
     <title>Jiro.Shared</title>
     <authors>HueByte</authors>
     <owners>HueByte</owners>
@@ -34,7 +34,7 @@
 
     <!-- Target Framework -->
     <dependencies>
-      <group targetFramework="net9.0">
+      <group targetFramework="net10.0">
         <dependency id="Grpc.AspNetCore" version="2.71.0" exclude="Build,Analyzers" />
         <dependency id="Google.Protobuf" version="3.31.1" exclude="Build,Analyzers" />
       </group>
@@ -43,9 +43,9 @@
 
   <files>
     <!-- Library files -->
-    <file src="bin\Release\net9.0\Jiro.Shared.dll" target="lib\net9.0\Jiro.Shared.dll" />
-    <file src="bin\Release\net9.0\Jiro.Shared.pdb" target="lib\net9.0\Jiro.Shared.pdb" />
-    <file src="bin\Release\net9.0\Jiro.Shared.xml" target="lib\net9.0\Jiro.Shared.xml" />
+    <file src="bin\Release\net10.0\Jiro.Shared.dll" target="lib\net10.0\Jiro.Shared.dll" />
+    <file src="bin\Release\net10.0\Jiro.Shared.pdb" target="lib\net10.0\Jiro.Shared.pdb" />
+    <file src="bin\Release\net10.0\Jiro.Shared.xml" target="lib\net10.0\Jiro.Shared.xml" />
 
     <!-- Proto files for gRPC service generation -->
     <file src="Grpc\jiroHub.proto" target="contentFiles\any\any\Grpc\jiroHub.proto" />

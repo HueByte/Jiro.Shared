@@ -38,7 +38,7 @@ public class SessionCommandResponseSerializationTests
 		Assert.Equal("text", deserialized.CommandType);
 		Assert.True(deserialized.IsSuccess);
 		// Result is deserialized as JsonElement for object types
-		var resultElement = (JsonElement)deserialized.Result;
+		var resultElement = Assert.IsType<JsonElement>(deserialized!.Result);
 		Assert.Equal("Simple text result", resultElement.GetString());
 	}
 
@@ -67,7 +67,7 @@ public class SessionCommandResponseSerializationTests
 		Assert.NotNull(deserialized.Result);
 
 		// Result is deserialized as JsonElement, verify structure
-		var resultElement = (JsonElement)deserialized.Result;
+		var resultElement = Assert.IsType<JsonElement>(deserialized!.Result);
 		Assert.True(resultElement.TryGetProperty("message", out var messageProperty));
 		Assert.Equal("Success", messageProperty.GetString());
 	}
@@ -117,8 +117,8 @@ public class SessionCommandResponseSerializationTests
 		Assert.Equal("test-command", deserialized.CommandName);
 		Assert.Equal("", deserialized.CommandType);
 		Assert.True(deserialized.IsSuccess);
-		// Result is deserialized as JsonElement for object types  
-		var resultElement = (JsonElement)deserialized.Result;
+		// Result is deserialized as JsonElement for object types
+		var resultElement = Assert.IsType<JsonElement>(deserialized!.Result);
 		Assert.Equal("Result data", resultElement.GetString());
 	}
 }

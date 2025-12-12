@@ -8,192 +8,339 @@ package JiroHubProto;
 // JiroHub Protocol Buffer Definition
 //
 // This file defines the gRPC service contract for communication between
-// Jiro instances and services. It supports command execution, real-time
-// chat messaging, and live word streaming for enhanced user experience.
+// Jiro instances and the JiroCloud API. All instance communication flows
+// through gRPC for consistency and performance.
+//
+// Architecture:
+// - Instances connect via bidirectional CommandChannel for commands/results
+// - Data streams (logs, chat, words) use client streaming
+// - Web clients connect via SignalR (separate from this service)
 
-// JiroHubProto Service
-// Main gRPC service for handling communication between Jiro instances and services
+// =============================================================================
+// MAIN SERVICE DEFINITION
+// =============================================================================
+
 service JiroHubProto {
-    // Sends command execution results from Jiro instances to services
-    // Used for reporting the outcome of executed commands including text or graph data
-    rpc SendCommandResult (ClientMessage) returns (CommandResultResponse);
+	// =========================================================================
+	// BIDIRECTIONAL COMMAND CHANNEL
+	// Primary connection for instances - stays open for the instance lifetime
+	// Server pushes commands, instance pushes results
+	// =========================================================================
+	rpc CommandChannel(stream InstanceMessage) returns (stream ServerMessage);
 
+	// =========================================================================
+	// DATA STREAMS - Instance pushes data to server
+	// These are separate streams for different data types
+	// =========================================================================
 
-	// Bidirectional streaming for real-time chat communication
-	// Both client and server can send ChatMessage objects at any time
-	// Enables live chat functionality between users and AI assistants
-	rpc StreamChat (stream ChatMessage) returns (stream ChatMessage);
+	// Client streaming for logs from instance to server
+	rpc StreamLogs(stream LogEntry) returns (LogStreamResponse);
 
-	// Client streaming for chat messages from client to server
-	// Allows clients to send multiple chat messages in a stream
-	rpc StreamChatMessagesToServer (stream ChatMessage) returns (ChatStreamResponse);
+	// Client streaming for chat messages from instance to server
+	rpc StreamChatMessages(stream ChatMessage) returns (ChatStreamResponse);
 
-	// Client streaming for logs from client to server
-	// Allows clients to continuously send log entries to the server
-	rpc StreamLogsToServer (stream LogEntry) returns (LogStreamResponse);
+	// Client streaming for word-by-word message content (real-time typing)
+	rpc StreamWords(stream WordStreamUpdate) returns (WordStreamResponse);
 
-	// Client streaming for word-by-word message content from client to server
-	// Allows clients to send message content word by word to the server
-	rpc StreamWordsToServer (stream WordStreamUpdate) returns (WordStreamResponse);
+	// =========================================================================
+	// UNARY METHODS - Simple request/response
+	// =========================================================================
+
+	// Send command result as unary call (alternative to CommandChannel)
+	rpc SendCommandResult(ClientMessage) returns (CommandResultResponse);
 }
 
-// ClientMessage
-// Represents a command execution result sent from Jiro instances
-// Contains command details, execution status, and the actual result data
+// =============================================================================
+// BIDIRECTIONAL CHANNEL MESSAGES
+// =============================================================================
+
+// ServerMessage - Messages sent from server to instance
+message ServerMessage {
+	string messageId = 1;                    // Unique message identifier for correlation
+	google.protobuf.Timestamp timestamp = 2; // When message was sent
+
+	oneof payload {
+		CommandRequest command = 3;          // Execute this command
+		StreamRequest streamRequest = 4;     // Start streaming (logs/chat/etc)
+		CancelRequest cancelRequest = 5;     // Cancel an active stream
+		Heartbeat heartbeat = 6;             // Keepalive ping
+		ConnectionAck connectionAck = 7;     // Connection acknowledged
+	}
+}
+
+// InstanceMessage - Messages sent from instance to server
+message InstanceMessage {
+	string messageId = 1;                    // Unique message identifier for correlation
+	string correlationId = 2;                // References ServerMessage.messageId if responding
+	google.protobuf.Timestamp timestamp = 3; // When message was sent
+
+	oneof payload {
+		CommandResult commandResult = 4;     // Command execution result
+		StreamAck streamAck = 5;             // Acknowledge stream request started
+		StatusUpdate statusUpdate = 6;       // Instance status/health update
+		Heartbeat heartbeat = 7;             // Keepalive pong
+		ConnectionRequest connectionRequest = 8; // Initial connection with API key
+	}
+}
+
+// =============================================================================
+// COMMAND MESSAGES
+// =============================================================================
+
+// CommandRequest - Server requests instance to execute a command
+message CommandRequest {
+	string requestId = 1;                    // Unique request ID for tracking
+	string command = 2;                      // The command/prompt to execute
+	string sessionId = 3;                    // Session context for the command
+	map<string, string> parameters = 4;      // Additional command parameters
+}
+
+// CommandResult - Instance reports command execution result
+message CommandResult {
+	string requestId = 1;                    // Matches CommandRequest.requestId
+	bool isSuccess = 2;                      // Whether command executed successfully
+	string commandName = 3;                  // Name of the executed command
+	DataType dataType = 4;                   // Type of result data
+
+	oneof result {
+		TextResult textResult = 5;           // Text-based command output
+		GraphResult graphResult = 6;         // Graph-based command output
+	}
+
+	string errorMessage = 7;                 // Error details if isSuccess=false
+	string sessionId = 8;                    // Session context
+}
+
+// =============================================================================
+// STREAM CONTROL MESSAGES
+// =============================================================================
+
+// StreamRequest - Server requests instance to start a data stream
+message StreamRequest {
+	string requestId = 1;                    // Unique request ID for the stream
+	StreamType streamType = 2;               // Type of stream to start
+	string sessionId = 3;                    // Session context (for chat/session streams)
+	string level = 4;                        // Log level filter (for logs stream)
+	int32 historyLimit = 5;                  // Number of historical entries to include
+}
+
+// StreamAck - Instance acknowledges stream request
+message StreamAck {
+	string requestId = 1;                    // Matches StreamRequest.requestId
+	bool accepted = 2;                       // Whether stream was started
+	string message = 3;                      // Status message or error
+}
+
+// CancelRequest - Server requests instance to stop a stream
+message CancelRequest {
+	string requestId = 1;                    // The stream requestId to cancel
+}
+
+// StreamType - Types of data streams available
+enum StreamType {
+	STREAM_LOGS = 0;                         // Log entries stream
+	STREAM_CHAT_MESSAGES = 1;                // Chat messages stream
+	STREAM_SESSION_MESSAGES = 2;             // Session history stream
+	STREAM_WORDS = 3;                        // Word-by-word typing stream
+}
+
+// =============================================================================
+// CONNECTION MESSAGES
+// =============================================================================
+
+// ConnectionRequest - Instance sends this first to authenticate
+message ConnectionRequest {
+	string apiKey = 1;                       // Instance API key for authentication
+	string instanceVersion = 2;              // Instance software version
+	map<string, string> metadata = 3;        // Additional instance metadata
+}
+
+// ConnectionAck - Server acknowledges successful connection
+message ConnectionAck {
+	bool success = 1;                        // Whether connection was accepted
+	string instanceId = 2;                   // Assigned instance ID
+	string instanceName = 3;                 // Instance name from database
+	string message = 4;                      // Status message or error
+	int32 heartbeatIntervalSeconds = 5;      // How often to send heartbeats (default 30)
+}
+
+// Heartbeat - Keepalive message (bidirectional)
+message Heartbeat {
+	google.protobuf.Timestamp sentAt = 1;    // When heartbeat was sent
+}
+
+// StatusUpdate - Instance reports its current status
+message StatusUpdate {
+	InstanceStatus status = 1;               // Current status
+	string message = 2;                      // Optional status message
+	map<string, string> metrics = 3;         // Optional metrics (memory, cpu, etc)
+}
+
+// InstanceStatus - Possible instance states
+enum InstanceStatus {
+	STATUS_UNKNOWN = 0;
+	STATUS_READY = 1;                        // Ready to receive commands
+	STATUS_BUSY = 2;                         // Processing a command
+	STATUS_ERROR = 3;                        // In error state
+	STATUS_SHUTTING_DOWN = 4;                // Graceful shutdown in progress
+}
+
+// =============================================================================
+// LEGACY COMMAND RESULT (for SendCommandResult unary call)
+// =============================================================================
+
+// ClientMessage - Command result sent via unary call
 message ClientMessage {
-    string commandName = 1;          // Name of the executed command
-    DataType dataType = 2;           // Type of result data (text or graph)
-    oneof result {                   // Polymorphic result data
-        TextResult textResult = 3;   // Text-based command output
-        GraphResult graphResult = 4; // Graph-based command output
-    }
-    bool isSuccess = 5;              // Whether command executed successfully
-    string RequestId = 6;        // Unique identifier for command synchronization
-    repeated Pair parameters = 7;    // Command parameters as key-value pairs
-    string sessionId = 8;            // Session identifier for context
+	string commandName = 1;                  // Name of the executed command
+	DataType dataType = 2;                   // Type of result data (text or graph)
+	oneof result {
+		TextResult textResult = 3;           // Text-based command output
+		GraphResult graphResult = 4;         // Graph-based command output
+	}
+	bool isSuccess = 5;                      // Whether command executed successfully
+	string RequestId = 6;                    // Unique identifier for command synchronization
+	repeated Pair parameters = 7;            // Command parameters as key-value pairs
+	string sessionId = 8;                    // Session identifier for context
 }
 
-// CommandResultResponse
-// Server response acknowledging receipt of command execution results
+// CommandResultResponse - Acknowledges receipt of command result
 message CommandResultResponse {
-    bool success = 1;
-    string message = 2;
+	bool success = 1;
+	string message = 2;
 }
 
-// DataType
-// Specifies the type of data contained in command execution results
+// =============================================================================
+// DATA TYPES
+// =============================================================================
+
+// DataType - Specifies the type of data in command results
 enum DataType {
-    text = 0;
-    graph = 1;
+	DATA_TEXT = 0;
+	DATA_GRAPH = 1;
 }
 
-// TextType
-// Specifies the format of text data in TextResult messages
-// Helps clients properly parse and display text content
+// TextType - Format of text data in TextResult
 enum TextType {
-    plain = 0;
-    json = 1;
-    base64 = 2;
-    markdown = 3;
-    html = 4;
+	TEXT_PLAIN = 0;
+	TEXT_JSON = 1;
+	TEXT_BASE64 = 2;
+	TEXT_MARKDOWN = 3;
+	TEXT_HTML = 4;
 }
 
-// TextResult
-// Represents text-based command output with type specification
-// Supports various text formats including plain text, JSON, base64, markdown, and HTML
+// TextResult - Text-based command output
 message TextResult {
-    string response = 1;
-    TextType textType = 2;
+	string response = 1;                     // The text content
+	TextType textType = 2;                   // Format of the text
 }
 
-// GraphResult
-// Represents graphical command output for data visualization
-// Contains binary graph data along with metadata like axes labels and units
+// GraphResult - Graph/visualization command output
 message GraphResult {
-    string message = 1;
-    bytes graphData = 2;
-    string note = 3;
-    string xAxis = 4;
-    string yAxis = 5;
-    map<string, string> units = 6;
+	string message = 1;                      // Description or title
+	bytes graphData = 2;                     // Binary graph data
+	string note = 3;                         // Additional notes
+	string xAxis = 4;                        // X-axis label
+	string yAxis = 5;                        // Y-axis label
+	map<string, string> units = 6;           // Unit labels
 }
 
-// Pair
-// Generic key-value pair used for passing command parameters
+// Pair - Generic key-value pair
 message Pair {
-    string key = 1;
-    string value = 2;
+	string key = 1;
+	string value = 2;
 }
 
-// Session
-// Represents a chat or command execution session
-// Tracks session metadata including creation and update timestamps
-message Session {
-    string id = 1;
-    string name = 2;
-    string description = 3;
-    google.protobuf.Timestamp createdAt = 4;
-    google.protobuf.Timestamp updatedAt = 5;
-}
+// =============================================================================
+// CHAT MESSAGES
+// =============================================================================
 
-// SessionsReply
-// Contains a list of available sessions
-message SessionsReply {
-    repeated Session sessions = 1;
-}
-
-// ChatMessage
-// Represents a single message in a chat conversation
-// Used for both historical messages and real-time streaming
+// ChatMessage - A single message in a chat conversation
 message ChatMessage {
-    string id = 1;                           // Unique message identifier
-    string content = 2;                      // Message text content
-    string author = 3;                       // Author name or identifier
-    google.protobuf.Timestamp timestamp = 4; // When message was created
-    string sessionId = 5;                    // Session this message belongs to
-    MessageType messageType = 6;             // Type of message (USER/ASSISTANT/SYSTEM)
+	string id = 1;                           // Unique message identifier
+	string content = 2;                      // Message text content
+	string author = 3;                       // Author name or identifier
+	google.protobuf.Timestamp timestamp = 4; // When message was created
+	string sessionId = 5;                    // Session this message belongs to
+	MessageType messageType = 6;             // Type of message
 }
 
-// ChatMessagesResponse
-// Wrapper for returning multiple chat messages with operation status
-message ChatMessagesResponse {
-    repeated ChatMessage messages = 1;
-    bool success = 2;
-    string errorMessage = 3;
-}
-
-// MessageType
-// Identifies the sender type of a chat message
-// Used to distinguish between user input, AI responses, and system notifications
+// MessageType - Identifies the sender type
 enum MessageType {
-    USER = 0;
-    ASSISTANT = 1;
-    SYSTEM = 2;
+	MESSAGE_USER = 0;
+	MESSAGE_ASSISTANT = 1;
+	MESSAGE_SYSTEM = 2;
 }
 
-
-// ChatStreamResponse
-// Response for client streaming chat messages
+// ChatStreamResponse - Response for chat streaming
 message ChatStreamResponse {
-    bool success = 1;
-    string message = 2;
-    int32 messagesReceived = 3;
+	bool success = 1;
+	string message = 2;
+	int32 messagesReceived = 3;
 }
 
-// LogEntry
-// Represents a single log entry for streaming
+// =============================================================================
+// LOG ENTRIES
+// =============================================================================
+
+// LogEntry - A single log entry
 message LogEntry {
-    string id = 1;
-    string level = 2;                        // Log level (DEBUG, INFO, WARN, ERROR)
-    string message = 3;                      // Log message content
-    string source = 4;                       // Source component or module
-    google.protobuf.Timestamp timestamp = 5; // When log was generated
-    map<string, string> metadata = 6;        // Additional log metadata
+	string id = 1;                           // Unique log identifier
+	string level = 2;                        // Log level (DEBUG, INFO, WARN, ERROR)
+	string message = 3;                      // Log message content
+	string source = 4;                       // Source component or module
+	google.protobuf.Timestamp timestamp = 5; // When log was generated
+	map<string, string> metadata = 6;        // Additional log metadata
 }
 
-// LogStreamResponse
-// Response for client streaming logs
+// LogStreamResponse - Response for log streaming
 message LogStreamResponse {
-    bool success = 1;
-    string message = 2;
-    int32 logsReceived = 3;
+	bool success = 1;
+	string message = 2;
+	int32 logsReceived = 3;
 }
 
-// WordStreamUpdate
-// Represents a word being streamed from client to server
+// =============================================================================
+// WORD STREAMING (Real-time typing effect)
+// =============================================================================
+
+// WordStreamUpdate - A word being streamed for real-time typing
 message WordStreamUpdate {
-    string sessionId = 1;                    // Session ID for the message
-    string messageId = 2;                    // ID of the message being streamed
-    string word = 3;                         // The word or token being sent
-    int32 position = 4;                      // Position of word in the message
-    bool isComplete = 5;                     // True when message is fully streamed
-    google.protobuf.Timestamp timestamp = 6; // When this word was sent
+	string sessionId = 1;                    // Session ID for the message
+	string messageId = 2;                    // ID of the message being streamed
+	string word = 3;                         // The word or token being sent
+	int32 position = 4;                      // Position of word in the message
+	bool isComplete = 5;                     // True when message is fully streamed
+	google.protobuf.Timestamp timestamp = 6; // When this word was sent
 }
 
-// WordStreamResponse
-// Response for client streaming words
+// WordStreamResponse - Response for word streaming
 message WordStreamResponse {
-    bool success = 1;
-    string message = 2;
-    int32 wordsReceived = 3;
+	bool success = 1;
+	string message = 2;
+	int32 wordsReceived = 3;
+}
+
+// =============================================================================
+// SESSION DATA
+// =============================================================================
+
+// Session - Represents a chat or command execution session
+message Session {
+	string id = 1;
+	string name = 2;
+	string description = 3;
+	google.protobuf.Timestamp createdAt = 4;
+	google.protobuf.Timestamp updatedAt = 5;
+}
+
+// SessionsReply - List of sessions
+message SessionsReply {
+	repeated Session sessions = 1;
+}
+
+// ChatMessagesResponse - Multiple chat messages with status
+message ChatMessagesResponse {
+	repeated ChatMessage messages = 1;
+	bool success = 2;
+	string errorMessage = 3;
 }
