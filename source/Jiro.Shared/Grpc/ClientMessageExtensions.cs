@@ -19,8 +19,8 @@ public static class ClientMessageExtensions
 
 		return clientMessage.DataType switch
 		{
-			DataType.Text => ConvertToTextResponse(clientMessage),
-			DataType.Graph => ConvertToGraphResponse(clientMessage),
+			DataType.DataText => ConvertToTextResponse(clientMessage),
+			DataType.DataGraph => ConvertToGraphResponse(clientMessage),
 			_ => throw new ArgumentException($"Unsupported data type: {clientMessage.DataType}", nameof(clientMessage))
 		};
 	}
