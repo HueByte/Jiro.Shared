@@ -70,6 +70,7 @@ Features:
 
   <ItemGroup>
     <!-- Generate both server and client code for this package -->
+    <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.11" />
     <Protobuf Include="Grpc\*.proto" GrpcServices="Both" />
   </ItemGroup>
 
